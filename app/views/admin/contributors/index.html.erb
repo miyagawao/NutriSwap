@@ -1,0 +1,36 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-lg-10 col-sm-12 mx-auto">
+      <div class="row mb-3">
+        <div class="col-12">
+          <h4><span class="bg-light bg-gradient">会員一覧</span></h4>
+        </div>
+      </div>
+
+  <div class="row">
+  <table class="table table-bordered border-dark">
+   <tr>
+    <td class="table-active">会員ID</td>
+    <td class="table-active">氏名</td>
+    <td class="table-active">メールアドレス</td>
+    <td class="table-active">ステータス</td>
+   </tr>
+   <% @contributors.each do |contributor| %>
+   <tr>
+    <td><%= contributor.id %></td>
+    <td>
+     <%= link_to admin_contributor_path(contributor.id),class: 'text-primary' do %>
+      <%= contributor.add_full_name %>
+     <% end %>
+    </td>
+    <td><%= contributor.email %></td>
+    <% if contributor.is_deleted == false %>
+     <td><p class="text-success">有効</p></td>
+    <% else %>
+     <td><p class="text-muted">退会済</p></td>
+    <% end %>
+   </tr>
+   <% end %>
+  </table>
+ </div>
+</div>
