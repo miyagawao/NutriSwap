@@ -5,7 +5,7 @@ Rails.application.routes.draw do
     registrations: "public/registrations",
     sessions: 'public/sessions'
   }
-  
+
   # ゲスト用
   devise_scope :contributor do
     get 'contributors/sign_in', to: 'public/sessions#new'
@@ -27,6 +27,6 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     resources :contributors, only: [:index, :show, :edit, :update]
   end
- 
+
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

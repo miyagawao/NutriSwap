@@ -30,7 +30,7 @@ class Contributor < ApplicationRecord
   end
   
   def get_image
-    (profile_image.attached?) ? profile_image : 'no_image.jpg'
+    profile_image.attached? ? profile_image : 'no_image.jpg'
   end
-  
+
 end

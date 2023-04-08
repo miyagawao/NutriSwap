@@ -56,4 +56,3 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 gem 'kaminari','~> 1.2.1'
-gem 'acts-as-taggable-on', '~> 5.0'
