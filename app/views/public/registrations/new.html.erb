@@ -14,7 +14,7 @@
         <td class="text-right"><%= f.label :（名） %></td>
         <td><%= f.text_field :first_name, autofocus: true, autocomplete: "first_name",placeholder: "太郎" %></td>
       </tr>
-      
+
       <tr>
         <th style="width: 20%">フリガナ</th>
         <td class="text-right"><%= f.label :（セイ） %>
@@ -22,19 +22,19 @@
         <td class="text-right"><%= f.label :（メイ） %></td>
         <td><%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana",placeholder: "タロウ" %></td>
       </tr>
-      
+
       <tr>
         <th style="width: 20%">ニックネーム</th>
         <td class="text-right"></td>
         <td><%= f.text_field :nickname, autofocus: true, autocomplete: "nickname",placeholder: "ニックネーム" %></td>
       </tr>
-      
+
       <tr>
         <th style="width: 20%">メールアドレス</td>
         <td class="text-right"></td>
         <td><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'sample@example.com' %></td>
       </tr>
-        
+
       <tr>
         <th style="width: 20%"><%= f.label :"郵便番号(ハイフンなし)" %></th>
         <td></td>
@@ -42,7 +42,7 @@
         <td></td>
         <td></td>
       </tr>
-        
+
       <tr>
         <th style="width: 20%"><%= f.label :住所 %></th>
         <td></td>
@@ -50,7 +50,7 @@
         <td></td>
         <td></td>
       </tr>
-      
+
       <tr>
         <th style="width: 20%"><%= f.label :"電話番号(ハイフンなし)" %></th>
         <td></td>
@@ -58,7 +58,7 @@
         <td></td>
         <td></td>
       </tr>
-      
+
       <tr>
         <th style="width: 20%"><%= f.label :資格 %></th>
         <td></td>
@@ -71,11 +71,19 @@
           <%= f.label :qualification, "調理師" %>
         </td>
       </tr>
-      
+
       <tr>
         <th style="width: 20%"><%= f.label :自己紹介 %></th>
         <td></td>
         <td><%= f.text_area :introduce, rows: 5, style: "width: 100%;" %></td>
+        <td></td>
+        <td></td>
+      </tr>
+
+      <tr>
+        <th style="width: 20%">プロフィール画像</th>
+        <td></td>
+        <td><%= f.file_field :profile_image %></td>
         <td></td>
         <td></td>
       </tr>
@@ -93,7 +101,6 @@
         <td></td>
       </tr>
       <tr>
-        
         <th style="width: 20%"><%= f.label :確認用パスワード %></th>
         <td></td>
         <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>

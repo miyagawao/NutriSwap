@@ -1,5 +1,4 @@
 <nav class="navbar navbar-expand-lg" style="background-color: #ffb54d;">
-  
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown"
    aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -8,29 +7,54 @@
     <div class="user-name text-light center-block">
       <% if contributor_signed_in? %>
         <p class="pt-3">ようこそ、<span class="h5"><strong><%= current_contributor.last_name %><%= current_contributor.first_name %></strong></span> 様</p>
-      
       <% else %>
         <p class="pt-3">ようこそ、<span class="h5"><strong>ゲスト</strong></span> 様</p>
       <% end %>
     </div>
     <div class="d-flex flex-column ml-auto">
-    <ul class="navbar-nav">
+      <ul class="navbar-nav">
+      <% if contributor_signed_in? %>
+        <li class="nav-link px-2">
+          <%= link_to root_path, class: "text-decoration-none text-light h5" do %>
+            <i class="fas fa-user"></i> マイページ
+          <% end %>
+        </li>
+        <li class="nav-link px-2">
+          <%= link_to posts_path, class: "text-decoration-none text-light h5" do %>
+            <i class="fas fa-utensils"></i> 投稿一覧
+          <% end %>
+        </li>
       
-        
-        
         <li class="nav-link px-2">
           <%= link_to destroy_contributor_session_path, method: :delete, class: "text-decoration-none text-light h5" do %>
             <i class="fas fa-sign-out-alt"></i> ログアウト
           <% end %>
         </li>
 
-   
+      <% elsif admin_signed_in? %>
+        <li class="nav-link px-2">
+          <%= link_to admin_contributors_path, class: "text-decoration-none text-light h5" do %>
+            <i class="fas fa-users"></i> 会員一覧
+          <% end %>
+        </li>
+        
+        <li class="nav-link px-2">
+          <%= link_to admin_root_path, class: "text-decoration-none text-light h5" do %>
+            <i class="fas fa-utensils"></i> 投稿一覧
+          <% end %>
+        </li>
+
+        <li class="nav-link px-2">
+          <%= link_to destroy_admin_session_path, method: :delete, class: "text-decoration-none text-light h5" do %>
+            <i class="fas fa-sign-out-alt"></i> ログアウト
+          <% end %>
+        </li>
+      <% else %>
         <li class="nav-link px-2">
           <%= link_to about_path, class: "text-decoration-none text-light text-light h5" do %>
             <i class="fas fa-link"></i> About
           <% end %>
         </li>
-        
         <li class="nav-link px-2">
           <%= link_to new_contributor_registration_path, class: "text-decoration-none text-light h5" do %>
             <i class="fas fa-user-plus"></i> 新規登録
@@ -41,8 +65,9 @@
             <i class="fas fa-sign-in-alt"></i> ログイン
           <% end %>
         </li>
-    </ul>
-    
+      <% end %>
+      </ul>
+
     </div>
   </div>
 </nav>

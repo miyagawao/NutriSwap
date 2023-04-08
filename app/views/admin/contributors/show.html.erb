@@ -1,0 +1,86 @@
+
+<div class="container my-5">
+  <div class="row">
+    <div class="col-lg-10 col-sm-12 mx-auto">
+      <div class="row mb-3">
+        <div class="col-12">
+          <h3><span class="bg-light bg-gradient"><%= @contributor.add_full_name %>さんの会員詳細</span></h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <table class="table table-bordered border-dark">
+          <tr>
+            <td class="bg-light bg-gradient">会員ID</td>
+            <td><%= @contributor.id %></td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">氏名</td>
+            <td>
+              <%= @contributor.last_name %> <%= @contributor.first_name %>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">カナ</td>
+            <td>
+              <%= @contributor.last_name_kana %> <%= @contributor.first_name_kana %>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">ニックネーム</td>
+            <td><%= @contributor.nickname %></td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">郵便番号</td>
+            <td>
+              <%= @contributor.postal_code %>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">住所</td>
+            <td>
+              <%= @contributor.address %>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">メールアドレス</td>
+            <td>
+              <%= @contributor.email %>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">電話番号</td>
+            <td>
+              <%= @contributor.telephone_number %>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">保有資格</td>
+            <td>
+              <%= @contributor.qualification %>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">自己紹介</td>
+            <td><%= simple_format(@contributor.introduce, {}, {style: "width: 100%;"}) %></td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">プロフィール画像</td>
+            <td>
+               <%= image_tag(@contributor.get_image, style: "width: 30%; height: auto;") %>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">会員ステータス</td>
+            <% if @contributor.is_deleted == false %>
+              <td><p class="text-success">有効</p></td>
+            <% else %>
+              <td><p class="text-muted">退会</p></td>
+            <% end %>
+          </tr>
+        </table>
+        <%= link_to "編集する", edit_admin_contributor_path(@contributor.id), class: 'btn btn-success' %>
+      </div>
+    </div>
+  </div>
+</div>
