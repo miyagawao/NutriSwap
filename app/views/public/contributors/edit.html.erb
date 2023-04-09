@@ -1,0 +1,109 @@
+<div class="container px-5 px-sm-0">
+  <div class="row">
+    <div class="mt-5">
+      <% if @contributor.errors.any? %>
+        <%= @contributor.errors.count %>件のエラーが発生しました。:
+        <ul>
+          <% @contributor.errors.full_messages.each do |message| %>
+            <li><%= message %></li>
+          <% end %>
+        </ul>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mt-5 offset-md-1">
+      <h3><span class="bg-light bg-gradient"><%= @contributor.add_full_name %>さんの会員詳細</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="mt-5">
+      <%= form_with model: @contributor, url: contributor_path, method: :patch do |f| %>
+        <table class="table table-borderless">
+          <tr>
+            <td class="bg-light bg-gradient">会員ID</td>
+            <td><%= @contributor.id %></td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">氏名</td>
+            <td>
+              <%= f.text_field :last_name %>
+            </td>
+            <td>
+              <%= f.text_field :first_name %>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">カナ</td>
+            <td>
+              <%= f.text_field :last_name_kana %>
+            </td>
+            <td>
+              <%= f.text_field :first_name_kana %>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="bg-light bg-gradient">ニックネーム</td>
+            <td><%= f.text_field :nickname, autofocus: true, autocomplete: "nickname",placeholder: "ニックネーム" %></td>
+          </tr>
+
+          <tr>
+            <td class="bg-light bg-gradient">郵便番号</td>
+            <td>
+              <%= f.text_field :postal_code %>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">住所</td>
+            <td>
+              <%= f.text_field :address %>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="bg-light bg-gradient">メールアドレス</td>
+            <td>
+              <%= f.text_field :email, autofocus: true, autocomplete: "email" %>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="bg-light bg-gradient">電話番号</td>
+            <td>
+              <%= f.text_field :telephone_number %>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="bg-light bg-gradient">資格</td>
+            <td>
+              <%= f.radio_button :qualification, "管理栄養士" %>
+              <%= f.label :qualification, "管理栄養士", style: "margin-right: 20px;" %>
+              <%= f.radio_button :qualification, "栄養士" %>
+              <%= f.label :qualification, "栄養士", style: "margin-right: 20px;" %>
+              <%= f.radio_button :qualification, "調理師" %>
+              <%= f.label :qualification, "調理師" %>
+            </td>
+          </tr>
+
+          <tr>
+            <td class="bg-light bg-gradient">自己紹介</th>
+            <td><%= f.text_area :introduce, rows: 5, style: "width: 100%;" %></td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">プロフィール画像</td>
+            <td><%= f.file_field :profile_image %></td>
+          </tr>
+          <tr>
+            <td></td>
+            <td><%= f.submit "変更を保存", class: "btn btn-success" %></td>
+            <td><%= link_to "退会する",  unsubscribe_contributors_path, class: "btn btn-danger" %></td>
+          </tr>
+        </table>
+      <% end %>
+    </div>
+  </div>
+</div>

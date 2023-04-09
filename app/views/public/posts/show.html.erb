@@ -3,4 +3,43 @@
   <div class="border-bottom" style="background-color: #ffffe5;">
     <h2><%= @post.title %></h2>
   </div>
+  <div class="card-header">
+    <div class="col-md-12">
+      <div class="d-flex">
+        <%= image_tag(@post.get_image, size: "400x300") %>
+        <div class="ml-5 pl-5">
+          <div class="row">
+            <table class="table float-right">
+              <tr>
+                <td><strong>投稿内容</strong></td>
+                <td><%= simple_format(@post.content, {}, {style: "width: 100%;"}) %></td>
+              </tr>
+              <tr>
+                <td><strong>ジャンル</strong></td>
+                <td><%= link_to @post.genre.name, posts_path(genre_id: @post.genre.id, genre_name: @post.genre.name) %></td>
+              </tr>
+              <tr>
+                <td><strong>タグ</strong></td>
+                <td><% @post.tags.each do |tag| %>
+                      <%= link_to tag.name, posts_path(tag_id: tag.id, tag_name: tag.name) %>
+                    <% end %>
+                </td>
+              </tr>
+              <tr>
+                <td style="white-space: nowrap;"><strong>ニックネーム</strong></td>
+                <td><%= link_to @post.contributor.nickname, contributor_path(@contributor.id) %></td>
+              </tr>
+              <tr>
+                <td><strong>保有資格</strong></td>
+                <td>
+                  <%= @post.contributor.qualification %>
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+    </div>
+    <div class="card-body">
+      <%= link_to "編集する", edit_post_path(current_contributor), class: "btn btn-lg btn-block btn-outline-primary", type: "button" %>
+    </div>
 </div>

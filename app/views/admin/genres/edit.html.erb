@@ -1,0 +1,25 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-lg-10 col-sm-12 mx-auto">
+      <div class="row mb-3">
+        <div class="col-12">
+          <h4><span class="bg-light bg-gradient">ジャンル編集</span></h4>
+        </div>
+      </div>
+      <div class='row'>
+        <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+          <%= form_with model: @genre, url: admin_genre_path(@genre), method: :patch, local: true do |f| %>
+            <div class="form-group">
+              <%= f.label :ジャンル名, class:"bg-light bg-gradient" %>
+              <%= f.text_field :name, class:'form-control book_title' %>
+            </div>
+            <%= form_for @genre, url: admin_genre_path(@genre), method: :delete do |f| %>
+              <div class="form-group text-right">
+                <%= f.submit "更新する", class:'btn btn-success' %>
+                <%= button_to "削除する", admin_genre_path(@genre), method: :delete, data: { confirm: "削除してもよろしいですか？" }, class: "btn btn-danger" %>
+              </div>
+            <% end %>
+          <% end %>
+        </div>
+    </div>
+</div>
