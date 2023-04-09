@@ -30,7 +30,20 @@ class Contributor < ApplicationRecord
   end
   
   def get_image
-    profile_image.attached? ? profile_image : 'no_image.jpg'
+    (profile_image.attached?) ? profile_image : 'no_image.jpg'
   end
-
+  
+  def self.search(search,word)
+    if search == "forward_match"
+      @contributor = Contributor.where("last_name LIKE ? OR first_name LIKE ?", "#{word}%", "#{word}%")
+    elsif search == "backward_match"
+      @contributor = Contributor.where("last_name LIKE ? OR first_name LIKE ?", "%#{word}", "%#{word}")
+    elsif search == "perfect_match"
+      @contributor = Contributor.where("last_name = ? OR first_name = ?", word, word)
+    elsif search == "partial_match"
+      @contributor = Contributor.where("last_name LIKE ? OR first_name LIKE ?", "%#{word}%", "%#{word}%")
+    else
+      @contributor = Contributor.all
+    end
+  end
 end

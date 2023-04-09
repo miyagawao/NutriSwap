@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   # 投稿者用
   # URL /contributors/sign_in ...
   devise_for :contributor, skip: [:passwords], controllers: {
@@ -14,9 +15,16 @@ Rails.application.routes.draw do
   scope module: :public do
     root to: 'homes#top'
     get '/about' => 'homes#about'
-    resources :posts
+    resources :posts do
+      get :tags, on: :collection
+    end
+    resources :contributors, only: [:show, :edit, :update] do
+      get :unsubscribe, on: :collection
+      patch :withdrawal, on: :member
+    end
+    get 'search' => 'searches#search'
   end
-
+  
   # 管理者用
   # URL /admin/sign_in ...
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
@@ -26,6 +34,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root to: 'homes#top'
     resources :contributors, only: [:index, :show, :edit, :update]
+    resources :genres, except: [:show, :new]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
