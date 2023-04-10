@@ -1,0 +1,10 @@
+<%= form_with model: [@post, @comment_reply], local: false do |f| %>
+  <div class="form-group">
+    <%= f.label "コメントに返信する" %>
+    <%= f.text_area :comment_text, :size => "3x3", autocomplete: 'off', placeholder: "コメントに返信してみよう", class: 'form-control' %>
+    <%= f.hidden_field :parent_id, value: comment.id %>
+  </div>
+  <div class="text-right">
+    <%= f.submit "返信する", class: 'btn btn-warning text-white' %>
+  </div>
+<% end %>

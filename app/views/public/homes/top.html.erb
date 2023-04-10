@@ -1,37 +1,49 @@
-<!--マイページ-->
-<div class="container pl-5">
-  <div class="text-center mt-5 mb-3"><h5><strong><%= flash[:notice] %></strong></h5></div>
-  <div class="border-bottom" style="background-color: #ffffe5;">
-    <h2>会員情報</h2>
-  </div>
-  <div class="card-header">
-    <div class="col-md-12">
-      <div class="d-flex">
-        <%= image_tag(current_contributor.get_image, style: "width: 20%; height: auto;") %>
-        <div class="ml-5 pl-5">
-          <div class="row">
-            <table class="table float-right">
-              <tr>
-                <td><strong>ニックネーム</strong></td>
-                <td><%= current_contributor.nickname %></td>
-              </tr>
-              <tr>
-                <td><strong>保有資格</strong></td>
-                <td>
-                  <%= current_contributor.qualification %>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>自己紹介</strong></td>
-                <td><%= simple_format(current_contributor.introduce, {}, {style: "width: 100%;"}) %></td>
-              </tr>
-            </table>
-          </div>
+<div style="background-color: #f9fffc;">
+  <div class="container px-5 text-center mx-auto">
+    <div class="row">
+      <div class="px-5 mx-auto ml-auto" style="position: relative;">
+        <div style="position: absolute; top: 60%; left: 50%; transform: translate(-50%, -50%);">
+          <h1 style="font-size: 3.5em; margin-bottom: 0.3em; color: white; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
+            ようこそ、NutriSwapへ
+          </h1>
+          <p style="font-size: 1.5em; color: white; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
+            ここは、現場で働く管理栄養士・栄養士・調理師の方専用のコミュニティサイトです。<br>
+            献立や食育のマンネリ化に悩んでいませんか？<br>
+            業務中の疑問を聞ける人がいない、というお悩みをお持ちではないですか？<br>
+            そんなお悩みを共有し、解決できるコミュニティサイトとしてご活用ください!!
+          </p>
         </div>
+        <%= image_tag 'vegetables-gd8df2cb3b_1280.jpg', style: "width: 100%; height: auto;" %>
+      </div>
     </div>
   </div>
-  <div class="card-body">
-    <%= link_to "編集する", edit_contributor_path(current_contributor), class: "btn btn-lg btn-block btn-outline-primary", type: "button" %>
-    <%= link_to "投稿する", new_post_path, class: "btn btn-lg btn-block btn-outline-warning", type: "button" %>
-  </div>
+  <div class="container pl-5">
+    <div class="border-bottom" style="background-color: #ffffe5;">
+      <h2>投稿一覧</h2>
+    </div>
+    <div class="d-md-flex flex-wrap">
+      <% @posts.each do |post| %>
+        <div class="card m-2 text-center card-warpper">
+          <%= link_to post_path(post.id) do %>
+            <%= image_tag post.get_image, size: '230x160', class: "card-image-top" %>
+            <div class="card-body text-dark py-2 font-weight-bold ">
+              <%= link_to post.title, post_path(post.id), class: "card-title mb-2" %>
+            </div>
+            <div class="card-body text-dark py-2 font-weight-bold ">
+              ジャンル：<%= link_to post.genre.name, posts_path(genre_id: post.genre.id, genre_name: post.genre.name) %>
+            </div>
+            <div class="card-body text-dark py-2 font-weight-bold ">
+              タグ：
+              <% post.tags.each do |tag| %>
+                <%= link_to tag.name, posts_path(tag_id: tag.id, tag_name: tag.name) %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+    <div id="paginate-warpper" class="text-center">
+      <%= paginate @posts %>
+    </div>
+</div>
 </div>

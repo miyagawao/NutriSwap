@@ -1,10 +1,10 @@
-<div class="container pl-5">
-  <div class="text-center mt-5 mb-3"><h5><strong><%= flash[:notice] %></strong></h5></div>
-  <div class="border-bottom" style="background-color: #ffffe5;">
-    <h2>投稿を編集する</h2>
-  </div>
-
-    <%= form_with(model: @post, url: posts_path, local: true) do |f| %>
+<div style="background-color: #f9fffc;">  
+  <div class="container pl-5">
+    <div class="border-bottom" style="background-color: #ffffe5;">
+      <h2>投稿を編集する</h2>
+    </div>
+  
+    <%= form_with(model: @post, url: post_path, method: :patch, local: true) do |f| %>
     <table class="table table-borderless">
       <tr>
         <th style="width: 20%">タイトル</th>
@@ -33,11 +33,11 @@
      <tr>
         <th style="width: 20%"><%= f.label :tag_list, "タグ付け" %></th>
         <td></td>
-        <td><%= f.text_field :tag_list, class: "form-control", id:'tag_list', placeholder: "タグをつける。複数つけるには','で区切ってください。" %></td>
+        <td><%= f.text_field :tag_list, class: "form-control", id:'tag_list', placeholder: "タグをつける。複数つけるには'　,　(カンマ)'で区切ってください。" %></td>
         <td></td>
         <td></td>
       </tr>
-      
+
       <tr>
         <th style="width: 20%"><%= f.label :genre_id, "ジャンルを選択する" %></th>
         <td></td>
@@ -49,7 +49,9 @@
     </table>
 
     <div class="form-group text-right">
-      <%= f.submit "更新する", class:'btn btn-success' %>
-      <%= button_to "削除", post_path(@post), method: :delete, data: { confirm: "本当に削除しますか?" }, class: "btn btn-danger" %>
+      <%= f.submit "更新する", class: 'btn btn-success' %>
+      <%= link_to "削除", post_path(@post.id), method: :delete, data: { confirm: "本当に削除しますか?" }, class: "btn btn-danger" %>
     </div>
     <% end %>
+  </div>
+</div>

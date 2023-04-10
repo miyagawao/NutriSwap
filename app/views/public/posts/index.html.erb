@@ -1,32 +1,33 @@
-<div class="container pl-5">
-  <div class="text-center mt-5 mb-3"><h5><strong><%= flash[:notice] %></strong></h5></div>
-  <div class="border-bottom" style="background-color: #ffffe5;">
-    <h2>投稿一覧</h2>
-  </div>
+<div style="background-color: #f9fffc;">
+  <div class="container pl-5">
+    <div class="border-bottom" style="background-color: #ffffe5;">
+      <h2>投稿一覧</h2>
+    </div>
   
-  <div class="d-md-flex flex-wrap">
-    <% @posts.each do |post|%>
-      <div class="card m-2 text-center card-warpper">
-        <%= link_to post_path(post.id) do %>
-          <%= image_tag post.get_image, size:'230x160', class:"card-image-top" %>
-        <div class="card-body text-dark py-2 font-weight-bold ">
-          <%= link_to post.title, post_path(post.id), class: "card-title mb-2" %>
-        </div>
-        <div class="card-body text-dark py-2 font-weight-bold ">
-          ジャンル：<%= link_to post.genre.name, posts_path(genre_id: post.genre.id, genre_name: post.genre.name) %>
-        </div>
-        <div class="card-body text-dark py-2 font-weight-bold ">
-          タグ：
-          <% post.tags.each do |tag| %>  
-            <%= link_to tag.name, posts_path(tag_id: tag.id, tag_name: tag.name) %>
+    <div class="d-md-flex flex-wrap">
+      <% @posts.each do |post|%>
+        <div class="card m-2 text-center card-warpper">
+          <%= link_to post_path(post.id) do %>
+            <%= image_tag post.get_image, size:'230x160', class:"card-image-top" %>
+          <div class="card-body text-dark py-2 font-weight-bold ">
+            <%= link_to post.title, post_path(post.id), class: "card-title mb-2" %>
+          </div>
+          <div class="card-body text-dark py-2 font-weight-bold ">
+            ジャンル：<%= link_to post.genre.name, posts_path(genre_id: post.genre.id, genre_name: post.genre.name) %>
+          </div>
+          <div class="card-body text-dark py-2 font-weight-bold ">
+            タグ：
+            <% post.tags.each do |tag| %>
+              <%= link_to tag.name, posts_path(tag_id: tag.id, tag_name: tag.name) %>
+            <% end %>
+          </div>
           <% end %>
         </div>
-        <% end %> 
-      </div>
-    <% end %>
-  </div>
+      <% end %>
+    </div>
   
-  <div id="paginate-warpper" class="text-center">
-    <%= paginate @posts %>
+    <div id="paginate-warpper" class="text-center">
+      <%= paginate @posts %>
+    </div>
   </div>
 </div>

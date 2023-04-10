@@ -1,0 +1,10 @@
+<!--'posts/show'で使用中-->
+<%= form_with model: [@post, @comment], local: false do |f| %>
+  <div class="form-group">
+    <%= f.label "コメントを投稿する" %>
+    <%= f.text_area :comment_text, size: "3x3", autocomplete: 'off', placeholder: "コメントを入力してください", class: 'form-control' %>
+  </div>
+  <div class="text-right">
+    <%= f.submit "コメントする",class: 'btn btn-warning text-white' %>
+  </div>
+<% end %>

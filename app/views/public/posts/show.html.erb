@@ -1,45 +1,59 @@
-<div class="container pl-5">
-  <div class="text-center mt-5 mb-3"><h5><strong><%= flash[:notice] %></strong></h5></div>
-  <div class="border-bottom" style="background-color: #ffffe5;">
-    <h2><%= @post.title %></h2>
-  </div>
-  <div class="card-header">
-    <div class="col-md-12">
-      <div class="d-flex">
-        <%= image_tag(@post.get_image, size: "400x300") %>
-        <div class="ml-5 pl-5">
-          <div class="row">
-            <table class="table float-right">
-              <tr>
-                <td><strong>投稿内容</strong></td>
-                <td><%= simple_format(@post.content, {}, {style: "width: 100%;"}) %></td>
-              </tr>
-              <tr>
-                <td><strong>ジャンル</strong></td>
-                <td><%= link_to @post.genre.name, posts_path(genre_id: @post.genre.id, genre_name: @post.genre.name) %></td>
-              </tr>
-              <tr>
-                <td><strong>タグ</strong></td>
-                <td><% @post.tags.each do |tag| %>
-                      <%= link_to tag.name, posts_path(tag_id: tag.id, tag_name: tag.name) %>
-                    <% end %>
-                </td>
-              </tr>
-              <tr>
-                <td style="white-space: nowrap;"><strong>ニックネーム</strong></td>
-                <td><%= link_to @post.contributor.nickname, contributor_path(@contributor.id) %></td>
-              </tr>
-              <tr>
-                <td><strong>保有資格</strong></td>
-                <td>
-                  <%= @post.contributor.qualification %>
-                </td>
-              </tr>
-            </table>
+<div style="background-color: #f9fffc;">  
+  <div class="container pl-5">
+    <div class="border-bottom" style="background-color: #ffffe5;">
+      <h2>「<%= @post.title %>」</h2>
+    </div>
+    <div class="card-header">
+      <div class="col-md-12">
+        <div class="d-flex">
+          <%= image_tag(@post.get_image, size: "400x300") %>
+          <div class="ml-5 pl-5">
+            <div class="row">
+              <table class="table float-right">
+                <tr>
+                  <td><strong>投稿内容</strong></td>
+                  <td><%= simple_format(@post.content, {}, {style: "width: 100%;"}) %></td>
+                </tr>
+                <tr>
+                  <td><strong>ジャンル</strong></td>
+                  <td><%= link_to @post.genre.name, posts_path(genre_id: @post.genre.id, genre_name: @post.genre.name) %></td>
+                </tr>
+                <tr>
+                  <td><strong>タグ</strong></td>
+                  <td><% @post.tags.each do |tag| %>
+                        <%= link_to tag.name, posts_path(tag_id: tag.id, tag_name: tag.name) %>
+                      <% end %>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="white-space: nowrap;"><strong>ニックネーム</strong></td>
+                  <td><%= link_to @post.contributor.nickname, contributor_path(@contributor.id) %></td>
+                </tr>
+                <tr>
+                  <td><strong>保有資格</strong></td>
+                  <td>
+                    <%= @post.contributor.qualification %>
+                  </td>
+                </tr>
+              </table>
+            </div>
           </div>
         </div>
+      </div>
+      <div class="card-body">
+        <% if current_contributor.id == @contributor.id %>
+          <%= link_to "編集する", edit_post_path(@post.id), class: "btn btn-lg btn-block btn-outline-primary", type: "button" %>
+        <% end %>
+      </div>
     </div>
-    <div class="card-body">
-      <%= link_to "編集する", edit_post_path(current_contributor), class: "btn btn-lg btn-block btn-outline-primary", type: "button" %>
+    <div class="border-bottom" style="background-color: #ffffe5;">
+      <h2>「<%= @post.title %>」へのコメント</h2>
     </div>
+    <div id="comments_area">
+      <%= render 'public/comments/index', comments: @comments, comment_reply: @comment_reply %>
+    </div>
+    <% if contributor_signed_in? %>
+      <%= render 'public/comments/form', post: @post, comment: @comment %>
+    <% end %>
+  </div>
 </div>

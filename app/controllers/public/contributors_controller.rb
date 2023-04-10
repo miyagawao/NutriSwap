@@ -1,6 +1,8 @@
 class Public::ContributorsController < ApplicationController
+  # sign_inしているcontributouのみ閲覧・編集可能
   before_action :ensure_current_contributor
-    #sign_inしているcustomerのみ閲覧・編集可能
+
+
 
   def show
     @contributor = Contributor.find(params[:id])
@@ -14,12 +16,12 @@ class Public::ContributorsController < ApplicationController
     @contributor = Contributor.find(current_contributor.id)
     if @contributor.update(contributor_params)
       flash[:notice] = "変更を保存しました。"
-      redirect_to root_path
+      redirect_to contributor_path(@contributor)
     else
       render :edit
     end
   end
-
+  # 退会画面
   def unsubscribe
     @contributor = Contributor.find(current_contributor.id)
   end
@@ -27,10 +29,11 @@ class Public::ContributorsController < ApplicationController
   #退会処理
   def withdrawal
     @contributor = Contributor.find(current_contributor.id)
+    # is_deletedカラムをtrueに変更することにより削除フラグを立てる
     @contributor.update(is_deleted: true)
     reset_session
-    flash[:notice] = "退会処理を実行いたしました"
-    redirect_to root_path
+    flash[:notice] = "退会が完了しました。ご利用ありがとうございました。"
+    redirect_to new_contributor_session_path
   end
 
   private

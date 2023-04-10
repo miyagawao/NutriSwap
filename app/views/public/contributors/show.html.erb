@@ -1,32 +1,39 @@
-<div class="container pl-5">
-  <div class="text-center mt-5 mb-3"><h5><strong><%= flash[:notice] %></strong></h5></div>
-  <div class="border-bottom" style="background-color: #ffffe5;">
-    <h2>会員情報</h2>
-  </div>
-  <div class="card-header">
-    <div class="col-md-12">
-      <div class="d-flex">
-        <%= image_tag(@contributor.get_image, style: "width: 30%; height: auto;") %>
-        <div class="ml-5 pl-5">
-          <div class="row">
-            <table class="table float-right">
-              <tr>
-                <td><strong>ニックネーム</strong></td>
-                <td><%= @contributor.nickname %></td>
-              </tr>
-              <tr>
-                <td><strong>保有資格</strong></td>
-                <td>
-                  <%= @contributor.qualification %>
-                </td>
-              </tr>
-              <tr>
-                <td><strong>自己紹介</strong></td>
-                <td><%= simple_format(@contributor.introduce, {}, {style: "width: 100%;"}) %></td>
-              </tr>
-            </table>
+<div style="background-color: #f9fffc;">
+  <div class="container pl-5">
+    <div class="border-bottom" style="background-color: #ffffe5;">
+      <h2>会員情報</h2>
+    </div>
+    <div class="card-header">
+      <div class="col-md-12">
+        <div class="d-flex">
+          <%= image_tag(@contributor.get_image, style: "width: 30%; height: auto;") %>
+          <div class="ml-5 pl-5">
+            <div class="row">
+              <table class="table float-right">
+                <tr>
+                  <td style="white-space: nowrap;"><strong>ニックネーム</strong></td>
+                  <td><%= @contributor.nickname %></td>
+                </tr>
+                <tr>
+                  <td style="white-space: nowrap;"><strong>保有資格</strong></td>
+                  <td>
+                    <%= @contributor.qualification %>
+                  </td>
+                </tr>
+                <tr>
+                  <td style="white-space: nowrap;"><strong>自己紹介</strong></td>
+                  <td><%= simple_format(@contributor.introduce, {}, {style: "width: 100%;"}) %></td>
+                </tr>
+              </table>
+            </div>
           </div>
-        </div>
+      </div>
+    </div>
+    <div class="card-body">
+      <% if current_contributor.id == @contributor.id %>
+        <%= link_to "編集する", edit_contributor_path(current_contributor), class: "btn btn-lg btn-block btn-outline-primary", type: "button" %>
+        <%= link_to "投稿する", new_post_path, class: "btn btn-lg btn-block btn-outline-warning", type: "button" %>
+      <% end %>
     </div>
   </div>
 </div>

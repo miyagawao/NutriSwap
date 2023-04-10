@@ -1,23 +1,25 @@
-<div class="container">
-  <div class="row">
-    <div class="col-12 mt-5 mb-5">
-      <div class="justify-content-center text-center">
-        <div class="mb-4">
-        <h4><strong>本当に退会しますか？</strong></h4>
+<div style="background-color: #f9fffc;">
+  <div class="container">
+    <div class="row">
+      <div class="col-12 mt-5 mb-5">
+        <div class="justify-content-center text-center">
+          <div class="mb-4">
+          <h4><strong>本当に退会しますか？</strong></h4>
+          </div>
+          <div class="mb-5">
+          <h5>
+            退会すると、会員登録情報や<br>
+            これまでの購入履歴が閲覧できなくなります。<br>
+            退会する場合は、「退会する」をクリックしてください。
+          </h5>
+          </div>
+          <%= link_to edit_contributor_path(current_contributor), class: 'ml-3' do %>
+            <button class="btn btn-primary" type="submit">退会しない</button>
+          <% end %>
+          <%= link_to withdrawal_contributor_path(current_contributor), method: :patch, class: 'ml-3', data: { confirm: "本当に退会しますか？" } do %>
+            <button class="btn btn-danger" type="submit">退会する</button>
+          <% end %>
         </div>
-        <div class="mb-5">
-        <h5>
-          退会すると、会員登録情報や<br>
-          これまでの購入履歴が閲覧できなくなります。<br>
-          退会する場合は、「退会する」をクリックしてください。
-        </h5>
-        </div>
-        <%= link_to edit_contributor_path(current_contributor), class: 'ml-3' do %>
-          <button class="btn btn-primary" type="submit">退会しない</button>
-        <% end %>
-        <%= link_to withdrawal_contributor_path(current_contributor), method: :patch, class: 'ml-3', data: { confirm: "本当に退会しますか？" } do %>
-          <button class="btn btn-danger" type="submit">退会する</button>
-        <% end %>
       </div>
     </div>
   </div>
