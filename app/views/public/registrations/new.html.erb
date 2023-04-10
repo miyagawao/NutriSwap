@@ -1,120 +1,121 @@
-<div class="container pl-5">
-  <div class="text-center mt-5 mb-3"><h5><strong><%= flash[:notice] %></strong></h5></div>
-  <div class="border-bottom" style="background-color: #ffffe5;">
-    <h2>新規会員登録</h2>
-  </div>
-
-  <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-    <%= render "public/shared/error_messages", resource: resource %>
-    <table class="table table-borderless">
-      <tr>
-        <th style="width: 20%">名前</th>
-        <td class="text-right"  style="width: 10%"><%= f.label :（姓） %></td>
-        <td><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name",placeholder: "山田" %></td>
-        <td class="text-right"><%= f.label :（名） %></td>
-        <td><%= f.text_field :first_name, autofocus: true, autocomplete: "first_name",placeholder: "太郎" %></td>
-      </tr>
-
-      <tr>
-        <th style="width: 20%">フリガナ</th>
-        <td class="text-right"><%= f.label :（セイ） %>
-        <td><%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana",placeholder: "ヤマダ" %></td>
-        <td class="text-right"><%= f.label :（メイ） %></td>
-        <td><%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana",placeholder: "タロウ" %></td>
-      </tr>
-
-      <tr>
-        <th style="width: 20%">ニックネーム</th>
-        <td class="text-right"></td>
-        <td><%= f.text_field :nickname, autofocus: true, autocomplete: "nickname",placeholder: "ニックネーム" %></td>
-      </tr>
-
-      <tr>
-        <th style="width: 20%">メールアドレス</td>
-        <td class="text-right"></td>
-        <td><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'sample@example.com' %></td>
-      </tr>
-
-      <tr>
-        <th style="width: 20%"><%= f.label :"郵便番号(ハイフンなし)" %></th>
-        <td></td>
-        <td><%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code",placeholder: "0000000" %></td>
-        <td></td>
-        <td></td>
-      </tr>
-
-      <tr>
-        <th style="width: 20%"><%= f.label :住所 %></th>
-        <td></td>
-        <td><%= f.text_field :address, autofocus: true,autocomplete: "address",placeholder: "" %></td>
-        <td></td>
-        <td></td>
-      </tr>
-
-      <tr>
-        <th style="width: 20%"><%= f.label :"電話番号(ハイフンなし)" %></th>
-        <td></td>
-        <td><%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number",placeholder: "0000000000" %></td>
-        <td></td>
-        <td></td>
-      </tr>
-
-      <tr>
-        <th style="width: 20%"><%= f.label :資格 %></th>
-        <td></td>
-        <td>
-          <%= f.radio_button :qualification, "管理栄養士" %>
-          <%= f.label :qualification, "管理栄養士", style: "margin-right: 20px;" %>
-          <%= f.radio_button :qualification, "栄養士" %>
-          <%= f.label :qualification, "栄養士", style: "margin-right: 20px;" %>
-          <%= f.radio_button :qualification, "調理師" %>
-          <%= f.label :qualification, "調理師" %>
-        </td>
-      </tr>
-
-      <tr>
-        <th style="width: 20%"><%= f.label :自己紹介 %></th>
-        <td></td>
-        <td><%= f.text_area :introduce, rows: 5, style: "width: 100%;" %></td>
-        <td></td>
-        <td></td>
-      </tr>
-
-      <tr>
-        <th style="width: 20%">プロフィール画像</th>
-        <td></td>
-        <td><%= f.file_field :profile_image %></td>
-        <td></td>
-        <td></td>
-      </tr>
-
-      <tr>
-        <th style="width: 20%">
-          <%= f.label :パスワード %>
-          <% if @minimum_password_length %>
-          (<%= @minimum_password_length %>文字以上)
-          <% end %>
-        </th>
-        <td></td>
-        <td><%= f.password_field :password, autocomplete: "new-password" %></td>
-        <td></td>
-        <td></td>
-      </tr>
-      <tr>
-        <th style="width: 20%"><%= f.label :確認用パスワード %></th>
-        <td></td>
-        <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
-      </tr>
-    </table>
-
-    <div class="border-top mb-3"></div>
-    <div class="text-center">
-      <%= f.submit "新規登録", class: "btn btn-success w-25" %>
+<div style="background-color: #f9fffc;">  
+  <div class="container pl-5">
+    <div class="border-bottom" style="background-color: #ffffe5;">
+      <h2>新規会員登録</h2>
     </div>
-  <% end %>
-
-  <div class="mt-3 mb-5">
-    <strong>既に登録済みの方</strong></br>
-    <%= link_to "こちら", new_contributor_session_path %>からログインしてください。
+  
+    <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+      <%= render "public/shared/error_messages", resource: resource %>
+      <table class="table table-borderless">
+        <tr>
+          <th style="width: 20%">名前</th>
+          <td class="text-right"  style="width: 10%"><%= f.label :（姓） %></td>
+          <td><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name",placeholder: "山田" %></td>
+          <td class="text-right"><%= f.label :（名） %></td>
+          <td><%= f.text_field :first_name, autofocus: true, autocomplete: "first_name",placeholder: "太郎" %></td>
+        </tr>
+  
+        <tr>
+          <th style="width: 20%">フリガナ</th>
+          <td class="text-right"><%= f.label :（セイ） %>
+          <td><%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana",placeholder: "ヤマダ" %></td>
+          <td class="text-right"><%= f.label :（メイ） %></td>
+          <td><%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana",placeholder: "タロウ" %></td>
+        </tr>
+  
+        <tr>
+          <th style="width: 20%">ニックネーム</th>
+          <td class="text-right"></td>
+          <td><%= f.text_field :nickname, autofocus: true, autocomplete: "nickname",placeholder: "ニックネーム" %></td>
+        </tr>
+  
+        <tr>
+          <th style="width: 20%">メールアドレス</td>
+          <td class="text-right"></td>
+          <td><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'sample@example.com' %></td>
+        </tr>
+  
+        <tr>
+          <th style="width: 20%"><%= f.label :"郵便番号(ハイフンなし)" %></th>
+          <td></td>
+          <td><%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code",placeholder: "0000000" %></td>
+          <td></td>
+          <td></td>
+        </tr>
+  
+        <tr>
+          <th style="width: 20%"><%= f.label :住所 %></th>
+          <td></td>
+          <td><%= f.text_field :address, autofocus: true,autocomplete: "address",placeholder: "" %></td>
+          <td></td>
+          <td></td>
+        </tr>
+  
+        <tr>
+          <th style="width: 20%"><%= f.label :"電話番号(ハイフンなし)" %></th>
+          <td></td>
+          <td><%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number",placeholder: "0000000000" %></td>
+          <td></td>
+          <td></td>
+        </tr>
+  
+        <tr>
+          <th style="width: 20%"><%= f.label :資格 %></th>
+          <td></td>
+          <td>
+            <%= f.radio_button :qualification, "管理栄養士" %>
+            <%= f.label :qualification, "管理栄養士", style: "margin-right: 20px;" %>
+            <%= f.radio_button :qualification, "栄養士" %>
+            <%= f.label :qualification, "栄養士", style: "margin-right: 20px;" %>
+            <%= f.radio_button :qualification, "調理師" %>
+            <%= f.label :qualification, "調理師" %>
+          </td>
+        </tr>
+  
+        <tr>
+          <th style="width: 20%"><%= f.label :自己紹介 %></th>
+          <td></td>
+          <td><%= f.text_area :introduce, rows: 5, style: "width: 100%;" %></td>
+          <td></td>
+          <td></td>
+        </tr>
+  
+        <tr>
+          <th style="width: 20%">プロフィール画像</th>
+          <td></td>
+          <td><%= f.file_field :profile_image %></td>
+          <td></td>
+          <td></td>
+        </tr>
+  
+        <tr>
+          <th style="width: 20%">
+            <%= f.label :パスワード %>
+            <% if @minimum_password_length %>
+            (<%= @minimum_password_length %>文字以上)
+            <% end %>
+          </th>
+          <td></td>
+          <td><%= f.password_field :password, autocomplete: "new-password" %></td>
+          <td></td>
+          <td></td>
+        </tr>
+        <tr>
+          <th style="width: 20%"><%= f.label :確認用パスワード %></th>
+          <td></td>
+          <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
+        </tr>
+      </table>
+  
+      <div class="border-top mb-3"></div>
+      <div class="text-center">
+        <%= f.submit "新規登録", class: "btn btn-success w-25" %>
+      </div>
+    <% end %>
+  
+    <div class="mt-3 mb-5">
+      <strong>既に登録済みの方</strong></br>
+      <%= link_to "こちら", new_contributor_session_path %>からログインしてください。
+    </div>
   </div>
 </div>

@@ -1,47 +1,49 @@
-<h2>検索結果一覧</h2>
-<table class="table table-hover table-inverse">
-  <!--posts一覧 -->
-  <% if @range == '2' %>
-    <thead>
-      <tr>
-        <th></th>
-        <th>タイトル</th>
-        <th>内容</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @post.each do |post| %>
+<div style="background-color: #f9fffc;">
+  <h2>検索結果一覧</h2>
+  <table class="table table-hover table-inverse">
+    <!--posts一覧 -->
+    <% if @range == '2' %>
+      <thead>
         <tr>
-          <td>
-            <%= link_to(post.contributor) do %>
-              <%= image_tag(post.contributor, :image, :fill, 50, 50, fallback: "no-image-mini.jpg") %>
-            <% end %>
-          </td>
-          <td>
-            <%= link_to post.title, post_path(post), class: "post_#{post.id}" %>
-          </td>
-          <td><%= post.content %></td>
+          <th></th>
+          <th>タイトル</th>
+          <th>内容</th>
+          <th colspan="3"></th>
         </tr>
-      <% end %>
-    </tbody>
-  <!--contributors一覧 -->
-  <% else %>
-    <thead>
-      <tr>
-        <th>image</th>
-        <th>name</th>
-        <th colspan="3"></th>
-      </tr>
-    </thead>
-    <tbody>
-      <% @contributor.each do |contributor| %>
+      </thead>
+      <tbody>
+        <% @post.each do |post| %>
+          <tr>
+            <td>
+              <%= link_to(post.contributor) do %>
+                <%= image_tag(post.contributor, :image, :fill, 50, 50, fallback: "no-image-mini.jpg") %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to post.title, post_path(post), class: "post_#{post.id}" %>
+            </td>
+            <td><%= post.content %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    <!--contributors一覧 -->
+    <% else %>
+      <thead>
         <tr>
-          <td><%= image_tag(contributor, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
-          <td><%= contributor.nickname %></td>
-          <td><%= link_to "Show", contributor_path(contributor), class: "contributor_#{contributor.id}" %></td>
+          <th>image</th>
+          <th>name</th>
+          <th colspan="3"></th>
         </tr>
-      <% end %>
-    </tbody>
-  <% end %>
-</table>
+      </thead>
+      <tbody>
+        <% @contributor.each do |contributor| %>
+          <tr>
+            <td><%= image_tag(contributor, :profile_image, :fill, 50, 50, fallback: "no-image-mini.jpg") %></td>
+            <td><%= contributor.nickname %></td>
+            <td><%= link_to "Show", contributor_path(contributor), class: "contributor_#{contributor.id}" %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    <% end %>
+  </table>
+</div>

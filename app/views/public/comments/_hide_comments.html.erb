@@ -1,0 +1,68 @@
+<!--'comments/_index'で使用中-->
+<div class="container">
+  <!--ユーザー詳細-->
+  <div class="row d-flex align-items-center pb-3">
+    <div class="col">
+      <% if comment.contributor.profile_image.present? %>
+        <%= link_to image_tag(comment.contributor.profile_image.variant(resize: "100x100")), contributor_path(comment.contributor.id) %>
+      <% else %>
+        <%= link_to image_tag("no_profile_img.png"), contributor_path(comment.contributor.id) %>
+      <% end %>
+      <%= link_to "#{comment.contributor.nickname}さん", contributor_path(comment.contributor.id), class: 'link pl-1' %>
+    </div>
+    <div class="col d-flex justify-content-end">
+      <%= comment.created_at.strftime('%Y/%m/%d') %>
+    </div>
+  </div>
+  <div class="card-body border rounded mb-3">
+    <%= comment.comment_text %>
+  </div>
+  
+  <% if comment.contributor != current_contributor %>
+    <div class="comments_reply-form">
+      <%= render 'public/comments/reply_form', comment: comment, comment_reply: comment_reply %>
+    </div>
+  <% end %>
+  <% if comment.contributor == current_contributor %>
+    <%= link_to post_comment_path(comment.post_id, comment.id), method: :delete, remote: true do %>
+      <div class="text-right">
+        <button class="btn btn-outline-secondary">削除する</button>
+      </div>
+    <% end %>
+  <% end %>
+  
+  <hr class="d-none">
+  <% comment.replies.each do |reply| %>
+    <div class="container w-95 pt-3">
+      <div class="row d-flex align-items-center pb-3">
+        <div class="col">
+          <% if reply.contributor.profile_image.present? %>
+            <%= link_to contributor_path(reply.contributor.id) do %>
+              <%= image_tag(reply.contributor.profile_image.variant(resize: "100x100")) %>
+            <% end %>
+          <% else %>
+            <%= link_to contributor_path(reply.contributor.id) do %>
+              <%= image_tag('no_profile_img.png') %>
+            <% end %>
+          <% end %>
+          <%= link_to "#{reply.contributor.nickname}さんからの返信", contributor_path(reply.contributor.id), class: 'link pl-1' %>
+        </div>
+        <div class="col d-flex justify-content-end">
+          <%= reply.created_at.strftime('%Y/%m/%d') %>
+        </div>
+      </div>
+      <div class="card-body border rounded mb-3">
+        <%= reply.comment_text %>
+        <% unless comment.contributor == current_contributor %>
+          <%= link_to post_comment_path(comment.post_id, reply.id), method: :delete, remote: true do %>
+            <div class="text-right">
+              <button class="btn btn-outline-secondary">削除する</button>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+  <% end %>
+  
+  <hr>
+</div>

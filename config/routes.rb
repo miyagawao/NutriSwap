@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get '/about' => 'homes#about'
     resources :posts do
+      resources :comments, only: [:create, :destroy]
       get :tags, on: :collection
     end
     resources :contributors, only: [:show, :edit, :update] do
