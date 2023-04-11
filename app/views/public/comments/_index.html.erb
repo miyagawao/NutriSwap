@@ -4,7 +4,7 @@
   <% comments.where(parent_id: nil).first(2).each do |comment|%>
     <%= render 'public/comments/hide_comments', comment: comment, comment_reply: comment_reply %>
   <% end %>
-  
+
   <!--コメントが3件以上の場合、残りのコメントをプルダウンで表示するボタンの作成-->
    <% if comments.where(parent_id: nil).offset(2).any? %>
     <div class="text-right">
@@ -13,7 +13,7 @@
     <div class="collapse" id="collapseExample">
       <% comments.where(parent_id: nil).offset(2).each do |comment| %>
         <%= render 'public/comments/hide_comments', comment: comment, comment_reply: comment_reply %>
-      <% end %>  
+      <% end %>
     </div>
   <% end %>
 </div>

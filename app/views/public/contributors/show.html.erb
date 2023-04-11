@@ -31,9 +31,66 @@
     </div>
     <div class="card-body">
       <% if current_contributor.id == @contributor.id %>
-        <%= link_to "編集する", edit_contributor_path(current_contributor), class: "btn btn-lg btn-block btn-outline-primary", type: "button" %>
-        <%= link_to "投稿する", new_post_path, class: "btn btn-lg btn-block btn-outline-warning", type: "button" %>
+        <%= link_to(raw('<i class="fas fa-heart" style="color: #ff0000;"></i> お気に入り一覧'), post_likes_path(@contributor, post_id: Post.last.id), class: "btn btn-lg btn-block btn-outline-info", type: "button") %>
+        <%= link_to(raw('<i class="fas fa-cogs" style="color: #2003fc;"></i> 編集する'), edit_contributor_path(current_contributor), class: "btn btn-lg btn-block btn-outline-primary", type: "button") %>
+        <%= link_to(raw('<i class="fas fa-pen" style="color: #f0a001;"></i> 投稿する'), new_post_path, class: "btn btn-lg btn-block btn-outline-warning", type: "button") %>
       <% end %>
+    </div>
+  </div>
+</div>
+<div style="background-color: #f9fffc;">
+  <div class="container pl-5">
+    <div class="border-bottom" style="background-color: #ffffe5;">
+      <h2>過去の投稿一覧  <span class="badge badge-pill badge-secondary">全<%= @contributor.posts.count %>件</span></h2>
+    </div>
+    <div class="d-md-flex flex-wrap justify-content-center">
+      <% @posts.each do |post|%>
+        <% if post.contributor_id == @contributor.id %>
+           <div class="card m-2 text-center card-warpper" style="width: 340px;">
+            <%= link_to post_path(post.id) do %>
+              <% if post.image.present? %>
+                <%= image_tag post.get_image.variant(resize: "200x200"), class:"card-image-top", height: "200" %>
+              <% else %>
+                <%= image_tag("no_image.jpg", size: "200x200") %>
+              <% end %>
+            
+            <div class="card-body text-dark py-2 font-weight-bold ">
+              <%= link_to post.title, post_path(post.id), class: "card-title mb-2" %>
+            </div>
+            <table class="table">
+              <tbody>
+                <tr>
+                  <th class="text-right">ジャンル:</th>
+                  <td class="text-left"><%= link_to post.genre.name, posts_path(genre_id: post.genre.id, genre_name: post.genre.name) %></td>
+                </tr>
+                <tr>
+                  <th class="text-right">タグ:</th>
+                  <td class="text-left">
+                    <% post.tags.each do |tag| %>
+                      <%= link_to tag.name, posts_path(tag_id: tag.id, tag_name: tag.name) %><br>
+                    <% end %>
+                  </td>
+                </tr>
+                <tr>
+                  <th class="text-right">投稿日:</th>
+                  <td class="text-left"><%= post.created_at.strftime('%Y/%m/%d') %></td>
+                </tr>
+                <tr>
+                  <th class="text-right">いいね数:</th>
+                  <td id="likes_buttons_<%= post.id %>"  class="text-left">
+                    <%= render partial: 'public/likes/like', locals: { post: post, likes: @likes} %>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <% end %>
+          </div>
+        <% end %>  
+      <% end %>
+    </div>
+  
+    <div id="paginate-warpper" class="text-center">
+      <%= paginate @posts %>
     </div>
   </div>
 </div>

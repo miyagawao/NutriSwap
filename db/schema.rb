@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_10_111345) do
+ActiveRecord::Schema.define(version: 2023_04_11_060749) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -93,6 +93,15 @@ ActiveRecord::Schema.define(version: 2023_04_10_111345) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "likes", force: :cascade do |t|
+    t.integer "contributor_id", null: false
+    t.integer "post_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["contributor_id"], name: "index_likes_on_contributor_id"
+    t.index ["post_id"], name: "index_likes_on_post_id"
+  end
+
   create_table "post_tags", force: :cascade do |t|
     t.integer "post_id", null: false
     t.integer "tag_id", null: false
@@ -124,6 +133,8 @@ ActiveRecord::Schema.define(version: 2023_04_10_111345) do
   add_foreign_key "comments", "comments", column: "parent_id"
   add_foreign_key "comments", "contributors"
   add_foreign_key "comments", "posts"
+  add_foreign_key "likes", "contributors"
+  add_foreign_key "likes", "posts"
   add_foreign_key "post_tags", "posts"
   add_foreign_key "post_tags", "tags"
 end
