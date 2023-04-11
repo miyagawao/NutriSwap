@@ -8,6 +8,7 @@ class Contributor < ApplicationRecord
   has_one_attached :profile_image
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   
   validates :address, presence: true
   validates :comment_text, presence: true, length: { maximum: 1000 }

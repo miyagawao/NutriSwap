@@ -1,19 +1,17 @@
 <div style="background-color: #f9fffc;">
   <div class="container pl-5">
     <div class="border-bottom" style="background-color: #ffffe5;">
-      <h2>投稿一覧　<span class="badge badge-pill badge-secondary">全<%= @posts.count %>件</span></h2>
+      <h2>お気に入り一覧　<span class="badge badge-pill badge-secondary">全<%= @likes_posts.count %>件</span></h2></h2>
     </div>
-  
     <div class="d-md-flex flex-wrap justify-content-center">
-      <% @posts.each do |post|%>
-         <div class="card m-2 text-center card-warpper" style="width: 340px;">
-          <%= link_to post_path(post.id) do %>
-            <% if post.image.present? %>
-              <%= image_tag post.get_image.variant(resize: "200x200"), class:"card-image-top", height: "200" %>
-            <% else %>
-              <%= image_tag("no_image.jpg", size: "200x200") %>
-            <% end %>
-          
+      <% @likes_posts.each do |post|%>
+       <div class="card m-2 text-center card-warpper" style="width: 340px;">
+        <%= link_to post_path(post.id) do %>
+          <% if post.image.present? %>
+            <%= image_tag post.get_image.variant(resize: "200x200"), class:"card-image-top", height: "200" %>
+          <% else %>
+            <%= image_tag("no_image.jpg", size: "200x200") %>
+          <% end %>
           <div class="card-body text-dark py-2 font-weight-bold ">
             <%= link_to post.title, post_path(post.id), class: "card-title mb-2" %>
           </div>
@@ -45,8 +43,7 @@
           </table>
           <% end %>
         </div>
-        
-      <% end %>
+      <% end %>  
     </div>
   
     <div id="paginate-warpper" class="text-center">

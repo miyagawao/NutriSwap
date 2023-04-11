@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  namespace :public do
+    get 'likes/create'
+    get 'likes/destroy'
+  end
   # 投稿者用
   # URL /contributors/sign_in ...
   devise_for :contributor, skip: [:passwords], controllers: {
@@ -17,6 +21,7 @@ Rails.application.routes.draw do
     get '/about' => 'homes#about'
     resources :posts do
       resources :comments, only: [:create, :destroy]
+      resources :likes, only: [:index, :create, :destroy]
       get :tags, on: :collection
     end
     resources :contributors, only: [:show, :edit, :update] do

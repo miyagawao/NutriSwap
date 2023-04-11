@@ -2,8 +2,10 @@ class Post < ApplicationRecord
   belongs_to :contributor
   belongs_to :genre
   has_many :comments, dependent: :destroy
+  has_many :likes, dependent: :destroy
   has_many :post_tags, dependent: :destroy
   has_many :tags, through: :post_tags
+  
   
   validates :title, presence: true
   validates :content, presence: true
@@ -12,6 +14,10 @@ class Post < ApplicationRecord
   has_one_attached :image
   def get_image
     (image.attached?) ? image : 'no_image.jpg'
+  end
+
+  def liked_by?(contributor)
+    likes.where(contributor_id: contributor.id).exists?
   end
 
   def save_tags(tag_list)

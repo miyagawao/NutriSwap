@@ -1,12 +1,20 @@
 <div style="background-color: #f9fffc;">  
   <div class="container pl-5">
     <div class="border-bottom" style="background-color: #ffffe5;">
-      <h2>「<%= @post.title %>」</h2>
+      <div style="display: flex; justify-content: space-between;">
+        <div>
+          <h2>「<%= @post.title %>」</h2>
+        </div>
+        <div id="likes_buttons_<%= @post.id %>" style="margin-top: 10px; margin-right: 10px;">
+          <%= render partial: 'public/likes/like', locals: { post: @post, likes: @likes} %>
+        </div>
+      </div>
     </div>
     <div class="card-header">
       <div class="col-md-12">
         <div class="d-flex">
           <%= image_tag(@post.get_image, size: "400x300") %>
+          
           <div class="ml-5 pl-5">
             <div class="row">
               <table class="table float-right">

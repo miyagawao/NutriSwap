@@ -1,0 +1,11 @@
+<% if post.liked_by?(current_contributor) %>
+  <%= link_to post_like_path(post, id: post.id), method: :delete, remote: true do %>
+    <i class="fas fa-heart" style="color: #ff000d;"></i><%= post.likes.count %>いいね
+  <% end %>
+<% else %>
+  <%= link_to post_likes_path(post), method: :post, remote: true do %>
+   <i class="far fa-heart" style="color: #ff000d;"></i><%= post.likes.count %>いいね
+  <% end %>
+<% end %>
+
+
