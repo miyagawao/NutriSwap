@@ -4,7 +4,6 @@ class Public::ContributorsController < ApplicationController
 
   def show
     @contributor = Contributor.find(params[:id])
-    
     @posts = @contributor.posts.order(created_at: :desc).includes(:genre, :tags).page(params[:page]).per(8)
     if params[:genre_id].present? && params[:tag_id].present?
       @posts = Post.search_genre(params[:genre_id]).search_tag(params[:tag_id]).order(created_at: :desc).page(params[:page]).per(8)
@@ -21,6 +20,7 @@ class Public::ContributorsController < ApplicationController
     else
       @posts = Post.order(created_at: :desc).page(params[:page]).per(8)
     end
+    @genres = Genre.all
   end
 
   def edit

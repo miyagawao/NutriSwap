@@ -35,6 +35,7 @@ class Public::PostsController < ApplicationController
     @comment = Comment.new
     # 返信コメントの作成
     @comment_reply = @post.comments.new
+    @genres = Genre.all
   end
 
   def new

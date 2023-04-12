@@ -1,19 +1,11 @@
-<div style="background-color: #f9fffc;">
-  <div class="container px-5 text-center mx-auto">
-    <div class="row">
-      <div class="px-5 mx-auto ml-auto" style="position: relative;">
-        <div style="position: absolute; top: 60%; left: 50%; transform: translate(-50%, -50%);">
-          <h1 style="font-size: 3.5em; margin-bottom: 0.3em; color: white; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
-            ようこそ、NutriSwapへ
-          </h1>
-          <p style="font-size: 1.5em; color: white; text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;">
-            ここは、現場で働く管理栄養士・栄養士・調理師の方専用のコミュニティサイトです。<br>
-            献立や食育のマンネリ化に悩んでいませんか？<br>
-            業務中の疑問を聞ける人がいない、というお悩みをお持ちではないですか？<br>
-            そんなお悩みを共有し、解決できるコミュニティサイトとしてご活用ください!!
-          </p>
-        </div>
-        <%= image_tag 'vegetables-gd8df2cb3b_1280.jpg', style: "width: 100%; height: auto;" %>
+<div class="container-fluid" style="background-color: #f9fffc;">
+  <div class="row">
+    <div class="col-md-2">
+      <%= render 'public/tmp/genre_list', genres: @genres %>
+    </div>
+     <div class="col-md-9">
+      <div class="px-5 mx-auto ml-auto container" style="position: relative;">
+        <%= image_tag 'top.jpg', style: "width: 85%; height: auto;" %>
       </div>
     </div>
   </div>
@@ -29,5 +21,5 @@
     <div id="paginate-warpper" class="text-center">
       <%= paginate @posts %>
     </div>
-</div>
+  </div>
 </div>
