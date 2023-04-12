@@ -1,9 +1,12 @@
-<div class="genre-list" id="genre-list">
-<h5 class="border-bottom p-1 text-center border-dark">ジャンル検索</h5>
-  <ul class="list-unstyled ml-3">
-    <li class="my-3 text-center"><%= link_to 'すべて', posts_path, class:"text-dark" %></li>
+<div class="list-group">
+  <a href="#" class="list-group-item list-group-item-action active text-center" style="background-color: #f5b2ac; border-color: #f8f9fa;">
+    <i class="fas fa-search"></i>  ジャンル検索
+  </a>
+  <%= link_to 'すべて', posts_path, class: 'list-group-item list-group-item-action text-center', style: 'font-size: 1.2em;' %>
+  <div class="list-group">
     <% genres.each do |genre|%>
-      <li class="my-3 text-center"><%= link_to genre.name, posts_path(genre_id: genre.id,genre_name:genre.name),class:"text-dark" %></li>
+      <%= link_to genre.name, posts_path(genre_id: genre.id, genre_name: genre.name), class: "list-group-item list-group-item-action text-center", style: 'font-size: 1.2em;' %>
     <% end %>
-  </ul>
+  </div>
 </div>
+

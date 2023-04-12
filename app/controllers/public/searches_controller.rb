@@ -8,5 +8,7 @@ class Public::SearchesController < ApplicationController
     else
       @contributors = Contributor.looks(params[:search], params[:word])
     end
-  end  
+
+    @genres = Genre.all
+  end
 end

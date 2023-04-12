@@ -1,6 +1,10 @@
-<div style="background-color: #f9fffc;">
-  <div class="container pl-5">
-    <div class="border-bottom" style="background-color: #ffffe5;">
+<div class="container-fluid" style="background-color: #f9fffc;">
+  <div class="row">
+    <div class="col-md-2">
+      <%= render 'public/tmp/genre_list', genres: @genres %>
+    </div>
+    <div class="col-md-9">
+      <div class="border-bottom" style="background-color: #ffffe5;">
       <h2>お気に入り一覧　<span class="badge badge-pill badge-secondary">全<%= @likes_posts.count %>件</span></h2></h2>
     </div>
     

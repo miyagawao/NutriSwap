@@ -1,49 +1,50 @@
-<div style="background-color: #f9fffc;">
-  <div class="container pl-5">
-    <div class="border-bottom" style="background-color: #ffffe5;">
-      <h2>会員情報</h2>
+<div class="container-fluid" style="background-color: #f9fffc;"> 
+  <div class="row">
+    <div class="col-md-2">
+      <%= render 'public/tmp/genre_list', genres: @genres %>
     </div>
-    <div class="card-header">
-      <div class="col-md-12">
-        <div class="d-flex">
-          <% if @contributor.profile_image.present? %>
-            <%= image_tag @contributor.profile_image.variant(resize: "200x200"), class:"card-image-top", height: "150" %>
-          <% else %>
-            <%= image_tag("no_image.jpg", size: "200x200", class: "card-image-top", height: "150") %>
-          <% end %>
-          <div class="ml-5 pl-5">
-            <div class="row">
-              <table class="table float-right">
-                <tr>
-                  <td style="white-space: nowrap;"><strong>ニックネーム</strong></td>
-                  <td><%= @contributor.nickname %></td>
-                </tr>
-                <tr>
-                  <td style="white-space: nowrap;"><strong>保有資格</strong></td>
-                  <td>
-                    <%= @contributor.qualification %>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="white-space: nowrap;"><strong>自己紹介</strong></td>
-                  <td><%= simple_format(@contributor.introduce, {}, {style: "width: 100%;"}) %></td>
-                </tr>
-              </table>
+    <div class="col-md-9">
+      <div class="border-bottom" style="background-color: #ffffe5;">
+        <h2>会員情報</h2>
+      </div>
+      <div class="card-header">
+        <div class="col-md-12">
+          <div class="d-flex">
+            <% if @contributor.profile_image.present? %>
+              <%= image_tag @contributor.profile_image.variant(resize: "200x200"), class:"card-image-top", height: "150" %>
+            <% else %>
+              <%= image_tag("no_image.jpg", size: "200x200", class: "card-image-top", height: "150") %>
+            <% end %>
+            <div class="ml-5 pl-5">
+              <div class="row">
+                <table class="table float-right">
+                  <tr>
+                    <td style="white-space: nowrap;"><strong>ニックネーム</strong></td>
+                    <td><%= @contributor.nickname %></td>
+                  </tr>
+                  <tr>
+                    <td style="white-space: nowrap;"><strong>保有資格</strong></td>
+                    <td>
+                      <%= @contributor.qualification %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="white-space: nowrap;"><strong>自己紹介</strong></td>
+                    <td><%= simple_format(@contributor.introduce, {}, {style: "width: 100%;"}) %></td>
+                  </tr>
+                </table>
+              </div>
             </div>
           </div>
+        </div>
+        <div class="card-body">
+          <% if current_contributor.id == @contributor.id %>
+            <%= link_to(raw('<i class="fas fa-heart" style="color: #ff0000;"></i> お気に入り一覧'), post_likes_path(@contributor, post_id: Post.last.id), class: "btn btn-lg btn-block btn-outline-info", type: "button") %>
+            <%= link_to(raw('<i class="fas fa-cogs" style="color: #2003fc;"></i> 編集する'), edit_contributor_path(current_contributor), class: "btn btn-lg btn-block btn-outline-primary", type: "button") %>
+            <%= link_to(raw('<i class="fas fa-pen" style="color: #f0a001;"></i> 投稿する'), new_post_path, class: "btn btn-lg btn-block btn-outline-warning", type: "button") %>
+          <% end %>
+        </div>
       </div>
-    </div>
-    <div class="card-body">
-      <% if current_contributor.id == @contributor.id %>
-        <%= link_to(raw('<i class="fas fa-heart" style="color: #ff0000;"></i> お気に入り一覧'), post_likes_path(@contributor, post_id: Post.last.id), class: "btn btn-lg btn-block btn-outline-info", type: "button") %>
-        <%= link_to(raw('<i class="fas fa-cogs" style="color: #2003fc;"></i> 編集する'), edit_contributor_path(current_contributor), class: "btn btn-lg btn-block btn-outline-primary", type: "button") %>
-        <%= link_to(raw('<i class="fas fa-pen" style="color: #f0a001;"></i> 投稿する'), new_post_path, class: "btn btn-lg btn-block btn-outline-warning", type: "button") %>
-      <% end %>
-    </div>
-  </div>
-</div>
-<div style="background-color: #f9fffc;">
-  <div class="container pl-5">
     <div class="border-bottom" style="background-color: #ffffe5;">
       <h2>過去の投稿一覧  <span class="badge badge-pill badge-secondary">全<%= @contributor.posts.count %>件</span></h2>
     </div>
