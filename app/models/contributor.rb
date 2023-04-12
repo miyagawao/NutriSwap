@@ -9,7 +9,7 @@ class Contributor < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
-  
+
   validates :address, presence: true
   validates :comment_text, presence: true, length: { maximum: 1000 }
   validates :email, presence: true
@@ -28,11 +28,11 @@ class Contributor < ApplicationRecord
   def get_image
     profile_image.attached? ? profile_image : 'no_image.jpg'
   end
-  
+
   def profile_image?
     profile_image.attached?
   end
-  
+
   # is_deletedがfalseならtrueを返すようにしている
   def active_for_authentication?
     super && (is_deleted == false)
@@ -45,17 +45,10 @@ class Contributor < ApplicationRecord
     end
   end
 
-  def self.search(search,word)
-    if search == "forward_match"
-      Contributor.where("last_name LIKE ? OR first_name LIKE ?", "#{word}%", "#{word}%")
-    elsif search == "backward_match"
-      Contributor.where("last_name LIKE ? OR first_name LIKE ?", "%#{word}", "%#{word}")
-    elsif search == "perfect_match"
-      Contributor.where("last_name = ? OR first_name = ?", word, word)
-    elsif search == "partial_match"
-      Contributor.where("last_name LIKE ? OR first_name LIKE ?", "%#{word}%", "%#{word}%")
-    else
-      Contributor.all
+  def self.looks(search, word)
+    if search == "partial_match"
+      where("nickname LIKE ?", "%#{word}%")
     end
   end
+
 end
