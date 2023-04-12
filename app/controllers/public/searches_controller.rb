@@ -2,14 +2,11 @@ class Public::SearchesController < ApplicationController
   
   def search
     @range = params[:range]
-    search = params[:search]
-    word = params[:word]
     
-    if @range == '1'
-      @contributor = Contributor.search(search,word)
+    if @range == 'Post'
+      @posts = Post.looks(params[:search], params[:word])
     else
-      @post = Post.search(search,word)
+      @contributors = Contributor.looks(params[:search], params[:word])
     end
   end  
-  
 end

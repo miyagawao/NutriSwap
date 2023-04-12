@@ -22,17 +22,13 @@ class Public::PostsController < ApplicationController
     else
       @posts = Post.order(created_at: :desc).page(params[:page]).per(8)
     end
+    @rank_posts = Post.order(impressions_count: 'DESC')
   end
-
-
-
-
-
-
-
+  
   def show
     @post = Post.find(params[:id])
     @contributor = @post.contributor
+    impressionist(@post, nil, unique: [:session_hash])
     # コメント一覧表示で使用する全コメントデータを代入（新着順で表示）
     @comments = @post.comments.order(create_at: :desc)
     # コメントの作成
