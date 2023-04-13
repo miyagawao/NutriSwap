@@ -1,0 +1,47 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-lg-10 col-sm-12 mx-auto">
+      <div class="row mb-3">
+        <div class="col-12">
+          <h3><span class="bg-light bg-gradient"><%= @comment.contributor.add_full_name %>さんのコメント詳細</span></h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <table class="table table-bordered border-dark">
+          <tr>
+            <td class="bg-light bg-gradient">会員ID</td>
+            <td><%= @comment.contributor.id %></td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">氏名</td>
+            <td>
+              <%= link_to admin_contributor_path(@comment.contributor.id), class: 'text-primary' do %>
+                <%= @comment.contributor.add_full_name %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient"  style="white-space: nowrap;">コメント内容</td>
+            <td>
+              <%= @comment.comment_text %>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">通報の有無</td>
+            <td>
+              <% if @comment.reports.exists? %>
+                <%= link_to admin_report_path(comment.reports.first) do %>
+                  <%= c@omment.reports.count %>件の通報あり
+                <% end %>
+              <% else %>
+                通報なし
+              <% end %>
+            </td>
+          </tr>
+        </table>
+        <%= link_to "削除する", admin_comment_path(@comment), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+      </div>
+    </div>
+  </div>
+</div>

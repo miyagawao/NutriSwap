@@ -10,13 +10,17 @@ class Public::LikesController < ApplicationController
   end
   
   def create
-    @like = Like.create(contributor_id: current_contributor.id, post_id: params[:post_id])
+    @post = Post.find(params[:post_id])
+    @current_contributor = current_contributor
+    @like = Like.create(contributor_id: @current_contributor.id, post_id: params[:post_id])
     @likes = Like.where(post_id: params[:post_id])
     @post.reload
   end
 
   def destroy
-    like = Like.find_by(contributor_id: current_contributor.id, post_id: params[:post_id])
+    @post = Post.find(params[:post_id])
+    @current_contributor = current_contributor
+    like = Like.find_by(contributor_id: @current_contributor.id, post_id: params[:post_id])
     like.destroy
     @likes = Like.where(post_id: params[:post_id])
     @post.reload

@@ -2,7 +2,8 @@
 <div id="comments_area">
   <h5>コメント一覧(<%= comments.count %>件)</h5>
   <% comments.where(parent_id: nil).first(2).each do |comment|%>
-    <%= render 'public/comments/hide_comments', comment: comment, comment_reply: comment_reply %>
+    <%= comment.comment_text %>
+    <%= render 'public/comments/hide_comments', comment: comment, comment_reply: comment_reply, current_contributor: current_contributor %>
   <% end %>
 
   <!--コメントが3件以上の場合、残りのコメントをプルダウンで表示するボタンの作成-->
@@ -12,7 +13,7 @@
     </div>
     <div class="collapse" id="collapseExample">
       <% comments.where(parent_id: nil).offset(2).each do |comment| %>
-        <%= render 'public/comments/hide_comments', comment: comment, comment_reply: comment_reply %>
+        <%= render 'public/comments/hide_comments', comment: comment, comment_reply: comment_reply, current_contributor: current_contributor %>
       <% end %>
     </div>
   <% end %>

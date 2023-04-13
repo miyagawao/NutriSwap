@@ -65,7 +65,7 @@
             <td><%= simple_format(@contributor.introduce, {}, {style: "width: 100%;"}) %></td>
           </tr>
           <tr>
-            <td class="bg-light bg-gradient">プロフィール画像</td>
+            <td class="bg-light bg-gradient" style="white-space: nowrap;">プロフィール画像</td>
             <td>
                <%= image_tag(@contributor.get_image, style: "width: 30%; height: auto;") %>
             </td>

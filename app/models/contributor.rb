@@ -9,6 +9,7 @@ class Contributor < ApplicationRecord
   has_many :posts, dependent: :destroy
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
+  has_many :reports, class_name: "Report", foreign_key: "reporter_id", dependent: :destroy
 
   validates :address, presence: true
   validates :comment_text, presence: true, length: { maximum: 1000 }
@@ -39,9 +40,18 @@ class Contributor < ApplicationRecord
   end
 
   def self.guest
-    find_or_create_by!(name: 'guestuser' ,email: 'guest@example.com') do |contributor|
+    find_or_create_by!(email: 'guest@example.com') do |contributor|
       contributor.password = SecureRandom.urlsafe_base64
-      contributor.name = "guestuser"
+      contributor.address = "東京都渋谷区道玄坂1-2-3"
+      contributor.comment_text = "ゲストユーザーです"
+      contributor.first_name = "ゲスト"
+      contributor.first_name_kana = "ゲスト"
+      contributor.last_name = "ユーザー"
+      contributor.last_name_kana = "ユーザー"
+      contributor.nickname = "ゲストユーザー"
+      contributor.postal_code = "000-0000"
+      contributor.telephone_number = "000-0000-0000"
+      contributor.qualification = "ゲスト"
     end
   end
 

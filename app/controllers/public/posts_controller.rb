@@ -6,6 +6,7 @@ class Public::PostsController < ApplicationController
   before_action :set_genres, :tags, only: [:index, :new, :edit]
   
   def index
+    @current_contributor = current_contributor
     @posts = Post.order(created_at: :desc).includes(:genre, :tags).page(params[:page]).per(8)
     if params[:genre_id].present? && params[:tag_id].present?
       @posts = Post.search_genre(params[:genre_id]).search_tag(params[:tag_id]).order(created_at: :desc).page(params[:page]).per(8)
@@ -27,10 +28,10 @@ class Public::PostsController < ApplicationController
   
   def show
     @post = Post.find(params[:id])
-    @contributor = @post.contributor
+    @current_contributor = current_contributor
     impressionist(@post, nil, unique: [:session_hash])
     # コメント一覧表示で使用する全コメントデータを代入（新着順で表示）
-    @comments = @post.comments.order(create_at: :desc)
+    @comments = @post.comments.order(created_at: :desc)
     # コメントの作成
     @comment = Comment.new
     # 返信コメントの作成
