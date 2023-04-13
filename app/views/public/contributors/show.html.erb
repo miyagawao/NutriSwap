@@ -10,10 +10,10 @@
       <div class="card-header">
         <div class="col-md-12">
           <div class="d-flex">
-            <% if @contributor.profile_image.present? %>
-              <%= image_tag @contributor.profile_image.variant(resize: "200x200"), class:"card-image-top", height: "150" %>
+            <% if @contributor.profile_image.attached? %>
+              <%= image_tag @contributor.profile_image.variant(resize: "200x200"), class: "card-image-top", height: "150" %>
             <% else %>
-              <%= image_tag("no_image.jpg", size: "200x200", class: "card-image-top", height: "150") %>
+              <%= image_tag "no_image.jpg", size: "200x200", class: "card-image-top" %>
             <% end %>
             <div class="ml-5 pl-5">
               <div class="row">
@@ -38,7 +38,7 @@
           </div>
         </div>
         <div class="card-body">
-          <% if current_contributor.id == @contributor.id %>
+          <% if current_contributor && current_contributor.nickname != "ゲストユーザー" %>
             <%= link_to(raw('<i class="fas fa-heart" style="color: #ff0000;"></i> お気に入り一覧'), post_likes_path(@contributor, post_id: Post.last.id), class: "btn btn-lg btn-block btn-outline-info", type: "button") %>
             <%= link_to(raw('<i class="fas fa-cogs" style="color: #2003fc;"></i> 編集する'), edit_contributor_path(current_contributor), class: "btn btn-lg btn-block btn-outline-primary", type: "button") %>
             <%= link_to(raw('<i class="fas fa-pen" style="color: #f0a001;"></i> 投稿する'), new_post_path, class: "btn btn-lg btn-block btn-outline-warning", type: "button") %>

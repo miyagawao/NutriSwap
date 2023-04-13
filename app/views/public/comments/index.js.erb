@@ -1,2 +1,2 @@
-$("#comments_area").html("<%= j(render 'index', { comments: @comment.post.comments.order(created_at: :desc), comment_reply: @comment_reply }) %>");
+$("#comments_area").html("<%= j(render 'index', { comments: @comment.post.comments.order(created_at: :desc), comment_reply: @comment_reply, current_contributor: @current_contributor }) %>");
 $("textarea").val('');

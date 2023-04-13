@@ -30,7 +30,7 @@
       <tr>
         <th class="text-right">いいね数:</th>
         <td id="likes_buttons_<%= post.id %>"  class="text-left">
-          <%= render partial: 'public/likes/like', locals: { post: post, likes: @likes} %>
+          <%= render partial: 'public/likes/like', locals:  { post: post, current_contributor: current_contributor} %>
         </td>
       </tr>
       <tr>

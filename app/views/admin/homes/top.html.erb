@@ -13,16 +13,18 @@
             <th>投稿者ID</th>
             <th>投稿者</th>
             <th>タイトル</th>
-            <th>通報ステータス</th>
           </thead>
           <tbody>
             <% @posts.each do |post| %>
               <tr>
                 <td><%= post.created_at %></td>
                 <td><%= post.contributor.id %></td>
-                <td><%= post.contributor.add_full_name %></td>
+                <td>
+                  <%=link_to admin_contributor_path(post.contributor.id) do%>
+                    <%= post.contributor.add_full_name %>
+                  <% end %>
+                  </td>
                 <td><%= post.title %></td>
-                <td><%= post.report_status %></td>
               </tr>
             <% end %>
           </tbody>

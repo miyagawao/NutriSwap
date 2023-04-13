@@ -1,9 +1,5 @@
 Rails.application.routes.draw do
   
-  namespace :public do
-    get 'likes/create'
-    get 'likes/destroy'
-  end
   # 投稿者用
   # URL /contributors/sign_in ...
   devise_for :contributor, skip: [:passwords], controllers: {
@@ -13,7 +9,7 @@ Rails.application.routes.draw do
 
   # ゲスト用
   devise_scope :contributor do
-    get 'contributors/sign_in', to: 'public/sessions#new'
+    post 'contributors/sign_in', to: 'public/sessions#guest_sign_in'
   end
 
   scope module: :public do
@@ -28,6 +24,7 @@ Rails.application.routes.draw do
       get :unsubscribe, on: :collection
       patch :withdrawal, on: :member
     end
+    resources :reports, only: [:new, :create]
     get 'search' => 'searches#search'
   end
   
@@ -41,6 +38,8 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     resources :contributors, only: [:index, :show, :edit, :update]
     resources :genres, except: [:show, :new]
+    resources :reports, only: [:index, :show]
+    resources :comments, only: [:index, :show, :destroy]
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

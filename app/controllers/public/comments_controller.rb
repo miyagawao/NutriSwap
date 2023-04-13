@@ -2,6 +2,7 @@ class Public::CommentsController < ApplicationController
   before_action :authenticate_contributor!
   
   def create
+    @current_contributor = current_contributor
     @post = Post.find(params[:post_id])
     #投稿に紐づいたコメントの作成
     @comment = @post.comments.new(comment_params)
@@ -18,6 +19,7 @@ class Public::CommentsController < ApplicationController
   end
   
   def destroy
+    @current_contributor = current_contributor
     # 返信フォームに渡しているインスタンス変数の追加
     @post = Post.find(params[:post_id])
     @comment_reply = @post.comments.new
