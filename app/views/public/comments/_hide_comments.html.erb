@@ -69,7 +69,7 @@
       </div>
       <div>
         <% if reply.contributor != current_contributor && current_contributor.nickname != "ゲストユーザー" %>
-          <%= link_to "通報する", new_post_comment_report_path(comment_id: comment.id, post_id: comment.post.id), class: "btn btn-danger" %>
+          <%= link_to "通報する", new_post_comment_report_path(comment_id: reply.id, post_id: comment.post.id), class: "btn btn-danger" %>
         <% end %>
       </div>
     </div>

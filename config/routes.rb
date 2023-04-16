@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  
   # 投稿者用
   # URL /contributors/sign_in ...
   devise_for :contributor, skip: [:passwords], controllers: {
@@ -40,7 +41,8 @@ Rails.application.routes.draw do
   }
 
   namespace :admin do
-    root to: 'homes#top'
+    root 'posts#index'
+    resources :posts, only: [:show, :destroy] 
     resources :contributors, only: [:index, :show, :edit, :update]
     resources :genres, except: [:show, :new]
     resources :comments, only: [:index, :show, :destroy] do

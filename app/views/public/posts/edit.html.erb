@@ -1,9 +1,9 @@
-<div style="background-color: #f9fffc;">  
+<div style="background-color: #f9fffc;">
   <div class="container pl-5">
     <div class="border-bottom" style="background-color: #ffffe5;">
       <h2>投稿を編集する</h2>
     </div>
-  
+
     <%= form_with(model: @post, url: post_path, method: :patch, local: true) do |f| %>
     <table class="table table-borderless">
       <tr>
@@ -45,7 +45,7 @@
         <td></td>
         <td></td>
       </tr>
-      
+
       <tr>
         <th style="width: 20%"><%= f.label"公開範囲を選択" %></th>
         <td></td>

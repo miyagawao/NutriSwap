@@ -31,7 +31,7 @@
             <td class="bg-light bg-gradient">通報の有無</td>
             <td>
               <% if @comment.reports.exists? %>
-                <%= link_to admin_comment_reports_path(@comment) do %>
+                <%= link_to admin_comment_reports_path(@comment), class: 'btn btn-primary' do %>
                   <%= @comment.reports.count %>件の通報あり
                 <% end %>
               <% else %>
@@ -40,7 +40,9 @@
             </td>
           </tr>
         </table>
-        <%= link_to "削除する", admin_comment_path(@comment), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+        <div class="col-12 text-right">
+          <%= link_to "削除する", admin_comment_path(@comment), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+        </div>
       </div>
     </div>
   </div>

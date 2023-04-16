@@ -10,7 +10,7 @@
         <table class="table table-borderless border-top mt-3">
           <thead class="bg-light">
             <th>投稿日時</th>
-            <th>投稿者ID</th>
+            <th style="white-space: nowrap;">投稿者ID</th>
             <th>投稿者</th>
             <th>タイトル</th>
           </thead>
@@ -24,7 +24,11 @@
                     <%= post.contributor.add_full_name %>
                   <% end %>
                   </td>
-                <td><%= post.title %></td>
+                <td>
+                  <%= link_to admin_post_path(post.id) do %>
+                    <%= post.title %>
+                  <% end %>
+                </td>
               </tr>
             <% end %>
           </tbody>
@@ -32,7 +36,7 @@
       </div>
     </div>
   </div>
-  <div class="row justify-content-center my-5">
+  <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center">
   <%= paginate @posts %>
   </div>
 </div>
