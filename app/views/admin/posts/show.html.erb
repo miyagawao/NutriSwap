@@ -1,0 +1,59 @@
+<div class="container my-5">
+  <div class="row">
+    <div class="col-lg-10 col-sm-12 mx-auto">
+      <div class="row mb-3">
+        <div class="col-12">
+          <h3><span class="bg-light bg-gradient"><%= @post.contributor.add_full_name %>さんの投稿詳細</span></h3>
+        </div>
+      </div>
+
+      <div class="row">
+        <table class="table table-bordered border-dark">
+          <tr>
+            <td class="bg-light bg-gradient">会員ID</td>
+            <td><%= @post.contributor.id %></td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">氏名</td>
+            <td>
+              <%= link_to admin_contributor_path(@post.contributor.id), class: 'text-primary' do %>
+                <%= @post.contributor.add_full_name %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient"  style="white-space: nowrap;">投稿内容</td>
+            <td>
+              <%= @post.content %>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">投稿画像</td>
+            <td>
+              <% if @post.image.present? %>
+                <%= image_tag @post.get_image.variant(resize: "300x300"), height: "300", class: "card-image-top" %>
+              <% else %>
+                <%= image_tag "no_image.jpg", size: "300x300", class: "card-image-top" %>
+              <% end %>
+            </td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">ジャンル</td>
+            <td><%= @post.genre.name %></td>
+          </tr>
+          <tr>
+            <td class="bg-light bg-gradient">タグ</td>
+            <td><% @post.tags.each do |tag| %>
+                  <%= tag.name %>
+                <% end %>
+            </td>
+          </tr>
+        </table>
+        
+        <div class="col-12 text-right">
+          <%= link_to "削除", admin_post_path(@post), method: :delete, data: { confirm: "本当に削除しますか?" }, class: "btn btn-danger" %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
