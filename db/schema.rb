@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_13_100440) do
+ActiveRecord::Schema.define(version: 2023_04_14_122914) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 2023_04_13_100440) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "parent_id"
+    t.boolean "reported"
     t.index ["contributor_id"], name: "index_comments_on_contributor_id"
     t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
@@ -146,6 +147,7 @@ ActiveRecord::Schema.define(version: 2023_04_13_100440) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "impressions_count", default: 0
+    t.integer "status", default: 0, null: false
   end
 
   create_table "reports", force: :cascade do |t|
@@ -154,6 +156,7 @@ ActiveRecord::Schema.define(version: 2023_04_13_100440) do
     t.string "reason", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.integer "reporter_id"
   end
 
   create_table "tags", force: :cascade do |t|

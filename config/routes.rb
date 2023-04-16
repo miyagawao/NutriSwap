@@ -16,15 +16,20 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     get '/about' => 'homes#about'
     resources :posts do
-      resources :comments, only: [:create, :destroy]
+      resources :comments, only: [:create, :destroy] do
+        member do
+          post :report
+        end
+        resources :reports, only: [:new, :create]
+      end
       resources :likes, only: [:index, :create, :destroy]
       get :tags, on: :collection
     end
     resources :contributors, only: [:show, :edit, :update] do
       get :unsubscribe, on: :collection
+      get :confirm, on: :member
       patch :withdrawal, on: :member
     end
-    resources :reports, only: [:new, :create]
     get 'search' => 'searches#search'
   end
   
@@ -38,8 +43,9 @@ Rails.application.routes.draw do
     root to: 'homes#top'
     resources :contributors, only: [:index, :show, :edit, :update]
     resources :genres, except: [:show, :new]
-    resources :reports, only: [:index, :show]
-    resources :comments, only: [:index, :show, :destroy]
+    resources :comments, only: [:index, :show, :destroy] do
+      resources :reports, only: [:index]
+    end
   end
 
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

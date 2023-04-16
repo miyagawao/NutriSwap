@@ -31,8 +31,8 @@
             <td class="bg-light bg-gradient">通報の有無</td>
             <td>
               <% if @comment.reports.exists? %>
-                <%= link_to admin_report_path(comment.reports.first) do %>
-                  <%= c@omment.reports.count %>件の通報あり
+                <%= link_to admin_comment_reports_path(@comment) do %>
+                  <%= @comment.reports.count %>件の通報あり
                 <% end %>
               <% else %>
                 通報なし

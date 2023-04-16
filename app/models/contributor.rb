@@ -12,7 +12,7 @@ class Contributor < ApplicationRecord
   has_many :reports, class_name: "Report", foreign_key: "reporter_id", dependent: :destroy
 
   validates :address, presence: true
-  validates :comment_text, presence: true, length: { maximum: 1000 }
+  validates :comment_text, length: { maximum: 1000 }
   validates :email, presence: true
   validates :encrypted_password, presence: true
   validates :first_name, presence: true

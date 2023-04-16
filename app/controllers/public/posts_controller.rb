@@ -4,28 +4,26 @@ class Public::PostsController < ApplicationController
   # sign_inしているcontributouのみ閲覧・編集可能
   before_action :ensure_current_contributor, only: [:edit, :update, :destroy]
   before_action :set_genres, :tags, only: [:index, :new, :edit]
-  
+
   def index
     @current_contributor = current_contributor
-    @posts = Post.order(created_at: :desc).includes(:genre, :tags).page(params[:page]).per(8)
+    @posts = Post.where(status: :published).order(created_at: :desc).includes(:genre, :tags).page(params[:page]).per(9)
     if params[:genre_id].present? && params[:tag_id].present?
-      @posts = Post.search_genre(params[:genre_id]).search_tag(params[:tag_id]).order(created_at: :desc).page(params[:page]).per(8)
+      @posts = Post.search_genre(params[:genre_id]).search_tag(params[:tag_id]).order(created_at: :desc).page(params[:page]).per(9)
       @title = "タグ:#{params[:tag_id]} / #{params[:genre_name]}"
       @add_posts_title = @posts.first.title if @posts.present?
     elsif params[:genre_id].present?
-      @posts = Post.search_genre(params[:genre_id]).order(created_at: :desc).page(params[:page]).per(8)
+      @posts = Post.search_genre(params[:genre_id]).order(created_at: :desc).page(params[:page]).per(9)
       @title = params[:genre_name]
       @add_posts_title = @posts.first.title if @posts.present?
     elsif params[:tag_id].present?
-      @posts = Post.search_tag(params[:tag_id]).order(created_at: :desc).page(params[:page]).per(8)
+      @posts = Post.search_tag(params[:tag_id]).order(created_at: :desc).page(params[:page]).per(9)
       @title = "タグ:#{params[:tag_id]}"
       @add_posts_title = @posts.first.title if @posts.present?
-    else
-      @posts = Post.order(created_at: :desc).page(params[:page]).per(8)
     end
     @rank_posts = Post.order(impressions_count: 'DESC')
   end
-  
+
   def show
     @post = Post.find(params[:id])
     @current_contributor = current_contributor
@@ -57,16 +55,15 @@ class Public::PostsController < ApplicationController
 
   def edit
     @post = Post.find(params[:id])
+    @post.tag_list = @post.tags.map(&:name).join(', ')
   end
 
   def update
     @post = Post.find(params[:id])
     tag_list = params[:post][:tag_list].split(',') # タグリストを更新
-  
-    # 変更点：タグの更新が成功した場合のみ、タグリストを保存する
     if @post.update(post_params)
-      @post.save_tags(tag_list) # 更新したタグリストを保存
-      flash[:notice] = "編集を保存しました。"
+      @post.save_tags(tag_list)
+      flash[:success] = "投稿を更新しました。"
       redirect_to post_path(@post.id)
     else
       render :edit
@@ -86,9 +83,9 @@ class Public::PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :content, :image, :tag_list, :genre_id)
+    params.require(:post).permit(:title, :content, :image, :tag_list, :genre_id, :status)
   end
-  
+
   def ensure_current_contributor
     @post = Post.find(params[:id])
     unless current_contributor.id == @post.contributor_id
