@@ -34,6 +34,18 @@ class Public::CommentsController < ApplicationController
     end  
   end
   
+  def report
+    comment = Comment.find(params[:id])
+    report = Report.new(user_id: current_user.id, comment_id: comment.id, reason: params[:reason])
+    if report.save
+      comment.update(reported: true)
+      flash[:success] = 'コメントを通報しました。'
+    else
+      flash[:error] = '通報に失敗しました。'
+    end
+    redirect_to comment.post
+  end
+  
   private
   
   def comment_params

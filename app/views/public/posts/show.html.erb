@@ -1,4 +1,4 @@
-<div class="container-fluid" style="background-color: #f9fffc;"> 
+<div class="container-fluid" style="background-color: #f9fffc;">
   <div class="row">
     <div class="col-md-2">
       <%= render 'public/tmp/genre_list', genres: @genres %>
@@ -7,12 +7,12 @@
     <div class="border-bottom" style="background-color: #ffffe5;">
       <div style="display: flex; justify-content: space-between;">
         <div>
-          <h2>「<%= @post.title %>」</h2>
+          <h2 style="white-space: nowrap;">「<%= @post.title %>」</h2>
         </div>
-        <div id="likes_buttons_<%= @post.id %>" style="margin-top: 10px; margin-left: 800px;">
+        <div id="likes_buttons_<%= @post.id %>" style="margin-top: 10px;">
           <%= render partial: 'public/likes/like', locals: { post: @post, current_contributor: @current_contributor} %>
         </div>
-        <div style="margin-top: 10px; margin-right: 20px; ">
+        <div style="margin-top: 10px; margin-right: 40px; ">
           <i class="fas fa-eye" style="margin-left: 20px;"></i> <%= @post.impressions_count %>
         </div>
       </div>
@@ -25,7 +25,7 @@
           <% else %>
             <%= image_tag "no_image.jpg", size: "300x300", class: "card-image-top" %>
           <% end %>
-          
+
           <div class="ml-5 pl-5">
             <div class="row">
               <table class="table float-right">
@@ -61,7 +61,11 @@
       </div>
       <div class="card-body">
         <% if current_contributor.id == @post.contributor.id %>
-          <%= link_to raw('<i class="fas fa-cogs" style="color: #2003fc;"></i> 編集する'), edit_post_path(@post.id), class: "btn btn-lg btn-block btn-outline-primary", type: "button" %>
+          <% if @post.status == "draft" %>
+            <%= link_to 'この下書きを編集する', edit_post_path(@post), class: "btn btn-lg btn-block btn-outline-primary", type: "button" %>
+          <% else %>
+            <%= link_to '編集する', edit_post_path(@post), class: "btn btn-lg btn-block btn-outline-primary", type: "button" %>
+          <% end %>
         <% end %>
       </div>
     </div>
@@ -71,7 +75,7 @@
     <div id="comments_area">
       <%= render 'public/comments/index', comments: @comments, comment_reply: @comment_reply, current_contributor: @current_contributor %>
     </div>
-    <% if contributor_signed_in? %>
+    <% if contributor_signed_in? && current_contributor.nickname != "ゲストユーザー" %>
       <%= render 'public/comments/form', post: @post, comment: @comment %>
     <% end %>
   </div>

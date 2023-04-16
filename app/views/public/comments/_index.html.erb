@@ -2,7 +2,6 @@
 <div id="comments_area">
   <h5>コメント一覧(<%= comments.count %>件)</h5>
   <% comments.where(parent_id: nil).first(2).each do |comment|%>
-    <%= comment.comment_text %>
     <%= render 'public/comments/hide_comments', comment: comment, comment_reply: comment_reply, current_contributor: current_contributor %>
   <% end %>
 

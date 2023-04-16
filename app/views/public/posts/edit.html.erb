@@ -45,6 +45,14 @@
         <td></td>
         <td></td>
       </tr>
+      
+      <tr>
+        <th style="width: 20%"><%= f.label"公開範囲を選択" %></th>
+        <td></td>
+        <td><%= f.select :status, [["公開", "published"], ["下書き", "draft"]],required: true,class:"form-control" %></td>
+        <td></td>
+        <td></td>
+      </tr>
 
     </table>
 

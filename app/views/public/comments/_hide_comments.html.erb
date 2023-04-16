@@ -6,19 +6,22 @@
       <% if comment.contributor.profile_image.present? %>
         <%= link_to image_tag(comment.contributor.profile_image.variant(resize: "100x100")), contributor_path(comment.contributor.id) %>
       <% else %>
-        <%= link_to image_tag("no_image.jpg").variant(resize: "100x100"), contributor_path(comment.contributor.id) %>
+        <%= link_to image_tag('no_image.jpg', width: 100, height: 100), contributor_path(comment.contributor.id) %>
       <% end %>
       <%= link_to "#{comment.contributor.nickname}さん", contributor_path(comment.contributor.id), class: 'link pl-1' %>
     </div>
     <div class="col d-flex justify-content-end">
-      <%= comment.created_at.strftime('%Y/%m/%d') %>
+      <%= comment.created_at.to_formatted_s(:datetime_jp) %>
     </div>
   </div>
   <div class="card-body border rounded mb-3" style="background-color: #fffcf9;">
     <%= comment.comment_text %>
   </div>
 
-  <% if comment.contributor != current_contributor %>
+  <% if comment.contributor != current_contributor && current_contributor.nickname != "ゲストユーザー" %>
+    <div>
+      <%= link_to "通報する", new_post_comment_report_path(comment_id: comment.id, post_id: comment.post.id), class: "btn btn-danger" %>
+    </div>
     <div class="comments_reply-form">
       <%= render 'public/comments/reply_form', comment: comment, comment_reply: comment_reply %>
     </div>
@@ -36,7 +39,7 @@
     <div class="container">
       <div class="row d-flex align-items-center pb-3">
         <div class="col">
-          <%= reply.created_at.strftime('%Y/%m/%d') %>
+          <%= reply.created_at.to_formatted_s(:datetime_jp) %>
         </div>
         <div class="col d-flex justify-content-end">
           <%= link_to "#{reply.contributor.nickname}さんからの返信", contributor_path(reply.contributor.id), class: 'link pl-1' %>
@@ -46,19 +49,27 @@
             <% end %>
           <% else %>
             <%= link_to contributor_path(reply.contributor.id) do %>
-              <%= image_tag('no_image.jpg').variant(resize: "100x100") %>
+              <%= image_tag 'no_image.jpg', width: 100, height: 100 %>
             <% end %>
           <% end %>
         </div>
       </div>
       <div class="card-body border rounded mb-3" style="background-color: #fffff9;">
         <%= reply.comment_text %>
-        <% unless comment.contributor == current_contributor %>
+        
+      </div>
+      <div>
+        <% if reply.contributor == current_contributor %>
           <%= link_to post_comment_path(comment.post_id, reply.id), method: :delete, remote: true do %>
             <div class="text-right">
               <button class="btn btn-outline-secondary">削除する</button>
             </div>
           <% end %>
+        <% end %>
+      </div>
+      <div>
+        <% if reply.contributor != current_contributor && current_contributor.nickname != "ゲストユーザー" %>
+          <%= link_to "通報する", new_post_comment_report_path(comment_id: comment.id, post_id: comment.post.id), class: "btn btn-danger" %>
         <% end %>
       </div>
     </div>

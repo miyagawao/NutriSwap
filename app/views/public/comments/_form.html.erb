@@ -4,7 +4,7 @@
     <%= f.label "コメントを投稿する" %>
     <%= f.text_area :comment_text, size: "3x3", autocomplete: 'off', placeholder: "コメントを入力してください", class: 'form-control' %>
   </div>
-  <div class="text-right">
+  <div class="text-right" style="margin-bottom: 50px">
     <%= f.submit "コメントする",class: 'btn btn-warning text-white' %>
   </div>
 <% end %>

@@ -12,6 +12,8 @@ class Post < ApplicationRecord
   attr_accessor :tag_list
   is_impressionable counter_cache: true
 
+  enum status: {draft: 1,published: 0}
+
 
   has_one_attached :image
   def get_image
