@@ -1,0 +1,45 @@
+ja:
+  activerecord:
+    models:
+      comment: "コメント"
+      contributor: "投稿者"
+      genre: "ジャンル"
+      post: "投稿"
+      report: "通報"
+      tag: "タグ"
+      
+    attributes:
+      comment:
+        comment_text: "コメント内容"
+        
+      contributor:
+        last_name: "姓"
+        first_name: "名"
+        last_name_kana: "姓（カナ）"
+        first_name_kana: "名（カナ）"
+        nickname: "ニックネーム"
+        postal_code: "郵便番号"
+        address: "住所"
+        telephone_number: "電話番号"
+        qualification: "保有資格"
+        introduce: "自己紹介"
+        comment_text: "コメント内容"
+        password: "パスワード"
+        encrypted_password: "確認用パスワード"
+        
+        
+      genre:
+        name: "ジャンル名"
+        
+      post:
+        title: "タイトル"
+        content: "投稿内容"
+        impressions_count: "閲覧数"
+        status: "公開範囲"
+        genre: "ジャンル"
+        
+      report:
+        reason: "通報理由"
+        
+      tag:
+        name: "タグ名"

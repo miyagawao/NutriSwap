@@ -46,7 +46,7 @@ class Public::PostsController < ApplicationController
     tag_list = params[:post][:tag_list].split(',')
     if @post.save
       @post.save_tags(tag_list)
-      flash[:success] = "投稿できました。"
+      flash[:notice] = "投稿できました。"
       redirect_to post_path(@post.id)
     else
       render :new
@@ -63,7 +63,7 @@ class Public::PostsController < ApplicationController
     tag_list = params[:post][:tag_list].split(',') # タグリストを更新
     if @post.update(post_params)
       @post.save_tags(tag_list)
-      flash[:success] = "投稿を更新しました。"
+      flash[:notice] = "投稿を更新しました。"
       redirect_to post_path(@post.id)
     else
       render :edit

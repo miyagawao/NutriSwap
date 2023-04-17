@@ -10,6 +10,7 @@ module NutriSwap
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+     
 
     # Configuration for the application, engines, and railties goes here.
     #
@@ -18,5 +19,6 @@ module NutriSwap
     #
     config.time_zone = "Tokyo"
     # config.eager_load_paths << Rails.root.join("extras")
+    config.i18n.default_locale = :ja
   end
 end

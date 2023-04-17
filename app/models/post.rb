@@ -1,5 +1,5 @@
 class Post < ApplicationRecord
-  belongs_to :contributor
+  belongs_to :contributor, dependent: :destroy
   belongs_to :genre
   has_many :comments, dependent: :destroy
   has_many :likes, dependent: :destroy
@@ -7,13 +7,13 @@ class Post < ApplicationRecord
   has_many :tags, through: :post_tags
 
   validates :title, presence: true
-  validates :content, presence: true
+  validates :content, presence: { message: 'を入力してください' }
+  validates :genre, presence: { message: 'を選択してください' }
 
   attr_accessor :tag_list
   is_impressionable counter_cache: true
 
   enum status: {draft: 1,published: 0}
-
 
   has_one_attached :image
   def get_image
