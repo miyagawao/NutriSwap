@@ -89,6 +89,8 @@ GEM
     enum_help (0.0.19)
       activesupport (>= 3.0.0)
     erubi (1.12.0)
+    faker (3.1.1)
+      i18n (>= 1.8.11, < 2)
     ffi (1.15.5)
     globalid (1.1.0)
       activesupport (>= 5.0)
@@ -176,6 +178,9 @@ GEM
       nokogiri (>= 1.6)
     rails-html-sanitizer (1.5.0)
       loofah (~> 2.19, >= 2.19.1)
+    rails-i18n (7.0.6)
+      i18n (>= 0.7, < 2)
+      railties (>= 6.0.0, < 8)
     railties (6.1.7.3)
       actionpack (= 6.1.7.3)
       activesupport (= 6.1.7.3)
@@ -259,6 +264,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   devise
   enum_help
+  faker
   image_processing (~> 1.2)
   impressionist
   jbuilder (~> 2.7)
@@ -267,6 +273,7 @@ DEPENDENCIES
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.7, >= 6.1.7.3)
+  rails-i18n
   sass-rails (>= 6)
   selenium-webdriver (>= 4.0.0.rc1)
   spring

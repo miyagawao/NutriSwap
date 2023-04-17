@@ -1,5 +1,10 @@
 <div style="background-color: #f9fffc;">
-  <div class="container pl-5">
+  <div class="container px-5 px-sm-0">
+    <div class="row">
+      <div class="mt-5">
+        <%= render partial: 'layouts/error_messages', locals: { object: @post} %>
+      </div>
+    </div>
     <div class="border-bottom" style="background-color: #ffffe5;">
       <h2>投稿する</h2>
     </div>

@@ -59,3 +59,5 @@ gem 'kaminari','~> 1.2.1'
 gem 'image_processing', '~> 1.2'
 gem 'impressionist'
 gem "enum_help"
+gem 'faker'
+gem 'rails-i18n'

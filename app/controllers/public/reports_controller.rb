@@ -14,7 +14,7 @@ class Public::ReportsController < ApplicationController
     @report.comment = @comment
     @report.contributor = @contributor
     @report.reporter = @reporter
-    if @report.save!
+    if @report.save
       flash[:notice] = "ご報告ありがとうございました。"
       redirect_to post_path(@post.id)
     else

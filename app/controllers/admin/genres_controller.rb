@@ -29,7 +29,7 @@ class Admin::GenresController < ApplicationController
       render :index
     end
   end
-  
+
   def destroy
     @genre =Genre.find(params[:id])
     if @genre.destroy
@@ -40,11 +40,11 @@ class Admin::GenresController < ApplicationController
       render :index
     end
   end
-  
+
   private
-  
+
   def genre_params
     params.require(:genre).permit(:name)
   end
-  
+
 end
