@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  
-  
+
+
   # 投稿者用
   # URL /contributors/sign_in ...
   devise_for :contributor, skip: [:passwords], controllers: {
@@ -33,7 +33,7 @@ Rails.application.routes.draw do
     end
     get 'search' => 'searches#search'
   end
-  
+
   # 管理者用
   # URL /admin/sign_in ...
   devise_for :admin, skip: [:registrations, :passwords] ,controllers: {
@@ -42,7 +42,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     root 'posts#index'
-    resources :posts, only: [:show, :destroy] 
+    resources :posts, only: [:show, :destroy]
     resources :contributors, only: [:index, :show, :edit, :update]
     resources :genres, except: [:show, :new]
     resources :comments, only: [:index, :show, :destroy] do
