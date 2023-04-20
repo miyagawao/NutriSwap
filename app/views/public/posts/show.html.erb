@@ -62,9 +62,9 @@
       <div class="card-body">
         <% if current_contributor.id == @post.contributor.id %>
           <% if @post.status == "draft" %>
-            <%= link_to 'この下書きを編集する', edit_post_path(@post), class: "btn btn-lg btn-block btn-outline-primary", type: "button" %>
+            <%= link_to(raw('<i class="fas fa-edit" style="color: #168d8b;"></i>この下書きを編集する'), edit_post_path(@post), class: "btn btn-lg btn-block btn-outline-info", type: "button") %>
           <% else %>
-            <%= link_to '編集する', edit_post_path(@post), class: "btn btn-lg btn-block btn-outline-primary", type: "button" %>
+            <%= link_to(raw('<i class="fas fa-cogs" style="color: #2003fc;"></i> 編集する'), edit_post_path(@post), class: "btn btn-lg btn-block btn-outline-primary", type: "button") %>
           <% end %>
         <% end %>
       </div>

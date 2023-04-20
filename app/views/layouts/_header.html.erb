@@ -3,8 +3,6 @@
     <div class="text-light d-flex justify-content-start flex-column">
       <% if contributor_signed_in? %>
         <p class="pt-3" style="font-size: 1.2em;">ようこそ!!  <%= current_contributor.nickname %> 様</p>
-      <% else %>
-        <p class="pt-3" style="font-size: 1.2em;">ようこそ!!  ゲスト 様</p>
       <% end %>
     </div>
     <div class="d-flex flex-column ml-auto">
@@ -20,13 +18,11 @@
             <i class="fas fa-utensils"></i> 投稿一覧
           <% end %>
         </li>
-        <% if @posts.present? %>
-          <li class="nav-link px-2">
-            <%= link_to post_likes_path(@contributor, post_id: Post.last.id), class: "text-decoration-none text-light h5" do %>
-              <i class="fas fa-heart"></i> お気に入り
-            <% end %>
-          </li>
-        <% end %>  
+        <li class="nav-link px-2">
+          <%= link_to post_likes_path(@contributor, post_id: Post.last.id), class: "text-decoration-none text-light h5" do %>
+            <i class="fas fa-heart"></i> お気に入り
+          <% end %>
+        </li>
         <li class="nav-link px-2">
           <%= link_to destroy_contributor_session_path, method: :delete, class: "text-decoration-none text-light h5" do %>
             <i class="fas fa-sign-out-alt"></i> ログアウト

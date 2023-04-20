@@ -1,4 +1,4 @@
-<div class="container-fluid" style="background-color: #f9fffc;"> 
+<div class="container-fluid" style="background-color: #f9fffc;">
   <div class="row">
     <div class="col-md-2">
       <%= render 'public/tmp/genre_list', genres: @genres %>
@@ -40,8 +40,7 @@
         <div class="card-body">
           <% if current_contributor && current_contributor.nickname != "ゲストユーザー" %>
             <%= link_to(raw('<i class="fas fa-cogs" style="color: #2003fc;"></i> 編集する'), edit_contributor_path(current_contributor), class: "btn btn-lg btn-block btn-outline-primary", type: "button") %>
-            <%= link_to "下書き一覧", confirm_contributor_path(@contributor), class: "btn btn-lg btn-block btn-outline-info", type: "button" %>
-            <%= link_to(raw('<i class="fas fa-heart" style="color: #ff0000;"></i> お気に入り一覧'), post_likes_path(@contributor, post_id: Post.last.id), class: "btn btn-lg btn-block btn-outline-info", type: "button") %>
+            <%= link_to(raw('<i class="fas fa-edit" style="color: #168d8b;"></i>下書き一覧'), confirm_contributor_path(@contributor), class: "btn btn-lg btn-block btn-outline-info", type: "button") %>
             <%= link_to(raw('<i class="fas fa-pen" style="color: #f0a001;"></i> 投稿する'), new_post_path, class: "btn btn-lg btn-block btn-outline-warning", type: "button") %>
           <% end %>
         </div>
@@ -53,10 +52,10 @@
       <% @posts.each do |post|%>
         <% if post.contributor_id == @contributor.id %>
           <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>
-        <% end %>  
+        <% end %>
       <% end %>
     </div>
-  
+
     <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center">
       <%= paginate @posts %>
     </div>
