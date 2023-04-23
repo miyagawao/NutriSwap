@@ -15,12 +15,12 @@
              <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>
           <% end %>
         </div>
+        <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center">
+          <%= paginate @posts %>
+        </div>
       <% else %>
         <h4 class="text-center">検索条件に一致する投稿はありませんでした。</h4>
       <% end %>
-    <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center">
-      <%= paginate @posts %>
-    </div>
     <!--contributors一覧 -->
     <% else %>
       <% if @contributors.present? %>
@@ -40,12 +40,12 @@
             </div>
           <% end %>
         </div>
+        <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center">
+          <%= paginate @contributors %>
+        </div>
       <% else %>
         <h4 class="text-center">検索条件に一致するユーザーはいませんでした。</h4>
       <% end %>
     <% end %>
-    <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center">
-      <%= paginate @contributors %>
-    </div>
   </div>
 </div>
