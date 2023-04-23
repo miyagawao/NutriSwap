@@ -1,12 +1,13 @@
 class Admin::CommentsController < ApplicationController
+  # コメント一覧（新着順）
   def index
     @comments = Comment.order(created_at: :desc)
   end
-
+  # コメント詳細
   def show
     @comment = Comment.find(params[:id])
   end
-
+  # コメント削除
   def destroy
     @comment = Comment.find(params[:id])
     if @comment.destroy

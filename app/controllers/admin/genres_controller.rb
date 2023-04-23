@@ -1,9 +1,12 @@
 class Admin::GenresController < ApplicationController
+  
   def index
+    # ジャンル作成
     @genre = Genre.new
+    # ジャンル一覧
     @genres = Genre.all
   end
-
+  # ジャンル作成
   def create
     @genre = Genre.new(genre_params)
     if @genre.save
@@ -14,11 +17,11 @@ class Admin::GenresController < ApplicationController
       render :index
     end
   end
-
+  # ジャンル編集
   def edit
     @genre = Genre.find(params[:id])
   end
-
+  # ジャンル更新
   def update
     @genre = Genre.find(params[:id])
     if @genre.update(genre_params)
@@ -29,7 +32,7 @@ class Admin::GenresController < ApplicationController
       render :index
     end
   end
-
+  # ジャンル削除
   def destroy
     @genre =Genre.find(params[:id])
     if @genre.destroy

@@ -1,16 +1,17 @@
 class Admin::ContributorsController < ApplicationController
+  # 会員一覧
   def index
     @contributors = Contributor.all
   end
-
+  # 会員詳細
   def show
     @contributor = Contributor.find(params[:id])
   end
-
+  # 会員情報編集
   def edit
     @contributor = Contributor.find(params[:id])
   end
-
+  # 会員情報更新
   def update
     @contributor = Contributor.find(params[:id])
     if @contributor.update(contributor_params)

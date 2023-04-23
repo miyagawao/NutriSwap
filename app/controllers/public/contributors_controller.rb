@@ -7,13 +7,6 @@ class Public::ContributorsController < ApplicationController
     @contributor = Contributor.find(params[:id])
     # 投稿（公開）を新着順で表示　１ページ6件の表示
     @posts = @contributor.posts.where(status: :published).order(created_at: :desc).includes(:genre, :tags).page(params[:page]).per(6)
-    # ジャンルとタグの両方が存在する場合
-    if params[:genre_id].present? && params[:tag_id].present?
-      @posts = Post.search_genre(params[:genre_id]).search_tag(params[:tag_id]).order(created_at: :desc).page(params[:page]).per(6)
-    # ジャンルのみ存在する場合（タグなし）
-    elsif params[:genre_id].present?
-      @posts = Post.search_genre(params[:genre_id]).order(created_at: :desc).page(params[:page]).per(6)
-    end
     @genres = Genre.all
   end
 
@@ -22,13 +15,6 @@ class Public::ContributorsController < ApplicationController
     @contributor = Contributor.find(params[:id])
     # 下書き保存の投稿のみ新着順で表示　１ページ９件
     @posts = @contributor.posts.where(status: :draft).order('created_at DESC').page(params[:page]).per(9)
-    # ジャンルとタグが存在する場合
-    if params[:genre_id].present? && params[:tag_id].present?
-      @posts = Post.search_genre(params[:genre_id]).search_tag(params[:tag_id]).order(created_at: :desc).page(params[:page]).per(6)
-    # ジャンルのみ存在する場合（タグなし）
-    elsif params[:genre_id].present?
-      @posts = Post.search_genre(params[:genre_id]).order(created_at: :desc).page(params[:page]).per(6)
-    end
     @genres = Genre.all
   end
 
