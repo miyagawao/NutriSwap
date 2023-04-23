@@ -3,30 +3,28 @@ class Public::PostsController < ApplicationController
   before_action :authenticate_contributor!, except: [:index]
   # sign_inしているcontributouのみ閲覧・編集可能
   before_action :ensure_current_contributor, only: [:edit, :update, :destroy]
+  # 以下アクション呼び出し前にジャンルとタグを取得する
   before_action :set_genres, :tags, only: [:index, :new, :edit]
 
+  # 投稿一覧ページ
   def index
     @current_contributor = current_contributor
+    # 公開を選択した投稿のみを表示（新着順）includesでプリロードする
     @posts = Post.where(status: :published).order(created_at: :desc).includes(:genre, :tags).page(params[:page]).per(9)
+    # ジャンルとタグの両方が存在する場合
     if params[:genre_id].present? && params[:tag_id].present?
-      @posts = Post.search_genre(params[:genre_id]).search_tag(params[:tag_id]).order(created_at: :desc).page(params[:page]).per(9)
-      @title = "タグ:#{params[:tag_id]} / #{params[:genre_name]}"
-      @add_posts_title = @posts.first.title if @posts.present?
+      @posts = Post.search_genre(params[:genre_id]).search_tag(params[:tag_id]).order(created_at: :desc).page(params[:page]).per(6)
+    # ジャンルのみ存在する場合（タグなし）
     elsif params[:genre_id].present?
-      @posts = Post.search_genre(params[:genre_id]).order(created_at: :desc).page(params[:page]).per(9)
-      @title = params[:genre_name]
-      @add_posts_title = @posts.first.title if @posts.present?
-    elsif params[:tag_id].present?
-      @posts = Post.search_tag(params[:tag_id]).order(created_at: :desc).page(params[:page]).per(9)
-      @title = "タグ:#{params[:tag_id]}"
-      @add_posts_title = @posts.first.title if @posts.present?
+      @posts = Post.search_genre(params[:genre_id]).order(created_at: :desc).page(params[:page]).per(6)
     end
-    @rank_posts = Post.order(impressions_count: 'DESC')
   end
 
+  # 投稿詳細ページ
   def show
     @post = Post.find(params[:id])
     @current_contributor = current_contributor
+    # セッションIDが同じである閲覧は、1回の閲覧としてカウント
     impressionist(@post, nil, unique: [:session_hash])
     # コメント一覧表示で使用する全コメントデータを代入（新着順で表示）
     @comments = @post.comments.order(created_at: :desc)
@@ -37,12 +35,14 @@ class Public::PostsController < ApplicationController
     @genres = Genre.all
   end
 
+  # 投稿ページ
   def new
     @post = Post.new
   end
-
+  # 投稿作成
   def create
     @post = current_contributor.posts.new(post_params)
+    # 投稿に紐づくタグをフォームから送信されたパラメータから取得する
     tag_list = params[:post][:tag_list].split(',')
     if @post.save
       @post.save_tags(tag_list)
@@ -54,14 +54,16 @@ class Public::PostsController < ApplicationController
     end
   end
 
+  # 投稿編集ページ
   def edit
     @post = Post.find(params[:id])
     @post.tag_list = @post.tags.map(&:name).join(', ')
   end
-
+  # 投稿の更新
   def update
     @post = Post.find(params[:id])
-    tag_list = params[:post][:tag_list].split(',') # タグリストを更新
+    # タグリストを更新
+    tag_list = params[:post][:tag_list].split(',')
     if @post.update(post_params)
       @post.save_tags(tag_list)
       flash[:notice] = "投稿を更新しました。"
@@ -71,7 +73,7 @@ class Public::PostsController < ApplicationController
       render :edit
     end
   end
-
+  # 投稿の削除
   def destroy
     @post = Post.find(params[:id])
     if @post.destroy
@@ -91,9 +93,6 @@ class Public::PostsController < ApplicationController
 
   def ensure_current_contributor
     @post = Post.find(params[:id])
-    unless current_contributor.id == @post.contributor_id
-      redirect_to root_path
-    end
   end
 
   def set_genres

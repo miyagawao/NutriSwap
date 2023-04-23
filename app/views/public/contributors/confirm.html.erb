@@ -12,7 +12,7 @@
           <%= render partial: 'public/posts/post_list', locals: {post: post, current_contributor: @current_contributor} %>
         <% end %>
       </div>
-      <div id="paginate-warpper" class="text-center">
+      <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center">
         <%= paginate @posts %>
       </div>
     </div>
