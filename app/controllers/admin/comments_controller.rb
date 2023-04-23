@@ -1,6 +1,6 @@
 class Admin::CommentsController < ApplicationController
   def index
-    @comments = Comment.all
+    @comments = Comment.order(created_at: :desc)
   end
 
   def show
@@ -13,6 +13,7 @@ class Admin::CommentsController < ApplicationController
       flash[:notice] = "コメントを削除しました。"
       redirect_to admin_comments_path
     else
+      flash[:notice] = "コメント削除に失敗しました。"
       render :show
     end
   end

@@ -10,6 +10,10 @@
       <div class="row">
         <table class="table table-bordered border-dark">
           <tr>
+            <td class="bg-light bg-gradient">コメント日時</td>
+            <td><%= @comment.created_at.to_s(:datetime_jp) %></td>
+          </tr>
+          <tr>
             <td class="bg-light bg-gradient">会員ID</td>
             <td><%= @comment.contributor.id %></td>
           </tr>

@@ -49,6 +49,7 @@ class Public::PostsController < ApplicationController
       flash[:notice] = "投稿できました。"
       redirect_to post_path(@post.id)
     else
+      flash[:notice] = "投稿に失敗しました。"
       render :new
     end
   end
@@ -66,6 +67,7 @@ class Public::PostsController < ApplicationController
       flash[:notice] = "投稿を更新しました。"
       redirect_to post_path(@post.id)
     else
+      flash[:notice] = "投稿の更新に失敗しました。"
       render :edit
     end
   end
@@ -76,6 +78,7 @@ class Public::PostsController < ApplicationController
       flash[:notice] = "投稿を削除しました。"
       redirect_to posts_path
     else
+      flash[:notice] = "投稿の削除に失敗しました。"
       render :edit
     end
   end
@@ -89,7 +92,7 @@ class Public::PostsController < ApplicationController
   def ensure_current_contributor
     @post = Post.find(params[:id])
     unless current_contributor.id == @post.contributor_id
-      redirect_to root_path, alert: '権限がありません'
+      redirect_to root_path
     end
   end
 

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_14_122914) do
+ActiveRecord::Schema.define(version: 2023_04_22_073105) do
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name", null: false
@@ -58,10 +58,9 @@ ActiveRecord::Schema.define(version: 2023_04_14_122914) do
     t.integer "post_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.integer "parent_id"
     t.boolean "reported"
+    t.integer "parent_id"
     t.index ["contributor_id"], name: "index_comments_on_contributor_id"
-    t.index ["parent_id"], name: "index_comments_on_parent_id"
     t.index ["post_id"], name: "index_comments_on_post_id"
   end
 
@@ -168,8 +167,6 @@ ActiveRecord::Schema.define(version: 2023_04_14_122914) do
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
   add_foreign_key "active_storage_variant_records", "active_storage_blobs", column: "blob_id"
-  add_foreign_key "comments", "comments", column: "parent_id"
-  add_foreign_key "comments", "contributors"
   add_foreign_key "comments", "posts"
   add_foreign_key "likes", "contributors"
   add_foreign_key "likes", "posts"

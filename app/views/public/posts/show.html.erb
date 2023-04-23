@@ -35,7 +35,11 @@
                 </tr>
                 <tr>
                   <td><strong>ジャンル</strong></td>
-                  <td><%= link_to @post.genre.name, posts_path(genre_id: @post.genre.id, genre_name: @post.genre.name) %></td>
+                  <% if @post.genre.present? %>
+                    <td><%= link_to @post.genre.name, posts_path(genre_id: @post.genre.id, genre_name: @post.genre.name) %></td>
+                  <% else %>
+                    <td>未分類</td>
+                  <% end %>
                 </tr>
                 <tr>
                   <td><strong>タグ</strong></td>

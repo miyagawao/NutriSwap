@@ -26,6 +26,7 @@
       <%= render 'public/comments/reply_form', comment: comment, comment_reply: comment_reply %>
     </div>
   <% end %>
+  <!--コメント投稿したユーザーがログインしている場合、削除できる-->
   <% if comment.contributor == current_contributor %>
     <%= link_to post_comment_path(comment.post_id, comment.id), method: :delete, remote: true do %>
       <div class="text-right">

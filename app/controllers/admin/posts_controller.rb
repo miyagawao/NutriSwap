@@ -15,6 +15,7 @@ class Admin::PostsController < ApplicationController
       flash[:notice] = "投稿を削除しました。"
       redirect_to admin_root_path
     else
+      flash[:notice] = "投稿の削除に失敗しました。"
       render :show
     end
   end

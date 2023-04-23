@@ -1,55 +1,46 @@
 class Public::CommentsController < ApplicationController
   before_action :authenticate_contributor!
-  
+
   def create
     @current_contributor = current_contributor
     @post = Post.find(params[:post_id])
     #投稿に紐づいたコメントの作成
     @comment = @post.comments.new(comment_params)
     @comment.contributor_id = current_contributor.id
+
+    #byebug
     #返信コメントの作成
     @comment_reply = @post.comments.new
     if @comment.save
-      flash.now[:notice] = "コメントの投稿に成功しました。"
+      flash[:notice] = "コメントの投稿に成功しました。"
       render :index
     else
-      flash.now[:alert] = "コメントの投稿に失敗しました。"
+      flash[:notice] = "コメントの投稿に失敗しました。"
       render :index
     end
   end
-  
+
   def destroy
     @current_contributor = current_contributor
     # 返信フォームに渡しているインスタンス変数の追加
     @post = Post.find(params[:post_id])
     @comment_reply = @post.comments.new
-    
+
     @comment = Comment.find(params[:id])
     if @comment.destroy
-      flash.now[:notice] = "コメントを削除しました。"
+      flash[:notice] = "コメントを削除しました。"
       render :index
     else
-      flash.now[:alert] = "コメント削除に失敗しました。"
+      flash[:notice] = "コメント削除に失敗しました。"
       render :index
-    end  
-  end
-  
-  def report
-    comment = Comment.find(params[:id])
-    report = Report.new(user_id: current_user.id, comment_id: comment.id, reason: params[:reason])
-    if report.save
-      comment.update(reported: true)
-      flash[:success] = 'コメントを通報しました。'
-    else
-      flash[:error] = '通報に失敗しました。'
     end
-    redirect_to comment.post
   end
-  
+
+
   private
-  
+
   def comment_params
     params.require(:comment).permit(:comment_text, :contributor_id, :post_id, :parent_id)
   end
-  
+
 end

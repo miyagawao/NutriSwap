@@ -10,6 +10,7 @@
       <div class="row">
         <table class="table table-bordered border-dark">
           <tr>
+            <td class="table-active">通報日時</td>
             <td class="table-active">通報ID</td>
             <td class="table-active">通報者ID</td>
             <td class="table-active">通報者氏名</td>
@@ -17,6 +18,7 @@
           </tr>
           <% @comment.reports.each do |report| %>
             <tr>
+              <td><%= report.created_at.to_s(:datetime_jp) %></td>
               <td><%= report.id %></td>
               <td>
                 <%= link_to admin_contributor_path(report.contributor.id), class: 'text-primary' do %>
