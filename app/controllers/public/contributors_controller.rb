@@ -11,7 +11,7 @@ class Public::ContributorsController < ApplicationController
   end
 
   # 下書き一覧ページ
-  def confirm
+  def draft_index
     @contributor = Contributor.find(params[:id])
     # 下書き保存の投稿のみ新着順で表示　１ページ９件
     @posts = @contributor.posts.where(status: :draft).order('created_at DESC').page(params[:page]).per(9)

@@ -28,7 +28,7 @@ Rails.application.routes.draw do
     end
     resources :contributors, only: [:show, :edit, :update] do
       get :unsubscribe, on: :collection
-      get :confirm, on: :member
+      get :draft_index, on: :member
       patch :withdrawal, on: :member
     end
     get 'search' => 'searches#search'
