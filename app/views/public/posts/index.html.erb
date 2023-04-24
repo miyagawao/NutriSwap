@@ -5,11 +5,11 @@
       <%= render 'public/genres/genre_list', genres: @genres %>
     </div>
     
-    <div class="col-md-9">
+    <div class="container pl-5">
       <div class="border-bottom" style="background-color: #ffffe5;">
         <h2>投稿一覧　<span class="badge badge-pill badge-secondary">全<%= @posts.count %>件</span></h2>
       </div>
-      <div class="d-md-flex flex-wrap" style="margin-left: 80px;">
+      <div class="d-flex flex-wrap">
         <% @posts.each do |post|%>
           <%= render partial: 'public/posts/post_list', locals: {post: post, current_contributor: @current_contributor} %>
         <% end %>

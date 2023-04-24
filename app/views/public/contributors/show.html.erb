@@ -5,7 +5,7 @@
       <%= render 'public/genres/genre_list', genres: @genres %>
     </div>
     
-    <div class="col-md-9">
+    <div class="container pl-5">
       <div class="border-bottom" style="background-color: #ffffe5;">
         <h2>会員情報</h2>
       </div>
@@ -47,11 +47,11 @@
           <% end %>
         </div>
       </div>
-      
+    
     <div class="border-bottom" style="background-color: #ffffe5;">
       <h2>過去の投稿一覧  <span class="badge badge-pill badge-secondary">全<%= @posts.count %>件</span></h2>
     </div>
-    <div class="d-md-flex flex-wrap justify-content-center">
+    <div class="d-flex flex-wrap">
       <% @posts.each do |post|%>
         <% if post.contributor_id == @contributor.id %>
           <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>

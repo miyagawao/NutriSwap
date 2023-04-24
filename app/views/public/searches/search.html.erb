@@ -3,14 +3,14 @@
     <div class="col-md-2">
       <%= render 'public/genres/genre_list', genres: @genres %>
     </div>
-    <div class="col-md-9">
+    <div class="container pl-5">
       <div class="border-bottom" style="background-color: #ffffe5;">
         <h2>検索結果一覧 <span class="badge badge-pill badge-secondary">全<%= @range == 'Post' ? @posts.count : @contributors.count %>件</span></h2>
       </div>  
       <!--posts一覧 -->
       <% if @range == 'Post' %>
         <% if @posts.present? %>
-          <div class="d-md-flex flex-wrap" style="margin-left: 80px;">
+          <div class="d-flex flex-wrap">
             <% @posts.each do |post|%>
                <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>
             <% end %>
@@ -24,7 +24,7 @@
       <!--contributors一覧 -->
       <% else %>
         <% if @contributors.present? %>
-          <div class="d-md-flex flex-wrap" style="margin-left: 80px;">
+          <div class="d-flex flex-wrap">
             <% @contributors.each do |contributor| %>
               <div class="card m-2 text-center card-warpper" style="width: 340px;">
                 <%= link_to contributor_path(contributor) do %>
