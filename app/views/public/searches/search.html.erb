@@ -1,51 +1,52 @@
 <div class="container-fluid" style="background-color: #f9fffc;">
   <div class="row">
     <div class="col-md-2">
-      <%= render 'public/tmp/genre_list', genres: @genres %>
+      <%= render 'public/genres/genre_list', genres: @genres %>
     </div>
     <div class="col-md-9">
       <div class="border-bottom" style="background-color: #ffffe5;">
-      <h2>検索結果一覧 <span class="badge badge-pill badge-secondary">全<%= @range == 'Post' ? @posts.count : @contributors.count %>件</span></h2>
-    </div>
-    <!--posts一覧 -->
-    <% if @range == 'Post' %>
-      <% if @posts.present? %>
-        <div class="d-md-flex flex-wrap justify-content-center">
-          <% @posts.each do |post|%>
-             <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>
-          <% end %>
-        </div>
-        <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center">
-          <%= paginate @posts %>
-        </div>
+        <h2>検索結果一覧 <span class="badge badge-pill badge-secondary">全<%= @range == 'Post' ? @posts.count : @contributors.count %>件</span></h2>
+      </div>  
+      <!--posts一覧 -->
+      <% if @range == 'Post' %>
+        <% if @posts.present? %>
+          <div class="d-md-flex flex-wrap justify-content-center">
+            <% @posts.each do |post|%>
+               <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>
+            <% end %>
+          </div>
+          <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center">
+            <%= paginate @posts %>
+          </div>
+        <% else %>
+          <h4 class="text-center">検索条件に一致する投稿はありませんでした。</h4>
+        <% end %>
+      <!--contributors一覧 -->
       <% else %>
-        <h4 class="text-center">検索条件に一致する投稿はありませんでした。</h4>
-      <% end %>
-    <!--contributors一覧 -->
-    <% else %>
-      <% if @contributors.present? %>
-        <div class="d-md-flex flex-wrap justify-content-center">
-          <% @contributors.each do |contributor| %>
-            <div class="card m-2 text-center card-warpper" style="width: 340px;">
-              <%= link_to contributor_path(contributor) do %>
-                <% if contributor.profile_image.present? %>
-                  <%= image_tag contributor.profile_image.variant(resize: "200x200"), class:"card-image-top", height: "100" %>
-                <% else %>
-                  <%= image_tag "no_image.jpg", size: "100x100", class: "card-image-top" %>
+        <% if @contributors.present? %>
+          <div class="d-md-flex flex-wrap justify-content-center">
+            <% @contributors.each do |contributor| %>
+              <div class="card m-2 text-center card-warpper" style="width: 340px;">
+                <%= link_to contributor_path(contributor) do %>
+                  <% if contributor.profile_image.present? %>
+                    <%= image_tag contributor.profile_image.variant(resize: "200x200"), class:"card-image-top", height: "100" %>
+                  <% else %>
+                    <%= image_tag "no_image.jpg", size: "100x100", class: "card-image-top" %>
+                  <% end %>
+                  <div class="card-body">
+                    <%= link_to "#{contributor.nickname}さんのページへ", contributor_path(contributor), class: "btn btn-lg btn-block btn-outline-info", type: "button" %>
+                  </div>
                 <% end %>
-                <div class="card-body">
-                  <%= link_to "#{contributor.nickname}さんのページへ", contributor_path(contributor), class: "btn btn-lg btn-block btn-outline-info", type: "button" %>
-                </div>
-              <% end %>
-            </div>
-          <% end %>
-        </div>
-        <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center">
-          <%= paginate @contributors %>
-        </div>
-      <% else %>
-        <h4 class="text-center">検索条件に一致するユーザーはいませんでした。</h4>
+              </div>
+            <% end %>
+          </div>
+          <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center">
+            <%= paginate @contributors %>
+          </div>
+        <% else %>
+          <h4 class="text-center">検索条件に一致するユーザーはいませんでした。</h4>
+        <% end %>
       <% end %>
-    <% end %>
+    </div>
   </div>
 </div>

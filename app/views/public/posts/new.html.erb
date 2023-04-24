@@ -18,7 +18,6 @@
           <td></td>
           <td></td>
         </tr>
-
         <tr>
           <th style="width: 20%"><%= f.label :投稿内容 %></th>
           <td></td>
@@ -26,7 +25,6 @@
           <td></td>
           <td></td>
         </tr>
-
         <tr>
           <th style="width: 20%"><%= f.label :画像 %></th>
           <td></td>
@@ -34,7 +32,6 @@
           <td></td>
           <td></td>
         </tr>
-
         <tr>
           <th style="width: 20%"><%= f.label :tag_list, "タグ付け" %></th>
           <td></td>
@@ -42,7 +39,6 @@
           <td></td>
           <td></td>
         </tr>
-
         <tr>
           <th style="width: 20%"><%= f.label :genre_id, "ジャンルを選択する" %></th>
           <td></td>
@@ -50,7 +46,6 @@
           <td></td>
           <td></td>
         </tr>
-        
         <tr>
           <th style="width: 20%"><%= f.label"公開範囲を選択" %></th>
           <td></td>
@@ -59,12 +54,10 @@
           <td></td>
         </tr>
       </table>
-
-      
-        <div class="text-center">
-          <%= f.submit "投稿する", name: "release", class: "btn btn-warning w-25" %>
-        </div>
+      <div class="text-center">
+        <%= f.submit "投稿する", name: "release", class: "btn btn-warning w-25" %>
       </div>
     <% end %>
+    
   </div>
 </div>

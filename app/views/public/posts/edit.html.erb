@@ -1,6 +1,7 @@
 <div style="background-color: #f9fffc;">
   <div class="container px-5 px-sm-0">
     <div class="row">
+      
       <div class="mt-5">
         <%= render partial: 'layouts/error_messages', locals: { object: @post} %>
       </div>
@@ -18,7 +19,6 @@
         <td ></td>
         <td></td>
       </tr>
-
       <tr>
         <th><%= f.label :投稿内容 %></th>
         <td></td>
@@ -26,7 +26,6 @@
         <td></td>
         <td></td>
       </tr>
-
       <tr>
         <th><%= f.label :画像 %></th>
         <td></td>
@@ -34,7 +33,6 @@
         <td></td>
         <td></td>
       </tr>
-
      <tr>
         <th><%= f.label :tag_list, "タグ付け" %></th>
         <td></td>
@@ -42,7 +40,6 @@
         <td></td>
         <td></td>
       </tr>
-
       <tr>
         <th style="white-space: nowrap;"><%= f.label :genre_id, "ジャンルを選択する" %></th>
         <td></td>
@@ -50,7 +47,6 @@
         <td></td>
         <td></td>
       </tr>
-
       <tr>
         <th><%= f.label"公開範囲を選択" %></th>
         <td></td>
@@ -58,13 +54,12 @@
         <td></td>
         <td></td>
       </tr>
-
     </table>
-
     <div class="form-group text-right">
       <%= f.submit "更新する", class: 'btn btn-success' %>
       <%= link_to "削除", post_path(@post.id), method: :delete, data: { confirm: "本当に削除しますか?" }, class: "btn btn-danger" %>
     </div>
     <% end %>
+    
   </div>
 </div>

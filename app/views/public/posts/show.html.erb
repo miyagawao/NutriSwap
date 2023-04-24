@@ -1,68 +1,67 @@
 <div class="container-fluid" style="background-color: #f9fffc;">
   <div class="row">
     <div class="col-md-2">
-      <%= render 'public/tmp/genre_list', genres: @genres %>
+      <%= render 'public/genres/genre_list', genres: @genres %>
     </div>
     <div class="col-md-9">
-    <div class="border-bottom" style="background-color: #ffffe5;">
-      <div style="display: flex; justify-content: space-between;">
-        <div>
-          <h2 style="white-space: nowrap;">「<%= @post.title %>」</h2>
-        </div>
-        <div id="likes_buttons_<%= @post.id %>" style="margin-top: 10px;">
-          <%= render partial: 'public/likes/like', locals: { post: @post, current_contributor: @current_contributor} %>
-        </div>
-        <div style="margin-top: 10px; margin-right: 40px; ">
-          <i class="fas fa-eye" style="margin-left: 20px;"></i> <%= @post.impressions_count %>
-        </div>
-      </div>
-    </div>
-    <div class="card-header">
-      <div class="col-md-12">
-        <div class="d-flex">
-          <% if @post.image.present? %>
-            <%= image_tag @post.get_image.variant(resize: "300x300"), height: "300", class: "card-image-top" %>
-          <% else %>
-            <%= image_tag "no_image.jpg", size: "300x300", class: "card-image-top" %>
-          <% end %>
-
-          <div class="ml-5 pl-5">
-            <div class="row">
-              <table class="table float-right">
-                <tr>
-                  <td><strong>投稿内容</strong></td>
-                  <td><%= simple_format(@post.content, {}, {style: "width: 100%;"}) %></td>
-                </tr>
-                <tr>
-                  <td><strong>ジャンル</strong></td>
-                  <% if @post.genre.present? %>
-                    <td><%= link_to @post.genre.name, posts_path(genre_id: @post.genre.id, genre_name: @post.genre.name) %></td>
-                  <% else %>
-                    <td>未分類</td>
-                  <% end %>
-                </tr>
-                <tr>
-                  <td><strong>タグ</strong></td>
-                  <td><% @post.tags.each do |tag| %>
-                        <%= link_to tag.name, posts_path(tag_id: tag.id, tag_name: tag.name) %>
-                      <% end %>
-                  </td>
-                </tr>
-                <tr>
-                  <td style="white-space: nowrap;"><strong>ニックネーム</strong></td>
-                  <td><%= link_to @post.contributor.nickname, contributor_path(@post.contributor.id) %></td>
-                </tr>
-                <tr>
-                  <td><strong>保有資格</strong></td>
-                  <td>
-                    <%= @post.contributor.qualification %>
-                  </td>
-                </tr>
-              </table>
-            </div>
+      <div class="border-bottom" style="background-color: #ffffe5;">
+        <div style="display: flex; justify-content: space-between;">
+          <div>
+            <h2 style="white-space: nowrap;">「<%= @post.title %>」</h2>
+          </div>
+          <div id="likes_buttons_<%= @post.id %>" style="margin-top: 10px;">
+            <%= render partial: 'public/likes/like', locals: { post: @post, current_contributor: @current_contributor} %>
+          </div>
+          <div style="margin-top: 10px; margin-right: 40px; ">
+            <i class="fas fa-eye" style="margin-left: 20px;"></i> <%= @post.impressions_count %>
           </div>
         </div>
       </div>
+      <div class="card-header">
+        <div class="col-md-12">
+          <div class="d-flex">
+            <% if @post.image.present? %>
+              <%= image_tag @post.get_image.variant(resize: "300x300"), height: "300", class: "card-image-top" %>
+            <% else %>
+              <%= image_tag "no_image.jpg", size: "300x300", class: "card-image-top" %>
+            <% end %>
+            <div class="ml-5 pl-5">
+              <div class="row">
+                <table class="table float-right">
+                  <tr>
+                    <td><strong>投稿内容</strong></td>
+                    <td><%= simple_format(@post.content, {}, {style: "width: 100%;"}) %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>ジャンル</strong></td>
+                    <% if @post.genre.present? %>
+                      <td><%= link_to @post.genre.name, posts_path(genre_id: @post.genre.id, genre_name: @post.genre.name) %></td>
+                    <% else %>
+                      <td>未分類</td>
+                    <% end %>
+                  </tr>
+                  <tr>
+                    <td><strong>タグ</strong></td>
+                    <td><% @post.tags.each do |tag| %>
+                          <%= link_to tag.name, posts_path(tag_id: tag.id, tag_name: tag.name) %>
+                        <% end %>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="white-space: nowrap;"><strong>ニックネーム</strong></td>
+                    <td><%= link_to @post.contributor.nickname, contributor_path(@post.contributor.id) %></td>
+                  </tr>
+                  <tr>
+                    <td><strong>保有資格</strong></td>
+                    <td>
+                      <%= @post.contributor.qualification %>
+                    </td>
+                  </tr>
+                </table>
+              </div>
+            </div>
+          </div>
+        </div>
       <div class="card-body">
         <% if current_contributor.id == @post.contributor.id %>
           <% if @post.status == "draft" %>

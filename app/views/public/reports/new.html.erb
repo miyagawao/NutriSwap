@@ -5,22 +5,18 @@
         <%= render partial: 'layouts/error_messages', locals: { object: @report } %>
       </div>
     </div>
-      <div class="row mb-3">
-        <div class="col-12">
-          <h4><span class="bg-light bg-gradient">通報理由を記入してください</span></h4>
-        </div>
-      </div>
-      <%= form_with model: @report, url: post_comment_reports_path(@comment), local: true do |f| %>
-        <div class="form-group">
-          <%= f.label :reason %>
-          <%= f.text_area :reason, rows:'3', class:"form-control" ,placeholder: "100文字以内で入力してください" %>
-          <%= hidden_field_tag :contributor_id, current_contributor.id %>
-        </div>
-        <div class="text-right">
-          <%= f.submit "通報する", class: "btn btn-danger" %>
-        </div>
-      <% end %>
+    <div class="col-12">
+      <h4><span class="bg-light bg-gradient">通報理由を記入してください</span></h4>
     </div>
+    <%= form_with model: @report, url: post_comment_reports_path(@comment), local: true do |f| %>
+      <div class="form-group">
+        <%= f.text_area :reason, rows:'3', class:"form-control" ,placeholder: "100文字以内で入力してください" %>
+        <%= hidden_field_tag :contributor_id, current_contributor.id %>
+      </div>
+      <div class="text-right">
+        <%= f.submit "通報する", class: "btn btn-danger" %>
+      </div>
+    <% end %>
   </div>
 </div>
 
