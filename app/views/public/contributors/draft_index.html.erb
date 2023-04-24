@@ -3,6 +3,7 @@
     <div class="col-md-2">
       <%= render 'public/tmp/genre_list', genres: @genres %>
     </div>
+    
     <div class="col-md-9">
       <div class="border-bottom" style="background-color: #ffffe5;">
         <h2>下書き一覧　<span class="badge badge-pill badge-secondary">全<%= @posts.count %>件</span></h2>
@@ -16,5 +17,6 @@
         <%= paginate @posts %>
       </div>
     </div>
+  
   </div>
 </div>

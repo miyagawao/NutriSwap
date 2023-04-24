@@ -1,6 +1,7 @@
 <div class="container my-5">
   <div class="row">
     <div class="col-lg-10 col-sm-12 mx-auto">
+      
       <div class="row mb-3">
         <div class="col-12">
           <h3><span class="bg-light bg-gradient"><%= @comment.contributor.add_full_name %>さんのコメント詳細</span></h3>
@@ -48,6 +49,7 @@
           <%= link_to "削除する", admin_comment_path(@comment), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
         </div>
       </div>
+      
     </div>
   </div>
 </div>

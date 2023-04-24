@@ -1,43 +1,44 @@
 <div class="container my-5">
   <div class="row">
     <div class="col-lg-10 col-sm-12 mx-auto">
+      
       <div class="row mb-3">
         <%= render partial: 'layouts/error_messages', locals: { object: @genre } %>
         <div class="col-12">
           <h4><span class="bg-light bg-gradient">ジャンル一覧・追加</span></h4>
         </div>
       </div>
-      <div class='row'>
-        <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
-          <%= form_with model:@genre, url: admin_genres_path, method: :post, local:true do |f| %>
-            <div class="form-group">
-              <%= f.label :ジャンル名, class:"bg-light bg-gradient" %>
-              <%= f.text_field :name, class:'form-control book_title' %>
-            </div>
-            <div class="form-group text-right">
-              <%= f.submit "追加する", class:'btn btn-success' %>
-            </div>
-          <% end %>
-          <table class='table table-hover table-inverse'>
-            <thead>
-              <tr style="white-space: nowrap;">
-                <th>登録日時</th>
-                <th>ジャンル名</th>
-                <th></th>
+      
+      <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+        <%= form_with model:@genre, url: admin_genres_path, method: :post, local:true do |f| %>
+          <div class="form-group">
+            <%= f.label :ジャンル名, class:"bg-light bg-gradient" %>
+            <%= f.text_field :name, class:'form-control book_title' %>
+          </div>
+          <div class="form-group text-right">
+            <%= f.submit "追加する", class:'btn btn-success' %>
+          </div>
+        <% end %>
+        <table class='table table-hover table-inverse'>
+          <thead>
+            <tr style="white-space: nowrap;">
+              <th>登録日時</th>
+              <th>ジャンル名</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody>
+            <% @genres.each do |genre| %>
+              <tr>
+                <td style="white-space: nowrap;"><%= genre.created_at.to_s(:datetime_jp) %></td>
+                <td><%= genre.name %></td>
+                <td class="text-right" style="white-space: nowrap;"><%= link_to "編集する", edit_admin_genre_path(genre.id), class: "btn btn-primary" %></td>
               </tr>
-            </thead>
-            <tbody>
-              <% @genres.each { |genre| %>
-                <tr>
-                  <td style="white-space: nowrap;"><%= genre.created_at.to_s(:datetime_jp) %></td>
-                  <td><%= genre.name %></td>
-                  <td class="text-right" style="white-space: nowrap;"><%= link_to "編集する", edit_admin_genre_path(genre.id), class: "btn btn-primary" %></td>
-                </tr>
-              <% } %>
-            </tbody>
-          </table>
-        </div>
+            <% end %>
+          </tbody>
+        </table>
       </div>
+      
     </div>
   </div>
 </div>

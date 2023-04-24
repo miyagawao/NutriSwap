@@ -1,6 +1,6 @@
-<!--'comments/_index'で使用中-->
+<!--'public/comments/_index'で使用中のコメント表示-->
 <div class="container">
-  <!--ユーザー詳細-->
+  
   <div class="row d-flex align-items-center pb-3">
     <div class="col">
       <% if comment.contributor.profile_image.present? %>
@@ -17,7 +17,7 @@
   <div class="card-body border rounded mb-3" style="background-color: #fffcf9;">
     <%= comment.comment_text %>
   </div>
-
+  <!--コメントしたユーザーとゲストユーザー以外に通報ボタンと返信コメントフォームを表示-->
   <% if comment.contributor != current_contributor && current_contributor.nickname != "ゲストユーザー" %>
     <div>
       <%= link_to "通報する", new_post_comment_report_path(comment_id: comment.id, post_id: comment.post.id), class: "btn btn-danger" %>
@@ -26,7 +26,7 @@
       <%= render 'public/comments/reply_form', comment: comment, comment_reply: comment_reply %>
     </div>
   <% end %>
-  <!--コメント投稿したユーザーがログインしている場合、削除できる-->
+  <!--コメントしたユーザーがログインしている場合は削除できる-->
   <% if comment.contributor == current_contributor %>
     <%= link_to post_comment_path(comment.post_id, comment.id), method: :delete, remote: true do %>
       <div class="text-right">
@@ -34,47 +34,49 @@
       </div>
     <% end %>
   <% end %>
-
+　<!--返信コメント-->
   <hr class="d-none">
-  <% comment.replies.each do |reply| %>
-    <div class="container">
-      <div class="row d-flex align-items-center pb-3">
-        <div class="col">
-          <%= reply.created_at.to_formatted_s(:datetime_jp) %>
-        </div>
-        <div class="col d-flex justify-content-end">
-          <%= link_to "#{reply.contributor.nickname}さんからの返信", contributor_path(reply.contributor.id), class: 'link pl-1' %>
-          <% if reply.contributor.profile_image.present? %>
-            <%= link_to contributor_path(reply.contributor.id) do %>
-              <%= image_tag(reply.contributor.profile_image.variant(resize: "100x100")) %>
+    <% comment.replies.each do |reply| %>
+      <div class="container">
+        <div class="row d-flex align-items-center pb-3">
+          <div class="col">
+            <%= reply.created_at.to_formatted_s(:datetime_jp) %>
+          </div>
+          <!--返信コメント表示-->
+          <div class="col d-flex justify-content-end">
+            <%= link_to "#{reply.contributor.nickname}さんからの返信", contributor_path(reply.contributor.id), class: 'link pl-1' %>
+            <% if reply.contributor.profile_image.present? %>
+              <%= link_to contributor_path(reply.contributor.id) do %>
+                <%= image_tag(reply.contributor.profile_image.variant(resize: "100x100")) %>
+              <% end %>
+            <% else %>
+              <%= link_to contributor_path(reply.contributor.id) do %>
+                <%= image_tag 'no_image.jpg', width: 100, height: 100 %>
+              <% end %>
             <% end %>
-          <% else %>
-            <%= link_to contributor_path(reply.contributor.id) do %>
-              <%= image_tag 'no_image.jpg', width: 100, height: 100 %>
+          </div>
+        </div>
+        <div class="card-body border rounded mb-3" style="background-color: #fffff9;">
+          <%= reply.comment_text %>
+        </div>
+        <!--返信コメントしたユーザーがログインしていたら削除できる-->
+        <div>
+          <% if reply.contributor == current_contributor %>
+            <%= link_to post_comment_path(comment.post_id, reply.id), method: :delete, remote: true do %>
+              <div class="text-right">
+                <button class="btn btn-outline-secondary">削除する</button>
+              </div>
             <% end %>
           <% end %>
         </div>
-      </div>
-      <div class="card-body border rounded mb-3" style="background-color: #fffff9;">
-        <%= reply.comment_text %>
+        <!--返信コメントしたユーザーとゲストユーザー以外に通報するボタンを表示-->
+        <div>
+          <% if reply.contributor != current_contributor && current_contributor.nickname != "ゲストユーザー" %>
+            <%= link_to "通報する", new_post_comment_report_path(comment_id: reply.id, post_id: comment.post.id), class: "btn btn-danger" %>
+          <% end %>
+        </div>
         
       </div>
-      <div>
-        <% if reply.contributor == current_contributor %>
-          <%= link_to post_comment_path(comment.post_id, reply.id), method: :delete, remote: true do %>
-            <div class="text-right">
-              <button class="btn btn-outline-secondary">削除する</button>
-            </div>
-          <% end %>
-        <% end %>
-      </div>
-      <div>
-        <% if reply.contributor != current_contributor && current_contributor.nickname != "ゲストユーザー" %>
-          <%= link_to "通報する", new_post_comment_report_path(comment_id: reply.id, post_id: comment.post.id), class: "btn btn-danger" %>
-        <% end %>
-      </div>
-    </div>
-  <% end %>
-
+    <% end %>
   <hr>
 </div>

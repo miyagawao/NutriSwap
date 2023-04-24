@@ -1,19 +1,13 @@
 <div style="background-color: #f9fffc;">
   <div class="container px-5 px-sm-0">
     <div class="row">
+      
       <div class="mt-5">
         <%= render partial: 'layouts/error_messages', locals: { object: @contributor } %>
       </div>
-    </div>
-
-    <div class="row">
+      
       <div class="mt-5 offset-md-1">
         <h3><span class="bg-light bg-gradient"><%= @contributor.add_full_name %>さんの会員詳細</h3>
-      </div>
-    </div>
-
-    <div class="row">
-      <div class="mt-5">
         <%= form_with model: @contributor, url: contributor_path, method: :patch do |f| %>
           <table class="table table-borderless">
             <tr>
@@ -22,55 +16,34 @@
             </tr>
             <tr>
               <td class="bg-light bg-gradient">氏名</td>
-              <td>
-                <%= f.text_field :last_name %>
-              </td>
-              <td>
-                <%= f.text_field :first_name %>
-              </td>
+              <td><%= f.text_field :last_name %></td>
+              <td><%= f.text_field :first_name %></td>
             </tr>
             <tr>
               <td class="bg-light bg-gradient">カナ</td>
-              <td>
-                <%= f.text_field :last_name_kana %>
-              </td>
-              <td>
-                <%= f.text_field :first_name_kana %>
-              </td>
+              <td><%= f.text_field :last_name_kana %></td>
+              <td><%= f.text_field :first_name_kana %></td>
             </tr>
-
             <tr>
               <td class="bg-light bg-gradient">ニックネーム</td>
               <td><%= f.text_field :nickname, autofocus: true, autocomplete: "nickname",placeholder: "ニックネーム" %></td>
             </tr>
-
             <tr>
               <td class="bg-light bg-gradient">郵便番号</td>
-              <td>
-                <%= f.text_field :postal_code %>
-              </td>
+              <td><%= f.text_field :postal_code %></td>
             </tr>
             <tr>
               <td class="bg-light bg-gradient">住所</td>
-              <td>
-                <%= f.text_field :address %>
-              </td>
+              <td><%= f.text_field :address %></td>
             </tr>
-
             <tr>
               <td class="bg-light bg-gradient">メールアドレス</td>
-              <td>
-                <%= f.text_field :email, autofocus: true, autocomplete: "email" %>
-              </td>
+              <td><%= f.text_field :email, autofocus: true, autocomplete: "email" %></td>
             </tr>
-
             <tr>
               <td class="bg-light bg-gradient">電話番号</td>
-              <td>
-                <%= f.text_field :telephone_number %>
-              </td>
+              <td><%= f.text_field :telephone_number %></td>
             </tr>
-
             <tr>
               <td class="bg-light bg-gradient">資格</td>
               <td>
@@ -84,7 +57,6 @@
                 <%= f.label :qualification, "調理従事者", style: "margin-right: 20px;" %>
               </td>
             </tr>
-
             <tr>
               <td class="bg-light bg-gradient">自己紹介</th>
               <td><%= f.text_area :introduce, rows: 5, style: "width: 100%;" %></td>
@@ -100,7 +72,8 @@
             </tr>
           </table>
         <% end %>
-      </div>
-    </div>
+      </div> 
+      
+    </div> 
   </div>
 </div>

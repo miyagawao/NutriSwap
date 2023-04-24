@@ -74,7 +74,7 @@
       </div>
     </div>
     <div class="border-bottom" style="background-color: #ffffe5;">
-      <h2>「<%= @post.title %>」へのコメント</h2>
+      <h2>「<%= @post.title %>」へのコメント一覧  <span class="badge badge-pill badge-secondary">全 <%= @comments.count %> 件</span></h2>
     </div>
     <div id="comments_area">
       <%= render 'public/comments/index', comments: @comments, comment_reply: @comment_reply, current_contributor: @current_contributor %>
