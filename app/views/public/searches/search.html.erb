@@ -10,7 +10,7 @@
       <!--posts一覧 -->
       <% if @range == 'Post' %>
         <% if @posts.present? %>
-          <div class="d-md-flex flex-wrap justify-content-center">
+          <div class="d-md-flex flex-wrap" style="margin-left: 80px;">
             <% @posts.each do |post|%>
                <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>
             <% end %>
@@ -24,7 +24,7 @@
       <!--contributors一覧 -->
       <% else %>
         <% if @contributors.present? %>
-          <div class="d-md-flex flex-wrap justify-content-center">
+          <div class="d-md-flex flex-wrap" style="margin-left: 80px;">
             <% @contributors.each do |contributor| %>
               <div class="card m-2 text-center card-warpper" style="width: 340px;">
                 <%= link_to contributor_path(contributor) do %>
