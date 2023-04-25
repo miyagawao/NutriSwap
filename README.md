@@ -26,7 +26,7 @@
   - 相談や質問を他の栄養士等にしたい時
 
 ## 設計書
-<...>
+  - [実装機能リスト](https://docs.google.com/spreadsheets/d/1aIdt1r1s5nlj3cKlUhVtg9XKzjSrvQfyRYr_4tPuhU8/edit#gid=885378170)
 
 ## 開発環境
 - OS：Linux(CentOS)
