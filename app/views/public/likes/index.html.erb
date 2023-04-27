@@ -7,15 +7,15 @@
       <div class="border-bottom" style="background-color: #ffffe5;">
       <h2>お気に入り一覧　<span class="badge badge-pill badge-secondary">全<%= @likes_posts.count %>件</span></h2></h2>
     </div>
-    
+
     <div class="d-flex flex-wrap">
       <% @likes_posts.each do |post|%>
-       <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>
-      <% end %>  
+        <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>
+      <% end %>
     </div>
-  
+
     <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center">
-      <%= paginate @posts %>
+      <%= paginate @likes_posts %>
     </div>
   </div>
 </div>

@@ -5,12 +5,10 @@ class Public::LikesController < ApplicationController
   def index
     # 現在ログインしているcontributor
     @contributor = current_contributor
-    # ログインユーザーの投稿（新着順）１ページ９件
-    @posts = @contributor.posts.order(created_at: :desc).includes(:genre, :tags).page(params[:page]).per(9)
     # ログインユーザーがいいねした投稿のIDを取得
     likes = Like.where(contributor_id: current_contributor.id).pluck(:post_id)
     # likes配列内のIDに対応するPostレコードを取得
-    @likes_posts = Post.find(likes)
+    @likes_posts = Post.where(id: likes).order(created_at: :desc).includes(:genre, :tags).page(params[:page]).per(9)
     @genres = Genre.all
   end
   
