@@ -1,5 +1,7 @@
 <!--posts/showで使用中-->
-<div id="comments_area">
+  <div class="border-bottom" style="background-color: #ffffe5;">
+    <h2>「<%= @post.title %>」へのコメント一覧  <span class="badge badge-pill badge-secondary">全 <%= comments.count %> 件</span></h2>
+  </div>
   <% if flash[:notice] %>
     <div class="alert alert-success">
       <%= flash[:notice] %>
@@ -20,4 +22,3 @@
       <% end %>
     </div>
   <% end %>
-</div>
