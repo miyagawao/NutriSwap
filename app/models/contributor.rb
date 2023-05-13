@@ -58,7 +58,7 @@ class Contributor < ApplicationRecord
 
   def self.looks(search, word)
     if search == "partial_match"
-      where("nickname LIKE ?", "%#{word}%")
+      where("nickname LIKE ?", "%#{word}%").where.not(is_deleted: true)
     end
   end
 

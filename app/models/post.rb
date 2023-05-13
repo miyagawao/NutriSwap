@@ -45,9 +45,11 @@ class Post < ApplicationRecord
   scope :search_genre, ->(genre) {where(genre_id: genre)}
   scope :search_tag, ->(tag_id) { joins(:post_tags).where(post_tags: { tag_id: tag_id }) }
 
+
   def self.looks(search, word)
     if search == "partial_match"
-      where("title LIKE ?", "%#{word}%")
+      where("title LIKE ?", "%#{word}%").where.not(status: :draft)
     end
   end
+
 end
