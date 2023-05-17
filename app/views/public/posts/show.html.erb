@@ -19,11 +19,11 @@
       </div>
       <div class="card-header">
         <div class="col-md-12">
-          <div class="d-flex">
+          <div class="row">
             <% if @post.image.present? %>
-              <%= image_tag @post.get_image.variant(resize: "300x300"), height: "300", class: "card-image-top" %>
+              <%= image_tag @post.get_image.variant(resize: "265x265"), height: "265", class: "card-image-top" %>
             <% else %>
-              <%= image_tag "no_image.jpg", size: "300x300", class: "card-image-top" %>
+              <%= image_tag "no_image.jpg", size: "265x265", class: "card-image-top" %>
             <% end %>
             <div class="ml-5 pl-5">
               <div class="row">
