@@ -16,13 +16,17 @@
             </tr>
             <tr>
               <td class="bg-light bg-gradient">氏名</td>
-              <td><%= f.text_field :last_name %></td>
-              <td><%= f.text_field :first_name %></td>
+              <td>
+                <%= f.text_field :last_name %>
+                <%= f.text_field :first_name %>
+              </td>
             </tr>
             <tr>
               <td class="bg-light bg-gradient">カナ</td>
-              <td><%= f.text_field :last_name_kana %></td>
-              <td><%= f.text_field :first_name_kana %></td>
+              <td>
+                <%= f.text_field :last_name_kana %>
+                <%= f.text_field :first_name_kana %>
+              </td>
             </tr>
             <tr>
               <td class="bg-light bg-gradient">ニックネーム</td>
@@ -66,7 +70,6 @@
               <td><%= f.file_field :profile_image %></td>
             </tr>
             <tr>
-              <td></td>
               <td><%= f.submit "変更を保存", class: "btn btn-success" %></td>
               <td><%= link_to "退会する",  unsubscribe_contributors_path, class: "btn btn-danger" %></td>
             </tr>

@@ -41,7 +41,7 @@
         <td></td>
       </tr>
       <tr>
-        <th style="white-space: nowrap;"><%= f.label :genre_id, "ジャンルを選択する" %></th>
+        <th><%= f.label :genre_id, "ジャンルを選択する" %></th>
         <td></td>
         <td><%= f.collection_select :genre_id, Genre.all, :id, :name, include_blank: "--選択してください--" %></td>
         <td></td>
