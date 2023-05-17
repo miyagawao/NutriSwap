@@ -2,30 +2,30 @@
   <div class="row">
     <div class="col-lg-10 col-sm-12 mx-auto">
       <h4><span class="bg-light bg-gradient"><%= @comment.contributor.add_full_name %>さんの通報理由一覧</span></h4>
-        
-      <table class="table table-bordered border-dark">
-        <tr>
-          <td class="table-active">通報日時</td>
-          <td class="table-active">通報ID</td>
-          <td class="table-active">通報者ID</td>
-          <td class="table-active">通報者氏名</td>
-          <td class="table-active">通報理由</td>
-        </tr>
-        <% @comment.reports.each do |report| %>
+      <div class="table-responsive">  
+        <table class="table table-bordered border-dark">
           <tr>
-            <td><%= report.created_at.to_s(:datetime_jp) %></td>
-            <td><%= report.id %></td>
-            <td>
-              <%= link_to admin_contributor_path(report.contributor.id), class: 'text-primary' do %>
-                <%= report.contributor.id %>
-              <% end %>
-            </td>
-            <td><%= report.contributor.add_full_name %></td>
-            <td><%= report.reason %></td>
+            <td class="table-active">通報日時</td>
+            <td class="table-active">通報ID</td>
+            <td class="table-active">通報者ID</td>
+            <td class="table-active">通報者氏名</td>
+            <td class="table-active">通報理由</td>
           </tr>
-        <% end %>
-      </table>
-      
+          <% @comment.reports.each do |report| %>
+            <tr>
+              <td><%= report.created_at.to_s(:datetime_jp) %></td>
+              <td><%= report.id %></td>
+              <td>
+                <%= link_to admin_contributor_path(report.contributor.id), class: 'text-primary' do %>
+                  <%= report.contributor.id %>
+                <% end %>
+              </td>
+              <td><%= report.contributor.add_full_name %></td>
+              <td><%= report.reason %></td>
+            </tr>
+          <% end %>
+        </table>
+      </div>
       <div class="col-12 text-right">
         <%= link_to "コメント詳細へ", admin_comment_path(@comment), class: 'btn btn-info' %> 
       </div>

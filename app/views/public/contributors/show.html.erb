@@ -11,7 +11,7 @@
       </div>
       <div class="card-header">
         <div class="col-md-12">
-          <div class="d-flex">
+          <div class="row">
             <% if @contributor.profile_image.attached? %>
               <%= image_tag @contributor.profile_image.variant(resize: "200x200"), class: "card-image-top", height: "150" %>
             <% else %>

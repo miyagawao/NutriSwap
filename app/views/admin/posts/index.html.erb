@@ -2,34 +2,34 @@
   <div class="row">
     <div class="col-lg-10 col-sm-12 mx-auto">
       <h4><span class="bg-light bg-gradient">投稿一覧</span></h4>
-
-      <table class="table table-borderless border-top mt-3">
-        <thead class="bg-light">
-          <th>投稿日時</th>
-          <th style="white-space: nowrap;">投稿者ID</th>
-          <th>投稿者</th>
-          <th>タイトル</th>
-        </thead>
-        <tbody>
-          <% @posts.each do |post| %>
-            <tr>
-              <td><%= post.created_at.to_s(:datetime_jp) %></td>
-              <td><%= post.contributor.id %></td>
-              <td>
-                <%=link_to admin_contributor_path(post.contributor.id) do%>
-                  <%= post.contributor.add_full_name %>
-                <% end %>
+      <div class="table-responsive">
+        <table class="table table-borderless border-top mt-3">
+          <thead class="bg-light">
+            <th>投稿日時</th>
+            <th style="white-space: nowrap;">投稿者ID</th>
+            <th>投稿者</th>
+            <th>タイトル</th>
+          </thead>
+          <tbody>
+            <% @posts.each do |post| %>
+              <tr>
+                <td><%= post.created_at.to_s(:datetime_jp) %></td>
+                <td><%= post.contributor.id %></td>
+                <td>
+                  <%=link_to admin_contributor_path(post.contributor.id) do%>
+                    <%= post.contributor.add_full_name %>
+                  <% end %>
+                  </td>
+                <td>
+                  <%= link_to admin_post_path(post.id) do %>
+                    <%= post.title %>
+                  <% end %>
                 </td>
-              <td>
-                <%= link_to admin_post_path(post.id) do %>
-                  <%= post.title %>
-                <% end %>
-              </td>
-            </tr>
-          <% end %>
-        </tbody>
-      </table>
-
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
       <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center">
         <%= paginate @posts %>
       </div>
