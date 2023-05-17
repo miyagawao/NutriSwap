@@ -9,42 +9,44 @@
       </div>
 
       <div class="row">
-        <table class="table table-bordered border-dark">
-          <thead>
-            <tr class="text-center"  style="white-space: nowrap;">
-              <th class="table-active">コメント日時</th>
-              <th class="table-active">コメントID</th>
-              <th class="table-active">コメント投稿者</th>
-              <th class="table-active">コメント内容</th>
-              <th class="table-active">通報ステータス</th>
-            </tr>
-          </thead>
-          <tbody>
-            <% @comments.each do |comment| %>
-              <tr>
-                <td class="text-center" style="white-space: nowrap;"><%= comment.created_at.to_s(:datetime_jp) %></td>
-                <td class="text-center"><%= comment.id %></td>
-                <td class="text-center">
-                  <%= link_to admin_contributor_path(comment.contributor.id), class: 'text-primary' do %>
-                    <%= comment.contributor.add_full_name %>
-                  <% end %>
-                </td>
-                <td>
-                  <%= link_to admin_comment_path(comment.id), class: 'text-primary' do %>
-                    <%= comment.comment_text %>
-                  <% end %>
-                </td>
-                <td class="text-center">
-                  <% if comment.reports.exists? %>
-                    <strong style="color: red;">通報あり</p>
-                  <% else %>
-                    通報なし
-                  <% end %>
-                </td>
+        <div class="table-responsive">
+          <table class="table table-bordered border-dark">
+            <thead>
+              <tr class="text-center"  style="white-space: nowrap;">
+                <th class="table-active">コメント日時</th>
+                <th class="table-active">コメントID</th>
+                <th class="table-active">コメント投稿者</th>
+                <th class="table-active">コメント内容</th>
+                <th class="table-active">通報ステータス</th>
               </tr>
-            <% end %>
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              <% @comments.each do |comment| %>
+                <tr>
+                  <td class="text-center" style="white-space: nowrap;"><%= comment.created_at.to_s(:datetime_jp) %></td>
+                  <td class="text-center"><%= comment.id %></td>
+                  <td class="text-center">
+                    <%= link_to admin_contributor_path(comment.contributor.id), class: 'text-primary' do %>
+                      <%= comment.contributor.add_full_name %>
+                    <% end %>
+                  </td>
+                  <td>
+                    <%= link_to admin_comment_path(comment.id), class: 'text-primary' do %>
+                      <%= comment.comment_text %>
+                    <% end %>
+                  </td>
+                  <td class="text-center">
+                    <% if comment.reports.exists? %>
+                      <strong style="color: red;">通報あり</p>
+                    <% else %>
+                      通報なし
+                    <% end %>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
       </div>
       
     </div>
