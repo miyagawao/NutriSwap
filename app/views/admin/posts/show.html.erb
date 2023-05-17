@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-lg-10 col-sm-12 mx-auto">
       <h3><span class="bg-light bg-gradient"><%= @post.contributor.add_full_name %>さんの投稿詳細</span></h3>
-    
+    <div class="table-responsive">
       <table class="table table-bordered border-dark">
         <tr>
           <td class="bg-light bg-gradient">会員ID</td>
@@ -48,7 +48,7 @@
           </td>
         </tr>
       </table>
-          
+    </div>      
       <div class="col-12 text-right">
         <%= link_to "削除", admin_post_path(@post), method: :delete, data: { confirm: "本当に削除しますか?" }, class: "btn btn-danger" %>
       </div>

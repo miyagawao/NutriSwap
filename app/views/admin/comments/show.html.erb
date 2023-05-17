@@ -9,45 +9,47 @@
       </div>
 
       <div class="row">
-        <table class="table table-bordered border-dark">
-          <tr>
-            <td class="bg-light bg-gradient">コメント日時</td>
-            <td><%= @comment.created_at.to_s(:datetime_jp) %></td>
-          </tr>
-          <tr>
-            <td class="bg-light bg-gradient">会員ID</td>
-            <td><%= @comment.contributor.id %></td>
-          </tr>
-          <tr>
-            <td class="bg-light bg-gradient">氏名</td>
-            <td>
-              <%= link_to admin_contributor_path(@comment.contributor.id), class: 'text-primary' do %>
-                <%= @comment.contributor.add_full_name %>
-              <% end %>
-            </td>
-          </tr>
-          <tr>
-            <td class="bg-light bg-gradient"  style="white-space: nowrap;">コメント内容</td>
-            <td>
-              <%= @comment.comment_text %>
-            </td>
-          </tr>
-          <tr>
-            <td class="bg-light bg-gradient">通報の有無</td>
-            <td>
-              <% if @comment.reports.exists? %>
-                <%= link_to admin_comment_reports_path(@comment), class: 'btn btn-primary' do %>
-                  <%= @comment.reports.count %>件の通報あり
+        <div class="table-responsive">
+          <table class="table table-bordered border-dark">
+            <tr>
+              <td class="bg-light bg-gradient">コメント日時</td>
+              <td><%= @comment.created_at.to_s(:datetime_jp) %></td>
+            </tr>
+            <tr>
+              <td class="bg-light bg-gradient">会員ID</td>
+              <td><%= @comment.contributor.id %></td>
+            </tr>
+            <tr>
+              <td class="bg-light bg-gradient">氏名</td>
+              <td>
+                <%= link_to admin_contributor_path(@comment.contributor.id), class: 'text-primary' do %>
+                  <%= @comment.contributor.add_full_name %>
                 <% end %>
-              <% else %>
-                通報なし
-              <% end %>
-            </td>
-          </tr>
-        </table>
-        <div class="col-12 text-right">
-          <%= link_to "削除する", admin_comment_path(@comment), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
-        </div>
+              </td>
+            </tr>
+            <tr>
+              <td class="bg-light bg-gradient"  style="white-space: nowrap;">コメント内容</td>
+              <td>
+                <%= @comment.comment_text %>
+              </td>
+            </tr>
+            <tr>
+              <td class="bg-light bg-gradient">通報の有無</td>
+              <td>
+                <% if @comment.reports.exists? %>
+                  <%= link_to admin_comment_reports_path(@comment), class: 'btn btn-primary' do %>
+                    <%= @comment.reports.count %>件の通報あり
+                  <% end %>
+                <% else %>
+                  通報なし
+                <% end %>
+              </td>
+            </tr>
+          </table>
+          <div class="col-12 text-right">
+            <%= link_to "削除する", admin_comment_path(@comment), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger' %>
+          </div>
+        </div>  
       </div>
       
     </div>
