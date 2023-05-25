@@ -10,32 +10,41 @@ class Public::PostsController < ApplicationController
   def index
     @current_contributor = current_contributor
     # 公開を選択した投稿のみを表示（新着順）includesでプリロードする
-    @posts = Post.where(status: :published).order(created_at: :desc).includes(:genre, :tags).page(params[:page]).per(9)
+    @posts = Post.where(status: :published).includes(:genre, :tags).order(created_at: :desc).page(params[:page]).per(9)
     # ジャンルとタグの両方が存在する場合
     if params[:genre_id].present? && params[:tag_id].present?
-      @posts = Post.search_genre(params[:genre_id]).search_tag(params[:tag_id]).order(created_at: :desc).page(params[:page]).per(9)
-    # ジャンル検索
+      # ジャンルとタグの両方が指定された場合
+      @posts = @posts.search_genre(params[:genre_id]).search_tag(params[:tag_id])
     elsif params[:genre_id].present?
-      @posts = Post.search_genre(params[:genre_id]).order(created_at: :desc).page(params[:page]).per(9)
-    # タグ検索
+      # ジャンルのみが指定された場合
+      @posts = @posts.search_genre(params[:genre_id])
     elsif params[:tag_id].present?
-      @posts = Post.search_tag(params[:tag_id]).order(created_at: :desc).page(params[:page]).per(9)
+      # タグのみが指定された場合
+      @posts = @posts.search_tag(params[:tag_id])
     end
+    @posts = @posts.page(params[:page]).per(9)
   end
 
   # 投稿詳細ページ
   def show
     @post = Post.find(params[:id])
-    @current_contributor = current_contributor
-    # セッションIDが同じである閲覧は、1回の閲覧としてカウント
-    impressionist(@post, nil, unique: [:session_hash])
-    # コメント一覧表示で使用する全コメントデータを代入（新着順で表示）
-    @comments = @post.comments.order(created_at: :desc)
-    # コメントの作成
-    @comment = Comment.new
-    # 返信コメントの作成
-    @comment_reply = @post.comments.new
-    @genres = Genre.all
+    # 公開投稿または現在のcontributorの下書きの場合に表示
+    if @post.status == 'published' || (current_contributor && current_contributor == @post.contributor)
+      @current_contributor = current_contributor
+      # セッションIDが同じである閲覧は、1回の閲覧としてカウント
+      impressionist(@post, nil, unique: [:session_hash])
+      # コメント一覧表示で使用する全コメントデータを代入（新着順で表示）
+      @comments = @post.comments.order(created_at: :desc)
+      # コメントの作成
+      @comment = Comment.new
+      # 返信コメントの作成
+      @comment_reply = @post.comments.new
+      @genres = Genre.all
+    else
+      # 他人の下書きの場合はリダイレクト
+      flash[:notice] = "この投稿は表示できません。"
+      redirect_to root_path
+    end
   end
 
   # 投稿ページ
@@ -60,7 +69,12 @@ class Public::PostsController < ApplicationController
   # 投稿編集ページ
   def edit
     @post = Post.find(params[:id])
-    @post.tag_list = @post.tags.map(&:name).join(', ')
+    if current_contributor && current_contributor == @post.contributor
+      @post.tag_list = @post.tags.map(&:name).join(', ')
+    else
+      flash[:notice] = "この投稿は編集できません。"
+      redirect_to root_path
+    end
   end
   # 投稿の更新
   def update

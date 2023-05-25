@@ -7,7 +7,7 @@
       <div class="border-bottom" style="background-color: #ffffe5;">
         <div style="display: flex; justify-content: space-between;">
           <div>
-            <h2 style="white-space: nowrap;">「<%= @post.title %>」</h2>
+            <h2 style="white-space">「<%= @post.title %>」</h2>
           </div>
           <div id="likes_buttons_<%= @post.id %>" style="margin-top: 10px;">
             <%= render partial: 'public/likes/like', locals: { post: @post, current_contributor: @current_contributor} %>

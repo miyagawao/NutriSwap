@@ -40,7 +40,7 @@
           </div>
         </div>
         <div class="card-body">
-          <% if current_contributor && current_contributor.nickname != "ゲストユーザー" %>
+          <% if current_contributor == @contributor && current_contributor.nickname != "ゲストユーザー" %>
             <%= link_to(raw('<i class="fas fa-cogs" style="color: #2003fc;"></i> 編集する'), edit_contributor_path(current_contributor), class: "btn btn-lg btn-block btn-outline-primary", type: "button") %>
             <%= link_to(raw('<i class="fas fa-edit" style="color: #168d8b;"></i>下書き一覧'), draft_index_contributor_path(current_contributor), class: "btn btn-lg btn-block btn-outline-info", type: "button") %>
             <%= link_to(raw('<i class="fas fa-pen" style="color: #f0a001;"></i> 投稿する'), new_post_path, class: "btn btn-lg btn-block btn-outline-warning", type: "button") %>

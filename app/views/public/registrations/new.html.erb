@@ -60,14 +60,14 @@
           <th style="width: 20%"><%= f.label :資格 %></th>
           <td></td>
           <td>
-            <%= f.radio_button :qualification, "管理栄養士" %>
-            <%= f.label :qualification, "管理栄養士", style: "margin-right: 20px;" %>
-            <%= f.radio_button :qualification, "栄養士" %>
-            <%= f.label :qualification, "栄養士", style: "margin-right: 20px;" %>
-            <%= f.radio_button :qualification, "調理師" %>
-            <%= f.label :qualification, "調理師", style: "margin-right: 20px;" %>
-            <%= f.radio_button :qualification, "調理従事者" %>
-            <%= f.label :qualification, "調理従事者", style: "margin-right: 20px;" %>
+            <%= f.radio_button :qualification, "管理栄養士", id: "qualification_manager" %>
+            <%= f.label :qualification, "管理栄養士", style: "margin-right: 20px;", for: "qualification_manager" %>
+            <%= f.radio_button :qualification, "栄養士", id: "qualification_nutritionist" %>
+            <%= f.label :qualification, "栄養士", style: "margin-right: 20px;", for: "qualification_nutritionist" %>
+            <%= f.radio_button :qualification, "調理師", id: "qualification_cook" %>
+            <%= f.label :qualification, "調理師", style: "margin-right: 20px;", for: "qualification_cook" %>
+            <%= f.radio_button :qualification, "調理従事者", id: "qualification_cook_assistant" %>
+            <%= f.label :qualification, "調理従事者", style: "margin-right: 20px;", for: "qualification_cook_assistant" %>
           </td>
         </tr>
         <tr>
