@@ -1,92 +1,85 @@
-<nav class="navbar navbar-expand-lg" style="background-color: #ffb54d;">
-  <%= link_to image_tag('NutriSwap.jpg', width: '40%', height: '40%', class: "ml-5"), root_path %>
-    <div class="text-light d-flex justify-content-start flex-column">
+<nav class="navbar">
+  <%= link_to image_tag('NutriSwap.jpg'), root_path %>
+    <% if contributor_signed_in? %>
+      <p class="pt-3">ようこそ!! <%= current_contributor.nickname %> 様</p>
+    <% end %>
+
+  <div class="ml-auto">
+    <ul class="navbar-nav">
       <% if contributor_signed_in? %>
-        <p class="pt-3" style="font-size: 1.2em;">ようこそ!!  <%= current_contributor.nickname %> 様</p>
-      <% end %>
-    </div>
-    <div class="d-flex flex-column ml-auto">
-      <ul class="navbar-nav">
-      <% if contributor_signed_in? %>
-        <li class="nav-link px-2">
-          <%= link_to contributor_path(current_contributor), class: "text-decoration-none text-light h5" do %>
+        <li class="nav-link">
+          <%= link_to contributor_path(current_contributor) do %>
             <i class="fas fa-user"></i> マイページ
           <% end %>
         </li>
-        <li class="nav-link px-2">
-          <%= link_to posts_path, class: "text-decoration-none text-light h5" do %>
+        <li class="nav-link">
+          <%= link_to posts_path do %>
             <i class="fas fa-utensils"></i> 投稿一覧
           <% end %>
         </li>
         <% if Post.last.present? %>
-          <li class="nav-link px-2">
-            <%= link_to post_likes_path(post_id: Post.last.id), class: "text-decoration-none text-light h5" do %>
+          <li class="nav-link">
+            <%= link_to post_likes_path(post_id: Post.last.id) do %>
               <i class="fas fa-heart"></i> お気に入り
             <% end %>
           </li>
         <% end %>
-        <li class="nav-link px-2">
-          <%= link_to destroy_contributor_session_path, method: :delete, class: "text-decoration-none text-light h5" do %>
+        <li class="nav-link">
+          <%= link_to destroy_contributor_session_path, method: :delete do %>
             <i class="fas fa-sign-out-alt"></i> ログアウト
           <% end %>
         </li>
-
       <% elsif admin_signed_in? %>
-        <li class="nav-link px-2">
-          <%= link_to admin_contributors_path, class: "text-decoration-none text-light h5" do %>
+        <li class="nav-link">
+          <%= link_to admin_contributors_path do %>
             <i class="fas fa-users"></i> 会員一覧
           <% end %>
         </li>
-
-        <li class="nav-link px-2">
-          <%= link_to admin_root_path, class: "text-decoration-none text-light h5" do %>
+        <li class="nav-link">
+          <%= link_to admin_root_path do %>
             <i class="fas fa-utensils"></i> 投稿一覧
           <% end %>
         </li>
-
-        <li class="nav-link px-2">
-          <%= link_to admin_comments_path, class: "text-decoration-none text-light h5" do %>
+        <li class="nav-link">
+          <%= link_to admin_comments_path do %>
             <i class="far fa-comments"></i> コメント一覧
           <% end %>
         </li>
-
-        <li class="nav-link px-2">
-          <%= link_to admin_genres_path, class: "text-decoration-none text-light h5" do %>
+        <li class="nav-link">
+          <%= link_to admin_genres_path do %>
             <i class="fas fa-cog"></i> ジャンル一覧
           <% end %>
         </li>
-
-        <li class="nav-link px-2">
-          <%= link_to destroy_admin_session_path, method: :delete, class: "text-decoration-none text-light h5" do %>
+        <li class="nav-link">
+          <%= link_to destroy_admin_session_path, method: :delete do %>
             <i class="fas fa-sign-out-alt"></i> ログアウト
           <% end %>
         </li>
       <% else %>
-        <li class="nav-link px-2">
-          <%= link_to about_path, class: "text-decoration-none text-light text-light h5" do %>
+        <li class="nav-link">
+          <%= link_to about_path do %>
             <i class="fas fa-link"></i> About
           <% end %>
         </li>
-        <li class="nav-link px-2">
-          <%= link_to posts_path, class: "text-decoration-none text-light h5" do %>
+        <li class="nav-link">
+          <%= link_to posts_path do %>
             <i class="fas fa-utensils"></i> 投稿一覧
           <% end %>
         </li>
-        <li class="nav-link px-2">
-          <%= link_to new_contributor_registration_path, class: "text-decoration-none text-light h5" do %>
+        <li class="nav-link">
+          <%= link_to new_contributor_registration_path do %>
             <i class="fas fa-user-plus"></i> 新規登録
           <% end %>
         </li>
-        <li class="nav-link px-2">
-          <%= link_to contributor_session_path, class: "text-decoration-none text-light h5" do %>
+        <li class="nav-link">
+          <%= link_to contributor_session_path do %>
             <i class="fas fa-sign-in-alt"></i> ログイン
           <% end %>
         </li>
       <% end %>
-      </ul>
-      <div class="d-flex flex-row-reverse">
-        <%= render 'layouts/search' %>
-      </div>
+    </ul>
+    <div class="search">
+      <%= render 'layouts/search' %>
     </div>
   </div>
 </nav>
