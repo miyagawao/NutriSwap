@@ -1,8 +1,8 @@
 <!--投稿一覧-->
-<div class="card m-2 text-center card-warpper" style="width: 340px;">
+<div class="card m-2 text-center card-warpper" style="width: 300px;">
   <%= link_to post_path(post.id) do %>
     <% if post.image.present? %>
-      <%= image_tag post.get_image.variant(resize: "200x200"), class:"card-image-top", height: "200" %>
+      <%= image_tag post.get_image.variant(resize: "200x200"), class:"card-image-top", height: "200", style: "object-fit: cover;" %>
     <% else %>
       <%= image_tag("no_image.jpg", class: "card-image-top", height: "200") %>
     <% end %>

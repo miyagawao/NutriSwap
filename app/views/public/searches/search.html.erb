@@ -1,46 +1,49 @@
-<div class="container-fluid" style="background-color: #f9fffc;">
+<div class="container-fluid">
   <div class="row">
     <div class="col-md-2">
       <%= render 'public/genres/genre_list', genres: @genres %>
     </div>
-    <div class="container pl-5 pt-5">
-      <div class="border-bottom" style="background-color: #ffffe5;">
-        <h2>検索結果一覧 <span class="badge badge-pill badge-secondary">全<%= @range == 'Post' ? @posts.count : @contributors.count %>件</span></h2>
-      </div>  
-      <!--posts一覧 -->
+    <div class="post-index col-md-10">
+      <div class="post-index-title">
+        <h2>　検索結果一覧 <span class="badge badge-pill badge-secondary">全<%= @range == 'Post' ? @posts.count : @contributors.count %>件</span></h2>
+      </div>
+      
       <% if @range == 'Post' %>
         <% if @posts.present? %>
-          <div class="d-flex flex-wrap">
-            <% @posts.each do |post|%>
-               <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>
-            <% end %>
+          <div class="row">
+            <div class="post_information col-md-12">
+              <% @posts.each do |post|%>
+                <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>
+              <% end %>
+            </div>
           </div>
-          <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center pb-5">
+          <div id="paginate-warpper" class="pagination">
             <%= paginate @posts %>
           </div>
         <% else %>
           <h4 class="text-center">検索条件に一致する投稿はありませんでした。</h4>
         <% end %>
-      <!--contributors一覧 -->
       <% else %>
         <% if @contributors.present? %>
-          <div class="d-flex flex-wrap">
-            <% @contributors.each do |contributor| %>
-              <div class="card m-2 text-center card-warpper" style="width: 340px;">
-                <%= link_to contributor_path(contributor) do %>
-                  <% if contributor.profile_image.present? %>
-                    <%= image_tag contributor.profile_image.variant(resize: "200x200"), class:"card-image-top", height: "100" %>
-                  <% else %>
-                    <%= image_tag "no_image.jpg", size: "100x100", class: "card-image-top" %>
-                  <% end %>
-                  <div class="card-body">
-                    <%= link_to "#{contributor.nickname}さんのページへ", contributor_path(contributor), class: "btn btn-lg btn-block btn-outline-info", type: "button" %>
+          <div class="row">
+            <div class="post_information col-md-12">
+                <% @contributors.each do |contributor| %>
+                  <div class="card m-2 text-center card-warpper" style="width: 300px;">
+                    <%= link_to contributor_path(contributor) do %>
+                      <% if contributor.profile_image.present? %>
+                        <%= image_tag contributor.profile_image.variant(resize: "200x200"), class:"card-image-top", height: "100" %>
+                      <% else %>
+                        <%= image_tag "no_image.jpg", size: "100x100", class: "card-image-top" %>
+                      <% end %>
+                      <div class="card-body">
+                        <%= link_to "#{contributor.nickname}さんのページへ", contributor_path(contributor), class: "btn btn-lg btn-block btn-outline-info", type: "button" %>
+                      </div>
+                    <% end %>
                   </div>
                 <% end %>
-              </div>
-            <% end %>
+            </div>
           </div>
-          <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center pb-5">
+          <div id="paginate-warpper" class="pagination">
             <%= paginate @contributors %>
           </div>
         <% else %>

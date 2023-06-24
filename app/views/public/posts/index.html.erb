@@ -1,23 +1,22 @@
-<div class="container-fluid" style="background-color: #f9fffc;">
+<div class="container-fluid">
   <div class="row">
-    
     <div class="col-md-2">
       <%= render 'public/genres/genre_list', genres: @genres %>
     </div>
-    
-    <div class="container pt-5 pl-5">
-      <div class="border-bottom" style="background-color: #ffffe5;">
+    <div class="post-index col-md-10">
+      <div class="post-index-title">
         <h2>　投稿一覧　<span class="badge badge-pill badge-secondary">全<%= @posts.count %>件</span></h2>
       </div>
-      <div class="posts-index">
-        <% @posts.each do |post|%>
-          <%= render partial: 'public/posts/post_list', locals: {post: post, current_contributor: @current_contributor} %>
-        <% end %>
+      <div class="row">
+        <div class="post_information col-md-12">
+          <% @posts.each do |post|%>
+            <%= render partial: 'public/posts/post_list', locals: {post: post, current_contributor: @current_contributor} %>
+          <% end %>
+        </div>
       </div>
       <div id="paginate-warpper" class="pagination">
         <%= paginate @posts %>
       </div>
     </div>
-    
   </div>
 </div>

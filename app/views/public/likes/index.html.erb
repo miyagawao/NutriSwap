@@ -1,21 +1,22 @@
-<div class="container-fluid" style="background-color: #f9fffc;">
+<div class="container-fluid">
   <div class="row">
     <div class="col-md-2">
       <%= render 'public/genres/genre_list', genres: @genres %>
     </div>
-    <div class="container pl-5 pt-5">
-      <div class="border-bottom" style="background-color: #ffffe5;">
-      <h2>お気に入り一覧　<span class="badge badge-pill badge-secondary">全<%= @likes_posts.count %>件</span></h2></h2>
-    </div>
-
-    <div class="likes-posts">
-      <% @likes_posts.each do |post|%>
-        <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>
-      <% end %>
-    </div>
-
-    <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center pb-5">
-      <%= paginate @likes_posts %>
+    <div class="post-index col-md-10">
+      <div class="post-index-title">
+        <h2>　お気に入り一覧　<span class="badge badge-pill badge-secondary">全<%= @likes_posts.count %>件</span></h2>
+      </div>
+      <div class="row">
+        <div class="post_information col-md-12">
+          <% @likes_posts.each do |post|%>
+            <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>
+          <% end %>
+        </div>
+      </div>
+      <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center pb-5">
+        <%= paginate @likes_posts %>
+      </div>
     </div>
   </div>
 </div>

@@ -1,22 +1,23 @@
-<div class="container-fluid" style="background-color: #f9fffc;">
+<div class="container-fluid">
   <div class="row">
     <div class="col-md-2">
       <%= render 'public/genres/genre_list', genres: @genres %>
     </div>
-  <div class="container">
-    <div class="px-5 mx-auto ml-auto container" style="position: relative;">
-        <%= image_tag 'top.jpg', style: "width: 85%; margin: 70px;" %>
+    <div class="col-md-10">
+      <%= image_tag 'top.jpg', style: "width: 85%; margin: 50px;" %>
+      <div class="post-index-title">
+        <h2>投稿一覧  <span class="badge badge-pill badge-secondary">全<%= @posts.count %>件</span></h2>
       </div>
-    <div class="border-bottom" style="background-color: #ffffe5;">
-      <h2>投稿一覧  <span class="badge badge-pill badge-secondary">全<%= @posts.count %>件</span></h2>
-    </div>
-    <div class="d-md-flex flex-wrap">
-      <% @posts.each do |post| %>
-        <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>
-      <% end %>
-    </div>
-    <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center pb-5">
-      <%= paginate @posts %>
+      <div class="row">
+        <div class="post_information col-md-12">
+          <% @posts.each do |post| %>
+            <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>
+          <% end %>
+        </div>
+      </div>
+      <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center pb-5">
+        <%= paginate @posts %>
+      </div>
     </div>
   </div>
 </div>
