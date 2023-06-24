@@ -1,13 +1,14 @@
-<div class="container-fluid " style="background-color: #f9fffc;">
+<div class="container-fluid">
   <div class="row">
     <div class="col-md-2">
       <%= render 'public/genres/genre_list', genres: @genres %>
     </div>
-    <div class="col-md-9">
-      <div class="border-bottom" style="background-color: #ffffe5;">
+  </div>
+  <div class="posts-detail row">
+    <div class="posts-detail-title col-md-10">
         <div style="display: flex; justify-content: space-between;">
           <div>
-            <h2 style="white-space">「<%= @post.title %>」</h2>
+            <h2>「<%= @post.title %>」</h2>
           </div>
           <div id="likes_buttons_<%= @post.id %>" style="margin-top: 10px;">
             <%= render partial: 'public/likes/like', locals: { post: @post, current_contributor: @current_contributor} %>
@@ -17,14 +18,15 @@
           </div>
         </div>
       </div>
-      <div class="card-header">
-        <div class="col-md-12">
-          <div class="row">
+      <div class="posts-detail-content card-header col-md-10">
+        <div class="col-md-10">
+          <div class="posted_detail_image">
             <% if @post.image.present? %>
-              <%= image_tag @post.get_image.variant(resize: "265x265"), height: "265", class: "card-image-top" %>
+              <%= image_tag @post.get_image.variant(resize: "265x265"), height: "265" %>
             <% else %>
               <%= image_tag "no_image.jpg", size: "265x265", class: "card-image-top" %>
             <% end %>
+          </div>
             <div class="ml-5 pl-5">
               <div class="row">
                 <table class="table float-right">
@@ -64,7 +66,6 @@
                     </td>
                   </tr>
                 </table>
-              </div>
             </div>
           </div>
         </div>
@@ -78,12 +79,11 @@
         <% end %>
       </div>
     </div>
-    
-    <div id="comments_area">
+    <div id="comments_area" class="col-md-10">
       <%= render 'public/comments/index', comments: @comments, comment_reply: @comment_reply, current_contributor: @current_contributor %>
-    </div>
     <% if contributor_signed_in? && current_contributor.nickname != "ゲストユーザー" %>
       <%= render 'public/comments/form', post: @post, comment: @comment %>
     <% end %>
+    </div>
   </div>
 </div>

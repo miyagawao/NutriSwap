@@ -96,6 +96,37 @@ main {
   margin-left: 40px;
 }
 
+.posts-index {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 4px;
+}
+
+.posts-detail {
+  margin-top: 50px; 
+  margin-left: 50px;
+}
+
+.posts-detail-title {
+  background-color: #ffffe5;
+}
+
+.posted_detail_image {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#comments_area {
+  margin-top: 50px;
+}
+
+.likes-posts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 4px;
+}
+
+
 .footer {
   background-color: #ffb54d;
   padding: 10px;

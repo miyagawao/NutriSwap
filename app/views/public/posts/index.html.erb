@@ -9,7 +9,7 @@
       <div class="border-bottom" style="background-color: #ffffe5;">
         <h2>　投稿一覧　<span class="badge badge-pill badge-secondary">全<%= @posts.count %>件</span></h2>
       </div>
-      <div class="d-flex flex-wrap">
+      <div class="posts-index">
         <% @posts.each do |post|%>
           <%= render partial: 'public/posts/post_list', locals: {post: post, current_contributor: @current_contributor} %>
         <% end %>
