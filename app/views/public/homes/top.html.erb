@@ -3,13 +3,10 @@
     <div class="col-md-2">
       <%= render 'public/genres/genre_list', genres: @genres %>
     </div>
-     <div class="col-md-9">
-      <div class="px-5 mx-auto ml-auto container" style="position: relative;">
+  <div class="container">
+    <div class="px-5 mx-auto ml-auto container" style="position: relative;">
         <%= image_tag 'top.jpg', style: "width: 85%; margin: 70px;" %>
       </div>
-    </div>
-  </div>
-  <div class="container pl-5">
     <div class="border-bottom" style="background-color: #ffffe5;">
       <h2>投稿一覧  <span class="badge badge-pill badge-secondary">全<%= @posts.count %>件</span></h2>
     </div>
@@ -18,7 +15,7 @@
         <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>
       <% end %>
     </div>
-    <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center">
+    <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center pb-5">
       <%= paginate @posts %>
     </div>
   </div>

@@ -5,16 +5,16 @@
       <%= render 'public/genres/genre_list', genres: @genres %>
     </div>
     
-    <div class="container pl-5">
+    <div class="container pt-5 pl-5">
       <div class="border-bottom" style="background-color: #ffffe5;">
-        <h2>投稿一覧　<span class="badge badge-pill badge-secondary">全<%= @posts.count %>件</span></h2>
+        <h2>　投稿一覧　<span class="badge badge-pill badge-secondary">全<%= @posts.count %>件</span></h2>
       </div>
       <div class="d-flex flex-wrap">
         <% @posts.each do |post|%>
           <%= render partial: 'public/posts/post_list', locals: {post: post, current_contributor: @current_contributor} %>
         <% end %>
       </div>
-      <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center">
+      <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center pb-5">
         <%= paginate @posts %>
       </div>
     </div>
