@@ -14,7 +14,7 @@
           <%= render partial: 'public/posts/post_list', locals: {post: post, current_contributor: @current_contributor} %>
         <% end %>
       </div>
-      <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center pb-5">
+      <div id="paginate-warpper" class="pagination">
         <%= paginate @posts %>
       </div>
     </div>
