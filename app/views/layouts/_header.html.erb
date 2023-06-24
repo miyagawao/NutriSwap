@@ -1,77 +1,87 @@
 <nav class="navbar">
   <%= link_to image_tag('NutriSwap.jpg'), root_path %>
+  <div class="user-name">
     <% if contributor_signed_in? %>
       <p class="pt-3">ようこそ!! <%= current_contributor.nickname %> 様</p>
     <% end %>
+  </div>
+    
+  <div id="hamburger">
+    <div class="icon">
+      <span></span>
+      <span></span>
+      <span></span>
+    </div>
+  </div>
 
-  <div class="ml-auto">
-    <ul class="navbar-nav">
+  <nav class="sm">
+    <ul>
       <% if contributor_signed_in? %>
-        <li class="nav-link">
+        <li>
           <%= link_to contributor_path(current_contributor) do %>
             <i class="fas fa-user"></i> マイページ
           <% end %>
         </li>
-        <li class="nav-link">
+        <li>
           <%= link_to posts_path do %>
             <i class="fas fa-utensils"></i> 投稿一覧
           <% end %>
         </li>
         <% if Post.last.present? %>
-          <li class="nav-link">
+          <li>
             <%= link_to post_likes_path(post_id: Post.last.id) do %>
               <i class="fas fa-heart"></i> お気に入り
             <% end %>
           </li>
         <% end %>
-        <li class="nav-link">
+        <li>
           <%= link_to destroy_contributor_session_path, method: :delete do %>
             <i class="fas fa-sign-out-alt"></i> ログアウト
           <% end %>
         </li>
       <% elsif admin_signed_in? %>
-        <li class="nav-link">
+        <li>
           <%= link_to admin_contributors_path do %>
             <i class="fas fa-users"></i> 会員一覧
           <% end %>
         </li>
-        <li class="nav-link">
+        <li>
           <%= link_to admin_root_path do %>
             <i class="fas fa-utensils"></i> 投稿一覧
           <% end %>
         </li>
-        <li class="nav-link">
+        <li>
           <%= link_to admin_comments_path do %>
             <i class="far fa-comments"></i> コメント一覧
           <% end %>
         </li>
-        <li class="nav-link">
+        <li>
           <%= link_to admin_genres_path do %>
             <i class="fas fa-cog"></i> ジャンル一覧
           <% end %>
         </li>
-        <li class="nav-link">
+        <li>
           <%= link_to destroy_admin_session_path, method: :delete do %>
             <i class="fas fa-sign-out-alt"></i> ログアウト
           <% end %>
         </li>
       <% else %>
-        <li class="nav-link">
+        <li>
           <%= link_to about_path do %>
             <i class="fas fa-link"></i> About
           <% end %>
         </li>
-        <li class="nav-link">
+        <li>
           <%= link_to posts_path do %>
             <i class="fas fa-utensils"></i> 投稿一覧
           <% end %>
         </li>
-        <li class="nav-link">
+        <li>
           <%= link_to new_contributor_registration_path do %>
             <i class="fas fa-user-plus"></i> 新規登録
           <% end %>
         </li>
-        <li class="nav-link">
+        <li>
           <%= link_to contributor_session_path do %>
             <i class="fas fa-sign-in-alt"></i> ログイン
           <% end %>
@@ -81,5 +91,84 @@
     <div class="search">
       <%= render 'layouts/search' %>
     </div>
-  </div>
+  </nav>
+  
+  <nav class="pc">
+    <ul>
+      <% if contributor_signed_in? %>
+        <li>
+          <%= link_to contributor_path(current_contributor) do %>
+            <i class="fas fa-user"></i> マイページ
+          <% end %>
+        </li>
+        <li>
+          <%= link_to posts_path do %>
+            <i class="fas fa-utensils"></i> 投稿一覧
+          <% end %>
+        </li>
+        <% if Post.last.present? %>
+          <li>
+            <%= link_to post_likes_path(post_id: Post.last.id) do %>
+              <i class="fas fa-heart"></i> お気に入り
+            <% end %>
+          </li>
+        <% end %>
+        <li>
+          <%= link_to destroy_contributor_session_path, method: :delete do %>
+            <i class="fas fa-sign-out-alt"></i> ログアウト
+          <% end %>
+        </li>
+      <% elsif admin_signed_in? %>
+        <li>
+          <%= link_to admin_contributors_path do %>
+            <i class="fas fa-users"></i> 会員一覧
+          <% end %>
+        </li>
+        <li>
+          <%= link_to admin_root_path do %>
+            <i class="fas fa-utensils"></i> 投稿一覧
+          <% end %>
+        </li>
+        <li>
+          <%= link_to admin_comments_path do %>
+            <i class="far fa-comments"></i> コメント一覧
+          <% end %>
+        </li>
+        <li>
+          <%= link_to admin_genres_path do %>
+            <i class="fas fa-cog"></i> ジャンル一覧
+          <% end %>
+        </li>
+        <li>
+          <%= link_to destroy_admin_session_path, method: :delete do %>
+            <i class="fas fa-sign-out-alt"></i> ログアウト
+          <% end %>
+        </li>
+      <% else %>
+        <li>
+          <%= link_to about_path do %>
+            <i class="fas fa-link"></i> About
+          <% end %>
+        </li>
+        <li>
+          <%= link_to posts_path do %>
+            <i class="fas fa-utensils"></i> 投稿一覧
+          <% end %>
+        </li>
+        <li>
+          <%= link_to new_contributor_registration_path do %>
+            <i class="fas fa-user-plus"></i> 新規登録
+          <% end %>
+        </li>
+        <li>
+          <%= link_to contributor_session_path do %>
+            <i class="fas fa-sign-in-alt"></i> ログイン
+          <% end %>
+        </li>
+      <% end %>
+    </ul>
+    <div class="search">
+      <%= render 'layouts/search' %>
+    </div>
+  </nav>
 </nav>
