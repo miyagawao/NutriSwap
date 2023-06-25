@@ -3,9 +3,8 @@
     <div class="col-md-2">
       <%= render 'public/genres/genre_list', genres: @genres %>
     </div>
-  </div>
-  <div class="posts-detail row">
-    <div class="posts-detail-title col-md-10">
+    <div class="col-md-10">
+      <div class="post-index-title">
         <div style="display: flex; justify-content: space-between;">
           <div>
             <h2>「<%= @post.title %>」</h2>
@@ -18,72 +17,78 @@
           </div>
         </div>
       </div>
-      <div class="posts-detail-content card-header col-md-10">
-        <div class="col-md-10">
-          <div class="posted_detail_image">
-            <% if @post.image.present? %>
-              <%= image_tag @post.get_image.variant(resize: "265x265"), height: "265" %>
-            <% else %>
-              <%= image_tag "no_image.jpg", size: "265x265", class: "card-image-top" %>
-            <% end %>
-          </div>
-            <div class="ml-5 pl-5">
-              <div class="row">
-                <table class="table float-right">
-                  <tr>
-                    <td><strong>投稿内容</strong></td>
-                    <td><%= simple_format(@post.content) %></td>
-                  </tr>
-                  <tr>
-                    <td><strong>ジャンル</strong></td>
-                    <% if @post.genre.present? %>
-                      <td><%= link_to @post.genre.name, posts_path(genre_id: @post.genre.id, genre_name: @post.genre.name) %></td>
-                    <% else %>
-                      <td>未分類</td>
-                    <% end %>
-                  </tr>
-                  <tr>
-                    <td><strong>タグ</strong></td>
-                    <td><% @post.tags.each do |tag| %>
+      <div class="card-header">
+        <div class="col-md-12">
+          <div class="row">
+            <div class="col-md-10">
+              <div class="posted_detail_image">
+                <% if @post.image.present? %>
+                  <%= image_tag @post.get_image.variant(resize: "265x265"), height: "265" %>
+                <% else %>
+                  <%= image_tag "no_image.jpg", size: "265x265", class: "card-image-top" %>
+                <% end %>
+              </div>
+              <div class="ml-5 pl-5">
+                <div class="row">
+                  <table class="table float-right">
+                    <tr>
+                      <td><strong>投稿内容</strong></td>
+                      <td><%= simple_format(@post.content) %></td>
+                    </tr>
+                    <tr>
+                      <td><strong>ジャンル</strong></td>
+                      <% if @post.genre.present? %>
+                        <td><%= link_to @post.genre.name, posts_path(genre_id: @post.genre.id, genre_name: @post.genre.name) %></td>
+                      <% else %>
+                        <td>未分類</td>
+                      <% end %>
+                    </tr>
+                    <tr>
+                      <td><strong>タグ</strong></td>
+                      <td>
+                        <% @post.tags.each do |tag| %>
                           <%= link_to tag.name, posts_path(tag_id: tag.id, tag_name: tag.name) %>
                         <% end %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td><strong>投稿日</strong></td>
-                    <td>
-                      <%= @post.created_at.strftime('%Y/%m/%d') %>
-                    </td>
-                  </tr>
-                  <tr>
-                    <td style="white-space: nowrap;"><strong>ニックネーム</strong></td>
-                    <td><%= link_to @post.contributor.nickname, contributor_path(@post.contributor.id) %></td>
-                  </tr>
-                  <tr>
-                    <td><strong>保有資格</strong></td>
-                    <td>
-                      <%= @post.contributor.qualification %>
-                    </td>
-                  </tr>
-                </table>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td><strong>投稿日</strong></td>
+                      <td><%= @post.created_at.strftime('%Y/%m/%d') %></td>
+                    </tr>
+                    <tr>
+                      <td style="white-space: nowrap;"><strong>ニックネーム</strong></td>
+                      <td><%= link_to @post.contributor.nickname, contributor_path(@post.contributor.id) %></td>
+                    </tr>
+                    <tr>
+                      <td><strong>保有資格</strong></td>
+                      <td><%= @post.contributor.qualification %></td>
+                    </tr>
+                  </table>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      <div class="card-body">
-        <% if current_contributor.id == @post.contributor.id %>
-          <% if @post.status == "draft" %>
-            <%= link_to(raw('<i class="fas fa-edit" style="color: #168d8b;"></i>この下書きを編集する'), edit_post_path(@post), class: "btn btn-lg btn-block btn-outline-info", type: "button") %>
-          <% else %>
-            <%= link_to(raw('<i class="fas fa-cogs" style="color: #2003fc;"></i> 編集する'), edit_post_path(@post), class: "btn btn-lg btn-block btn-outline-primary", type: "button") %>
+        <div class="card-body">
+          <% if current_contributor.id == @post.contributor.id %>
+            <% if @post.status == "draft" %>
+              <%= link_to(raw('<i class="fas fa-edit" style="color: #168d8b;"></i>この下書きを編集する'), edit_post_path(@post), class: "btn btn-lg btn-block btn-outline-info", type: "button") %>
+            <% else %>
+              <%= link_to(raw('<i class="fas fa-cogs" style="color: #2003fc;"></i> 編集する'), edit_post_path(@post), class: "btn btn-lg btn-block btn-outline-primary", type: "button") %>
+            <% end %>
           <% end %>
-        <% end %>
+        </div>
       </div>
     </div>
-    <div id="comments_area" class="col-md-10">
-      <%= render 'public/comments/index', comments: @comments, comment_reply: @comment_reply, current_contributor: @current_contributor %>
-    <% if contributor_signed_in? && current_contributor.nickname != "ゲストユーザー" %>
-      <%= render 'public/comments/form', post: @post, comment: @comment %>
-    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-md-10 offset-md-2">
+      <div id="comments_area">
+        <%= render 'public/comments/index', comments: @comments, comment_reply: @comment_reply, current_contributor: @current_contributor %>
+        <% if contributor_signed_in? && current_contributor.nickname != "ゲストユーザー" %>
+          <%= render 'public/comments/form', post: @post, comment: @comment %>
+        <% end %>
+      </div>
     </div>
   </div>
 </div>

@@ -4,7 +4,7 @@
       <%= render 'public/genres/genre_list', genres: @genres %>
     </div>
     <div class="col-md-10">
-      <%= image_tag 'top.jpg', style: "width: 85%; margin: 50px;" %>
+      <%= image_tag 'top.jpg', style: "width: 70%; margin: 50px 150px 0;" %>
       <div class="post-index-title">
         <h2>投稿一覧  <span class="badge badge-pill badge-secondary">全<%= @posts.count %>件</span></h2>
       </div>
@@ -15,7 +15,7 @@
           <% end %>
         </div>
       </div>
-      <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center pb-5">
+      <div id="paginate-warpper" class="pagination">
         <%= paginate @posts %>
       </div>
     </div>
