@@ -1,14 +1,13 @@
 <div class="container my-5">
   <div class="row">
-    <div class="col-lg-10 col-sm-12 mx-auto">
-      
+    <div class="col-12 mx-auto">
       <div class="row mb-3">
         <%= render partial: 'layouts/error_messages', locals: { object: @genre } %>
         <div class="col-12">
           <h4><span class="bg-light bg-gradient">ジャンル編集</span></h4>
         </div>
       </div>
-      <div class="col-sm-12 col-md-8 col-lg-5 px-5 px-sm-0 mx-auto">
+       <div class="col-12 mx-auto">
         <%= form_with model: @genre, url: admin_genre_path(@genre), method: :patch do |f| %>
           <div class="form-group">
             <%= f.label :ジャンル名, class:"bg-light bg-gradient" %>
@@ -22,7 +21,6 @@
           <%= button_to "削除する", admin_genre_path(@genre), method: :delete, data: { confirm: "削除してもよろしいですか？" }, class: "btn btn-danger" %>
         </div>
       </div>
-        
-    </div>  
+    </div>
   </div>
 </div>

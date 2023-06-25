@@ -1,26 +1,23 @@
-<div class="container px-5 px-sm-0">
-  
+<div class="container my-5">
   <div class="row">
-    <div class="mt-5">
-      <% if @contributor.errors.any? %>
+    <% if @contributor.errors.any? %>
+      <div class="col-12">
         <%= @contributor.errors.count %>件のエラーが発生しました。:
         <ul>
           <% @contributor.errors.full_messages.each do |message| %>
             <li><%= message %></li>
           <% end %>
         </ul>
-      <% end %>
+      </div>
+    <% end %>
+  </div>
+  <div class="row">
+    <div class="col-12 mx-auto">
+      <h3><span class="bg-light bg-gradient"><%= @contributor.add_full_name %>さんの会員詳細</span></h3>
     </div>
   </div>
-
   <div class="row">
-    <div class="mt-5 offset-md-1">
-      <h3><span class="bg-light bg-gradient"><%= @contributor.add_full_name %>さんの会員詳細</h3>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="mt-5">
+    <div class="col-12">
       <%= form_with model: @contributor, url: admin_contributor_path, method: :patch do |f| %>
         <div class="table-responsive">
           <table class="table table-borderless">
@@ -44,7 +41,7 @@
             </tr>
             <tr>
               <td class="bg-light bg-gradient">ニックネーム</td>
-              <td><%= f.text_field :nickname, autofocus: true, autocomplete: "nickname",placeholder: "ニックネーム" %></td>
+              <td><%= f.text_field :nickname, autofocus: true, autocomplete: "nickname", placeholder: "ニックネーム" %></td>
             </tr>
             <tr>
               <td class="bg-light bg-gradient">郵便番号</td>
@@ -84,7 +81,7 @@
               </td>
             </tr>
             <tr>
-              <td class="bg-light bg-gradient">自己紹介</th>
+              <td class="bg-light bg-gradient">自己紹介</td>
               <td><%= f.text_area :introduce, rows: 5, style: "width: 100%;" %></td>
             </tr>
             <tr>
@@ -109,5 +106,4 @@
       <% end %>
     </div>
   </div>
-  
 </div>
