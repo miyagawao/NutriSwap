@@ -75,6 +75,10 @@ li a:hover {
   display: none;
 }
 
+.sm-index {
+  display: none;
+}
+
 .list-group {
   position: sticky;
   width: 170px;
@@ -83,6 +87,10 @@ li a:hover {
   margin: 50px 20px 0 20px;
   z-index: 999;
 }
+
+
+
+
 
 .post-index-title {
   background-color: #ffffe5;
@@ -96,7 +104,7 @@ li a:hover {
 }
 
 .posts-detail {
-  margin-top: 50px; 
+  margin-top: 50px;
   margin-left: 50px;
 }
 
@@ -161,6 +169,8 @@ li a:hover {
 }
 
 
+
+
 @media screen and (max-width: 1024px) {
   .pc {
     display: none;
@@ -218,6 +228,14 @@ li a:hover {
     width: 100%;
     background-color: rgba(255, 181, 77, 0.9)
   }
+  
+  .sm-index {
+    display: block;
+  }
+  
+  .list-group-item {
+    background-color: #fff9f4;
+  }
 
   ul {
     flex-direction: column;
@@ -235,9 +253,15 @@ li a:hover {
     margin: 0 auto;
     padding: 10px 0;
   }
-  
+
   .container-fluid {
     width: 100%;
+  }
+  
+  .post_information {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+    grid-gap: 4px;
   }
 
 }

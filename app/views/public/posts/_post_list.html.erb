@@ -1,4 +1,3 @@
-<!--投稿一覧-->
 <div class="card m-2 text-center card-warpper" style="width: 300px;">
   <%= link_to post_path(post.id) do %>
     <% if post.image.present? %>
@@ -7,44 +6,44 @@
       <%= image_tag("no_image.jpg", class: "card-image-top", height: "200") %>
     <% end %>
 
-  <div class="card-body text-dark py-2 font-weight-bold ">
-    <%= link_to post.title, post_path(post.id), class: "card-title mb-2" %>
-  </div>
-  <table class="table">
-    <tbody>
-      <tr>
-        <th class="text-right">ジャンル:</th>
-        <% if post.genre.present? %>
-          <td class="text-left"><%= link_to post.genre.name, posts_path(genre_id: post.genre.id, genre_name: post.genre.name) %></td>
-        <% else %>
-          <td class="text-left">未分類</td>
-        <% end %>
-      </tr>
-      <tr>
-        <th class="text-right">タグ:</th>
-        <td class="text-left">
-          <% post.tags.each do |tag| %>
-            <%= link_to tag.name, posts_path(tag_id: tag.id, tag_name: tag.name) %><br>
+    <div class="card-body text-dark py-2 font-weight-bold">
+      <%= link_to post.title, post_path(post.id), class: "card-title mb-2" %>
+    </div>
+    <table class="table">
+      <tbody>
+        <tr>
+          <th class="text-right">ジャンル:</th>
+          <% if post.genre.present? %>
+            <td class="text-left"><%= link_to post.genre.name, posts_path(genre_id: post.genre.id, genre_name: post.genre.name) %></td>
+          <% else %>
+            <td class="text-left">未分類</td>
           <% end %>
-        </td>
-      </tr>
-      <tr>
-        <th class="text-right">投稿日:</th>
-        <td class="text-left"><%= post.created_at.strftime('%Y/%m/%d') %></td>
-      </tr>
-      <tr>
-        <th class="text-right">いいね数:</th>
-        <td id="likes_buttons_<%= post.id %>"  class="text-left">
-          <%= render partial: 'public/likes/like', locals:  { post: post, current_contributor: current_contributor} %>
-        </td>
-      </tr>
-      <tr>
-        <th class="text-right">閲覧数:</th>
-        <td id="likes_buttons_<%= post.id %>"  class="text-left">
-          <i class="fas fa-eye"></i> <%= post.impressions_count %>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+        </tr>
+        <tr>
+          <th class="text-right">タグ:</th>
+          <td class="text-left">
+            <% post.tags.each do |tag| %>
+              <%= link_to tag.name, posts_path(tag_id: tag.id, tag_name: tag.name) %><br>
+            <% end %>
+          </td>
+        </tr>
+        <tr>
+          <th class="text-right">投稿日:</th>
+          <td class="text-left"><%= post.created_at.strftime('%Y/%m/%d') %></td>
+        </tr>
+        <tr>
+          <th class="text-right">いいね数:</th>
+          <td id="likes_buttons_<%= post.id %>" class="text-left">
+            <%= render partial: 'public/likes/like', locals:  { post: post, current_contributor: current_contributor} %>
+          </td>
+        </tr>
+        <tr>
+          <th class="text-right">閲覧数:</th>
+          <td id="likes_buttons_<%= post.id %>" class="text-left">
+            <i class="fas fa-eye"></i> <%= post.impressions_count %>
+          </td>
+        </tr>
+      </tbody>
+    </table>
   <% end %>
 </div>

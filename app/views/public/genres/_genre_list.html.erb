@@ -6,6 +6,6 @@
     <% genres.each do |genre|%>
       <%= link_to genre.name, posts_path(genre_id: genre.id, genre_name: genre.name), class: "list-group-item list-group-item-action text-center", style: 'font-size: 1.2em;' %>
     <% end %>
-
 </div>
+
 
