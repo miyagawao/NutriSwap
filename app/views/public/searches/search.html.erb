@@ -1,13 +1,22 @@
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-2">
-      <%= render 'public/genres/genre_list', genres: @genres %>
+    <div class="pc">
+      <div class="col-md-2 list-group">
+        <%= render 'public/genres/genre_list', genres: @genres %>
+      </div>
     </div>
     <div class="post-index col-md-10">
       <div class="post-index-title">
-        <h2>　検索結果一覧 <span class="badge badge-pill badge-secondary">全<%= @range == 'Post' ? @posts.count : @contributors.count %>件</span></h2>
+        <h2> 検索結果一覧 <span class="badge badge-pill badge-secondary">全<%= @range == 'Post' ? @posts.count : @contributors.count %>件</span></h2>
       </div>
-      
+      <div id="tab-head-parent" class="col-12 sm-index">
+        <div class="tab-area" style="display: flex;">
+          <%= link_to 'すべて', posts_path, class: "list-group-item list-group-item-action text-center rounded-lg", style: 'font-size: 1.0em;' %>
+          <% @genres.each do |genre| %>
+            <%= link_to genre.name, posts_path(genre_id: genre.id, genre_name: genre.name), class: "list-group-item list-group-item-action text-center rounded-lg", style: 'font-size: 1.0em;' %>
+          <% end %>
+        </div>
+      </div>
       <% if @range == 'Post' %>
         <% if @posts.present? %>
           <div class="row">
@@ -27,20 +36,20 @@
         <% if @contributors.present? %>
           <div class="row">
             <div class="post_information col-md-12">
-                <% @contributors.each do |contributor| %>
-                  <div class="card m-2 text-center card-warpper" style="width: 300px;">
-                    <%= link_to contributor_path(contributor) do %>
-                      <% if contributor.profile_image.present? %>
-                        <%= image_tag contributor.profile_image.variant(resize: "200x200"), class:"card-image-top", height: "100" %>
-                      <% else %>
-                        <%= image_tag "no_image.jpg", size: "100x100", class: "card-image-top" %>
-                      <% end %>
-                      <div class="card-body">
-                        <%= link_to "#{contributor.nickname}さんのページへ", contributor_path(contributor), class: "btn btn-lg btn-block btn-outline-info", type: "button" %>
-                      </div>
+              <% @contributors.each do |contributor| %>
+                <div class="card m-2 text-center card-warpper" style="width: 300px;">
+                  <%= link_to contributor_path(contributor) do %>
+                    <% if contributor.profile_image.present? %>
+                      <%= image_tag contributor.profile_image.variant(resize: "200x200"), class:"card-image-top", height: "100" %>
+                    <% else %>
+                      <%= image_tag "no_image.jpg", size: "100x100", class: "card-image-top" %>
                     <% end %>
-                  </div>
-                <% end %>
+                    <div class="card-body">
+                      <%= link_to "#{contributor.nickname}さんのページへ", contributor_path(contributor), class: "btn btn-lg btn-block btn-outline-info", type: "button" %>
+                    </div>
+                  <% end %>
+                </div>
+              <% end %>
             </div>
           </div>
           <div id="paginate-warpper" class="pagination">

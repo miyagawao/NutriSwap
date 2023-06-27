@@ -1,24 +1,32 @@
 <!--posts/showで使用中-->
-  <div class="border-bottom  col-md-12" style="background-color: #ffffe5;">
-    <h2>「<%= @post.title %>」へのコメント一覧  <span class="badge badge-pill badge-secondary">全 <%= comments.count %> 件</span></h2>
-  </div>
-  <% if flash[:notice] %>
-    <div class="alert alert-success">
-      <%= flash[:notice] %>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-2">
     </div>
-  <% end %>
-  <% comments.where(parent_id: nil).first(2).each do |comment|%>
-    <%= render 'public/comments/hide_comments', comment: comment, comment_reply: comment_reply, current_contributor: current_contributor %>
-  <% end %>
-
-  <!--コメントが3件以上の場合、残りのコメントをプルダウンで表示するボタンの作成-->
-   <% if comments.where(parent_id: nil).offset(2).any? %>
-    <div class="text-right">
-      <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">もっと見る...</button>
-    </div>
-    <div class="collapse" id="collapseExample">
-      <% comments.where(parent_id: nil).offset(2).each do |comment| %>
+    <div class="col-md-10">
+      <div class="border-bottom  col-md-12" style="background-color: #ffffe5;">
+        <h2>「<%= @post.title %>」へのコメント一覧  <span class="badge badge-pill badge-secondary">全 <%= comments.count %> 件</span></h2>
+      </div>
+      <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+      <% comments.where(parent_id: nil).first(2).each do |comment|%>
         <%= render 'public/comments/hide_comments', comment: comment, comment_reply: comment_reply, current_contributor: current_contributor %>
       <% end %>
+    
+      <!--コメントが3件以上の場合、残りのコメントをプルダウンで表示するボタンの作成-->
+       <% if comments.where(parent_id: nil).offset(2).any? %>
+        <div class="text-right">
+          <button class="btn btn-primary" data-toggle="collapse" data-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">もっと見る...</button>
+        </div>
+        <div class="collapse" id="collapseExample">
+          <% comments.where(parent_id: nil).offset(2).each do |comment| %>
+            <%= render 'public/comments/hide_comments', comment: comment, comment_reply: comment_reply, current_contributor: current_contributor %>
+          <% end %>
+        </div>
+      <% end %>
     </div>
-  <% end %>
+  </div>
+</div>
