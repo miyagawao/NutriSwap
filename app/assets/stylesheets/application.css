@@ -88,8 +88,10 @@ li a:hover {
   z-index: 999;
 }
 
-
-
+.top-image {
+  display: flex; 
+  justify-content: center;
+}
 
 
 .post-index-title {
@@ -256,12 +258,18 @@ li a:hover {
 
   .container-fluid {
     width: 100%;
+    display: flex;
+    justify-content: center;
   }
   
   .post_information {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
     grid-gap: 4px;
+  }
+
+  .sm-genre {
+    display: none;
   }
 
 }

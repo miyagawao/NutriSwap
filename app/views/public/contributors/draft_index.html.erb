@@ -1,21 +1,48 @@
 <div class="container-fluid">
-  <div class="row">
-    <div class="col-md-2">
-      <%= render 'public/genres/genre_list', genres: @genres %>
-    </div>
-    <div class="post-index col-md-10">
-      <div class="post-index-title">
-        <h2>下書き一覧　<span class="badge badge-pill badge-secondary">全<%= @posts.count %>件</span></h2>
+  <div class="pc">
+    <div class="row">
+      <div class="col-md-2">
+        <%= render 'public/genres/genre_list', genres: @genres %>
       </div>
-      <div class="row">
-        <div class="post_information col-md-12">
-          <% @posts.each do |post|%>
-            <%= render partial: 'public/posts/post_list', locals: {post: post, current_contributor: @current_contributor} %>
-          <% end %>
+      <div class="post-index col-md-10">
+        <div class="post-index-title">
+          <h2>　下書き一覧　<span class="badge badge-pill badge-secondary">全<%= @posts.count %>件</span></h2>
+        </div>
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center">
+            <div data-tab-id="1" class="post_information">
+              <% @posts.each do |post|%>
+                <%= render partial: 'public/posts/post_list', locals: {post: post, current_contributor: @current_contributor} %>
+              <% end %>
+            </div>  
+          </div>
+        </div>
+        <div class="pagination">
+          <%= paginate @posts %>
         </div>
       </div>
-      <div id="paginate-warpper" class="d-md-flex flex-wrap justify-content-center pb-5">
-        <%= paginate @posts %>
+    </div>
+  </div>
+</div>
+
+<div class="sm-index">
+  <div class="row">
+    <div class="post-index col-md-12">
+        <div class="post-index-title">
+          <h2>　下書き一覧　<span class="badge badge-pill badge-secondary">全<%= @posts.count %>件</span></h2>
+        </div>
+        <div class="row">
+          <div class="col-12 d-flex justify-content-center">
+            <div data-tab-id="1" class="post_information">
+              <% @posts.each do |post|%>
+                <%= render partial: 'public/posts/post_list', locals: {post: post, current_contributor: @current_contributor} %>
+              <% end %>
+            </div>  
+          </div>
+        </div>
+        <div class="pagination">
+          <%= paginate @posts %>
+        </div>
       </div>
     </div>
   </div>
