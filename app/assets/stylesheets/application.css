@@ -94,6 +94,11 @@ li a:hover {
   justify-content: center;
 }
 
+.top-image img {
+  width: 70%; 
+  margin-top: 50px;
+}
+
 
 .post-index-title {
   background-color: #ffffe5;
@@ -274,5 +279,8 @@ li a:hover {
   .sm-genre {
     display: none;
   }
+
+  
+
 
 }
