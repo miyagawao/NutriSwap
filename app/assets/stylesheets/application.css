@@ -90,12 +90,12 @@ li a:hover {
 }
 
 .top-image {
-  display: flex; 
+  display: flex;
   justify-content: center;
 }
 
 .top-image img {
-  width: 70%; 
+  width: 70%;
   margin-top: 50px;
 }
 
@@ -126,9 +126,58 @@ li a:hover {
   margin-bottom: 20px;
 }
 
+.posted_detail_image img {
+  height: 300px;
+}
+
+.likes-impressions-count {
+  display: flex;
+  margin-top: 10px;
+  margin-right: 40px;
+  margin-left: 20px;
+}
+
+.impressions-count {
+  padding-left: 40px;
+}
+
+
+
 #comments_area {
   margin-top: 50px;
 }
+
+.comment-title {
+  background-color: #ffffe5;
+}
+
+.contributor-image img {
+  height: 200px;
+}
+
+.contributor-info, .post-info {
+  display: table;
+  width: 100%;
+  margin: 20px 0 0 5px;
+}
+
+
+.contributor-info td, .post-info td {
+  padding: 10px 10px;
+  border-bottom: 1px dotted gray;
+}
+
+.contributor-info td:first-child, .post-info td:first-child {
+  white-space: nowrap;
+  font-weight: bold;
+}
+
+.row {
+  display: flex;
+  justify-content: center;
+}
+
+
 
 .footer {
   background-color: #ffb54d;
@@ -237,11 +286,11 @@ li a:hover {
     width: 100%;
     background-color: rgba(255, 181, 77, 0.9)
   }
-  
+
   .sm-index {
     display: block;
   }
-  
+
   .list-group-item {
     background-color: #fff9f4;
   }
@@ -268,7 +317,7 @@ li a:hover {
     display: flex;
     justify-content: center;
   }
-  
+
   .post_information {
     display: grid;
     grid-template-columns: repeat(1, 1fr);
@@ -276,11 +325,46 @@ li a:hover {
     justify-items: center;
   }
 
+  .post-index-title h2, .comment-title h2 {
+    font-size: 25px;
+  }
+
   .sm-genre {
     display: none;
   }
 
-  
+   .row {
+    display: flex;
+    flex-wrap: wrap;
+  }
 
+  .contributor-image {
+    flex-basis: 100%;
+  }
+
+  .contributor-info {
+    flex-basis: 100%;
+  }
+
+  .contributor-image {
+    text-align: center;
+  }
+  
+  .posted_detail_image img {
+    height: 200px;
+  }
+  
+  .likes-impressions-count {
+    display: flex;
+    margin-top: 10px;
+    margin-right: 20px;
+    margin-left: 10px;
+    font-size: 12px;
+  }
+  
+  .impressions-count {
+    padding-left: 10px;
+  }
 
 }
+
