@@ -99,10 +99,15 @@ li a:hover {
   margin-top: 50px;
 }
 
+.post-index-title, .comment-title {
+  display: flex;
+  justify-content: space-between;
+}
 
-.post-index-title {
+.post-index-title, .comment-title {
   background-color: #ffffe5;
   margin-top: 50px;
+  padding: 10px 0 0 0;
 }
 
 .post_information {
@@ -117,10 +122,6 @@ li a:hover {
   margin-left: 50px;
 }
 
-.posts-detail-title {
-  background-color: #ffffe5;
-}
-
 .posted_detail_image {
   text-align: center;
   margin-bottom: 20px;
@@ -132,6 +133,7 @@ li a:hover {
 
 .likes-impressions-count {
   display: flex;
+  justify-content: flex-end;
   margin-top: 10px;
   margin-right: 40px;
   margin-left: 20px;
@@ -365,6 +367,10 @@ li a:hover {
   .impressions-count {
     padding-left: 10px;
   }
+  
+  .card-header {
+    width: 100%;
+  } 
 
 }
 

@@ -1,10 +1,10 @@
 <!--posts/showで使用中-->
 <div class="container-fluid">
   <div class="row">
-    <div class="col-md-2">
+    <div class="col-md-2 pc">
     </div>
     <div class="col-md-10">
-      <div class="comment-title col-md-12">
+      <div class="comment-title">
         <h2>「<%= @post.title %>」へのコメント一覧  <span class="badge badge-pill badge-secondary">全 <%= comments.count %> 件</span></h2>
       </div>
       <% if flash[:notice] %>
