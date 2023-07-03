@@ -5,64 +5,64 @@
         <%= render 'public/genres/genre_list', genres: @genres %>
       </div>
     </div>
-      <div class="post-index col-md-10">
-        <div class="post-index-title">
-            <h2>　会員情報　</h2>
-          </div>
-        <div class="card-header">
-          <div class="col-md-10">
-            <div class="row">
-              <div class="contributor-image">
-                <% if @contributor.profile_image.attached? %>
-                  <%= image_tag @contributor.profile_image.variant(resize: "200x200") %>
-                <% else %>
-                  <%= image_tag "no_image.jpg", size: "200x200", class: "card-image-top" %>
-                <% end %>
-              </div>  
-            </div> 
-            <div class="row">
-              <table class="contributor-info">
-                <tr>
-                  <td><strong>ニックネーム</strong></td>
-                  <td><%= @contributor.nickname %></td>
-                </tr>
-                <tr>
-                  <td><strong>保有資格</strong></td>
-                  <td>
-                    <%= @contributor.qualification %>
-                  </td>
-                </tr>
-                <tr>
-                  <td><strong>自己紹介</strong></td>
-                  <td><%= simple_format(@contributor.introduce) %></td>
-                </tr>
-              </table>
-            </div>
-          </div>
-            <div class="card-body">
-              <% if current_contributor == @contributor && current_contributor.nickname != "ゲストユーザー" %>
-                <%= link_to(raw('<i class="fas fa-cogs" style="color: #2003fc;"></i> 編集する'), edit_contributor_path(current_contributor), class: "btn btn-lg btn-block btn-outline-primary", type: "button") %>
-                <%= link_to(raw('<i class="fas fa-edit" style="color: #168d8b;"></i>下書き一覧'), draft_index_contributor_path(current_contributor), class: "btn btn-lg btn-block btn-outline-info", type: "button") %>
-                <%= link_to(raw('<i class="fas fa-pen" style="color: #f0a001;"></i> 投稿する'), new_post_path, class: "btn btn-lg btn-block btn-outline-warning", type: "button") %>
-              <% end %>
-            </div>
-          </div>
-        <div class="post-index col-md-12">
-          <div class="post-index-title">
-            <h2>　過去の投稿一覧　<span class="badge badge-pill badge-secondary">全<%= @posts.count %>件</span></h2>
-          </div>
+    <div class="post-index col-md-10">
+      <div class="post-index-title">
+        <h2>　会員情報　</h2>
+      </div>
+      <div class="card-header">
+        <div class="col-md-10">
           <div class="row">
-            <div class="post_information col-md-12">
-              <% @posts.each do |post| %>
-                <% if post.contributor_id == @contributor.id %>
-                  <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>
-                <% end %>
+            <div class="contributor-image">
+              <% if @contributor.profile_image.attached? %>
+                <%= image_tag @contributor.profile_image.variant(resize: "200x200") %>
+              <% else %>
+                <%= image_tag "no_image.jpg", size: "200x200", class: "card-image-top" %>
               <% end %>
-            </div>
+            </div>  
+          </div> 
+          <div class="row">
+            <table class="contributor-info">
+              <tr>
+                <td><strong>ニックネーム</strong></td>
+                <td><%= @contributor.nickname %></td>
+              </tr>
+              <tr>
+                <td><strong>保有資格</strong></td>
+                <td>
+                  <%= @contributor.qualification %>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>自己紹介</strong></td>
+                <td><%= simple_format(@contributor.introduce) %></td>
+              </tr>
+            </table>
           </div>
-          <div class="pagination">
-            <%= paginate @posts %>
+        </div>
+          <div class="card-body">
+            <% if current_contributor == @contributor && current_contributor.nickname != "ゲストユーザー" %>
+              <%= link_to(raw('<i class="fas fa-cogs" style="color: #2003fc;"></i> 編集する'), edit_contributor_path(current_contributor), class: "btn btn-lg btn-block btn-outline-primary", type: "button") %>
+              <%= link_to(raw('<i class="fas fa-edit" style="color: #168d8b;"></i>下書き一覧'), draft_index_contributor_path(current_contributor), class: "btn btn-lg btn-block btn-outline-info", type: "button") %>
+              <%= link_to(raw('<i class="fas fa-pen" style="color: #f0a001;"></i> 投稿する'), new_post_path, class: "btn btn-lg btn-block btn-outline-warning", type: "button") %>
+            <% end %>
           </div>
+        </div>
+      <div class="post-index col-md-12">
+        <div class="post-index-title">
+          <h2>　過去の投稿一覧　<span class="badge badge-pill badge-secondary">全<%= @posts.count %>件</span></h2>
+        </div>
+        <div class="row">
+          <div class="post_information col-md-12">
+            <% @posts.each do |post| %>
+              <% if post.contributor_id == @contributor.id %>
+                <%= render partial: 'public/posts/post_list', locals: {post: post, likes: @likes} %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+        <div class="pagination">
+          <%= paginate @posts %>
+        </div>
       </div>
     </div>
   </div>

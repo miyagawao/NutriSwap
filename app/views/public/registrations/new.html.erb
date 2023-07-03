@@ -12,38 +12,38 @@
     <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <table class="table table-borderless">
         <tr>
-          <th style="width: 20%">名前</th>
+          <th style="width: 20%">名前　　<span class="badge badge-danger">必須</span></th>
           <td class="text-right"  style="width: 10%"><%= f.label :（姓） %></td>
           <td><%= f.text_field :last_name, autofocus: true, autocomplete: "last_name",placeholder: "山田" %></td>
           <td class="text-right"><%= f.label :（名） %></td>
           <td><%= f.text_field :first_name, autofocus: true, autocomplete: "first_name",placeholder: "太郎" %></td>
         </tr>
         <tr>
-          <th style="width: 20%">フリガナ</th>
+          <th style="width: 20%">フリガナ　　<span class="badge badge-danger">必須</span></th>
           <td class="text-right"><%= f.label :（セイ） %>
           <td><%= f.text_field :last_name_kana, autofocus: true, autocomplete: "last_name_kana",placeholder: "ヤマダ" %></td>
           <td class="text-right"><%= f.label :（メイ） %></td>
           <td><%= f.text_field :first_name_kana, autofocus: true, autocomplete: "first_name_kana",placeholder: "タロウ" %></td>
         </tr>
         <tr>
-          <th style="width: 20%">ニックネーム</th>
+          <th style="width: 20%">ニックネーム　　<span class="badge badge-danger">必須</span></th>
           <td class="text-right"></td>
           <td><%= f.text_field :nickname, autofocus: true, autocomplete: "nickname",placeholder: "ニックネーム" %></td>
         </tr>
         <tr>
-          <th style="width: 20%">メールアドレス</td>
+          <th style="width: 20%">メールアドレス　　<span class="badge badge-danger">必須</span></td>
           <td class="text-right"></td>
           <td><%= f.email_field :email, autofocus: true, autocomplete: "email", placeholder: 'sample@example.com' %></td>
         </tr>
         <tr>
           <th style="width: 20%"><%= f.label :"郵便番号(ハイフンなし)" %></th>
-          <td></td>
+          <td><span class="badge badge-danger">必須</span></td>
           <td><%= f.text_field :postal_code, autofocus: true, autocomplete: "postal_code",placeholder: "0000000" %></td>
           <td></td>
           <td></td>
         </tr>
         <tr>
-          <th style="width: 20%"><%= f.label :住所 %></th>
+          <th style="width: 20%"><%= f.label :住所 %>　　<span class="badge badge-danger">必須</span></th>
           <td></td>
           <td><%= f.text_field :address, autofocus: true,autocomplete: "address",placeholder: "" %></td>
           <td></td>
@@ -51,7 +51,7 @@
         </tr>
         <tr>
           <th style="width: 20%"><%= f.label :"電話番号(ハイフンなし)" %></th>
-          <td></td>
+          <td><span class="badge badge-danger">必須</span></td>
           <td><%= f.text_field :telephone_number, autofocus: true, autocomplete: "telephone_number",placeholder: "0000000000" %></td>
           <td></td>
           <td></td>
@@ -91,14 +91,14 @@
             (<%= @minimum_password_length %>文字以上)
             <% end %>
           </th>
-          <td></td>
+          <td><span class="badge badge-danger">必須</span></td>
           <td><%= f.password_field :password, autocomplete: "new-password" %></td>
           <td></td>
           <td></td>
         </tr>
         <tr>
           <th style="width: 20%"><%= f.label :確認用パスワード %></th>
-          <td></td>
+          <td><span class="badge badge-danger">必須</span></td>
           <td><%= f.password_field :password_confirmation, autocomplete: "new-password" %></td>
         </tr>
       </table>
